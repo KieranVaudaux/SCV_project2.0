@@ -32,7 +32,7 @@ def main():
     st.title("The Whole Story")
     st.subheader("This is the project report, containing all the details of our data analysis.")
     
-    with open("../reports/Statistical_analysis_and_visualization_of_meteorological_data-5.pdf","rb") as f:
+    with open("../reports/SCV_report.pdf","rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
         pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
         
