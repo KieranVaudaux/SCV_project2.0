@@ -6,12 +6,8 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 import os
-<<<<<<< HEAD
 import matplotlib
 import base64
-=======
-
->>>>>>> 4bb0c58c165ffdb52219165fd78d6e06adf1493c
 
 from streamlit_functions import display_date_slider, st_display_pdf, main
 from visual_features import *
