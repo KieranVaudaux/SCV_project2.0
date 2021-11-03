@@ -1,0 +1,33 @@
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}          &       Mean       & \textbf{  No. Observations:  } &    121      \\
+\textbf{Model:}                  &  ARIMA(1, 0, 1)  & \textbf{  Log Likelihood     } &  -103.092   \\
+\textbf{Date:}                   & Mon, 25 Oct 2021 & \textbf{  AIC                } &  216.185    \\
+\textbf{Time:}                   &     21:00:15     & \textbf{  BIC                } &  230.164    \\
+\textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  221.862    \\
+\textbf{}                        &       - 121      & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+                & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+\midrule
+\textbf{const}  &       9.4680  &        0.528     &    17.929  &         0.000        &        8.433    &       10.503     \\
+\textbf{x1}     &       0.0137  &        0.007     &     2.039  &         0.041        &        0.001    &        0.027     \\
+\textbf{ar.L1}  &       0.9129  &        0.064     &    14.233  &         0.000        &        0.787    &        1.039     \\
+\textbf{ma.L1}  &      -0.6141  &        0.107     &    -5.744  &         0.000        &       -0.824    &       -0.405     \\
+\textbf{sigma2} &       0.3201  &        0.039     &     8.142  &         0.000        &        0.243    &        0.397     \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lclc}
+\textbf{Ljung-Box (L1) (Q):}     & 0.04 & \textbf{  Jarque-Bera (JB):  } &  3.92  \\
+\textbf{Prob(Q):}                & 0.85 & \textbf{  Prob(JB):          } &  0.14  \\
+\textbf{Heteroskedasticity (H):} & 1.34 & \textbf{  Skew:              } & -0.34  \\
+\textbf{Prob(H) (two-sided):}    & 0.36 & \textbf{  Kurtosis:          } &  3.56  \\
+\bottomrule
+\end{tabular}
+%\caption{SARIMAX Results}
+\end{center}
+
+Warnings: \newline
+ [1] Covariance matrix calculated using the outer product of gradients (complex-step).

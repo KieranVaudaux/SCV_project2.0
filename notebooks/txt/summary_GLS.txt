@@ -1,0 +1,34 @@
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}    &       Mean       & \textbf{  R-squared:         } &     0.023   \\
+\textbf{Model:}            &       GLS        & \textbf{  Adj. R-squared:    } &     0.015   \\
+\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     2.809   \\
+\textbf{Date:}             & Tue, 26 Oct 2021 & \textbf{  Prob (F-statistic):} &   0.0964    \\
+\textbf{Time:}             &     13:31:29     & \textbf{  Log-Likelihood:    } &   -74.867   \\
+\textbf{No. Observations:} &         121      & \textbf{  AIC:               } &     153.7   \\
+\textbf{Df Residuals:}     &         119      & \textbf{  BIC:               } &     159.3   \\
+\textbf{Df Model:}         &           1      & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+               & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+\midrule
+\textbf{const} &      -6.9952  &       10.309     &    -0.679  &         0.499        &      -27.408    &       13.417     \\
+\textbf{x1}    &       0.0088  &        0.005     &     1.676  &         0.096        &       -0.002    &        0.019     \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lclc}
+\textbf{Omnibus:}       &  5.066 & \textbf{  Durbin-Watson:     } &    2.090  \\
+\textbf{Prob(Omnibus):} &  0.079 & \textbf{  Jarque-Bera (JB):  } &    6.789  \\
+\textbf{Skew:}          &  0.126 & \textbf{  Prob(JB):          } &   0.0336  \\
+\textbf{Kurtosis:}      &  4.133 & \textbf{  Cond. No.          } & 1.36e+05  \\
+\bottomrule
+\end{tabular}
+%\caption{GLS Regression Results}
+\end{center}
+
+Notes: \newline
+ [1] Standard Errors assume that the covariance matrix of the errors is correctly specified. \newline
+ [2] The condition number is large, 1.36e+05. This might indicate that there are \newline
+ strong multicollinearity or other numerical problems.

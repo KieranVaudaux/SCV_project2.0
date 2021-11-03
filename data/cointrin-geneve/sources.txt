@@ -1,0 +1,88 @@
+EUROPEAN CLIMATE ASSESSMENT & DATASET (ECA&D), file created on 05-10-2021
+THESE DATA CAN BE USED FREELY PROVIDED THAT THE FOLLOWING SOURCE IS ACKNOWLEDGED:
+
+Klein Tank, A.M.G. and Coauthors, 2002. Daily dataset of 20th-century surface
+air temperature and precipitation series for the European Climate Assessment.
+Int. J. of Climatol., 22, 1441-1453.
+Data and metadata available at http://www.ecad.eu
+
+FILE FORMAT (MISSING VALUE CODE IS -9999):
+
+ 01- 05 STAID  : Station identifier
+ 07- 12 SOUID  : Source identifier
+ 14- 53 SOUNAME: Source name
+ 55- 56 CN     : Country code (ISO3116 country codes)
+ 58- 66 LAT    : Latitude in degrees:minutes:seconds (+: North, -: South)
+ 68- 77 LON    : Longitude in degrees:minutes:seconds (+: East, -: West)
+ 79- 82 HGTH   : Station elevation in meters
+ 84- 87 ELEI   : Element identifier (see website at Daily Data > Data dictionary > Elements)
+ 89- 96 BEGIN  : Begin date YYYYMMDD
+ 98-105 END    : End date YYYYMMDD
+107-111 PARID  : Participant identifier
+113-163 PARNAME: Participant name
+
+STAID, SOUID,SOUNAME                                 ,CN,      LAT,       LON,HGHT,ELEI,   BEGIN,     END,PARID,PARNAME
+
+  240,105109,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, CC1,19010101,19620228,   32,Gergely Rigo                                      
+  240,105114,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, CC1,19580101,20210531,   32,Gergely Rigo                                      
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, CC7,19800101,20200229,     ,                    
+  241,105109,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, CC1,19010101,19620228,   32,Gergely Rigo                                      
+  241,105114,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, CC1,19580101,20210531,   32,Gergely Rigo                                      
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, CC7,19800101,20200229,     ,                    
+  240,191062,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, QQ5,19810101,20171231,   72,Anatoly V. Tsvetkov                               
+  240,191260,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, QQ5,20181201,20210531,   32,Gergely Rigo                                      
+  240,209947,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, QQ6,19580101,20210531,   32,Gergely Rigo                                      
+  240,209948,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, QQ6,19010101,19661231,   32,Gergely Rigo                                      
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, QQ1,20160101,20200229,     ,                    
+  241,191062,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, QQ5,19810101,20171231,   72,Anatoly V. Tsvetkov                               
+  241,191260,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, QQ5,20181201,20210531,   32,Gergely Rigo                                      
+  241,209947,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, QQ6,19580101,20210531,   32,Gergely Rigo                                      
+  241,209948,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, QQ6,19010101,19661231,   32,Gergely Rigo                                      
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, QQ1,20160101,20200229,     ,                    
+  240,105111,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, HU3,19010101,19650103,   32,Gergely Rigo                                      
+  240,105116,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, HU3,19590101,20210531,   32,Gergely Rigo                                      
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, HU6,20150501,20200229,     ,                    
+  241,105111,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, HU3,19010101,19650103,   32,Gergely Rigo                                      
+  241,105116,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, HU3,19590101,20210531,   32,Gergely Rigo                                      
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, HU6,20150501,20200229,     ,                    
+  240,100742,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TX3,19620101,20210531,   32,Gergely Rigo                                      
+  240,100746,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TX3,19010101,19611231,   32,Gergely Rigo                                      
+  240,119281,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TX1,19550101,20110123,   50,GHCND                                             
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, TX7,19820112,20200229,     ,                    
+  241,100742,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TX3,19620101,20210531,   32,Gergely Rigo                                      
+  241,100746,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TX3,19010101,19611231,   32,Gergely Rigo                                      
+  241,119278,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TX1,19010101,19661130,   50,GHCND                                             
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, TX7,19820112,20200229,     ,                    
+  240,100741,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TG3,19620101,20210531,   32,Gergely Rigo                                      
+  240,100745,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TG3,19010101,19611231,   32,Gergely Rigo                                      
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, TG5,19820113,20200229,     ,                    
+  241,100741,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TG3,19620101,20210531,   32,Gergely Rigo                                      
+  241,100745,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TG3,19010101,19611231,   32,Gergely Rigo                                      
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, TG5,19820113,20200229,     ,                    
+  240,100740,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TN3,19620101,20210531,   32,Gergely Rigo                                      
+  240,100744,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TN3,19010101,19611231,   32,Gergely Rigo                                      
+  240,119280,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TN1,19550103,20110120,   50,GHCND                                             
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, TN6,19820113,20200229,     ,                    
+  241,100740,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, TN3,19620101,20210531,   32,Gergely Rigo                                      
+  241,100744,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TN3,19010101,19611231,   32,Gergely Rigo                                      
+  241,119277,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, TN1,19010101,19661130,   50,GHCND                                             
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, TN6,19820113,20200229,     ,                    
+  240,100743,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420,RR11,19620101,20210531,   32,Gergely Rigo                                      
+  240,100747,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405,RR11,19010101,19611231,   32,Gergely Rigo                                      
+  240,119282,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, RR1,19550103,20110121,   50,GHCND                                             
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, RR8,19820102,20200229,     ,                    
+  241,100743,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420,RR11,19620101,20210531,   32,Gergely Rigo                                      
+  241,100747,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405,RR11,19010101,19611231,   32,Gergely Rigo                                      
+  241,119279,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, RR1,19010101,19661130,   50,GHCND                                             
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, RR8,19820102,20200229,     ,                    
+  240,105115,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, PP2,19810101,20210531,   32,Gergely Rigo                                      
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413,PP11,19800101,20200229,     ,                    
+  240,105117,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, SD7,19650101,20210531,   32,Gergely Rigo                                      
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, SD1,19800102,20200229,     ,                    
+  241,105112,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, SD7,19310101,19620228,   32,Gergely Rigo                                      
+  240,105113,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, SS3,19010101,19661231,   32,Gergely Rigo                                      
+  240,105118,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, SS3,19580101,20210531,   32,Gergely Rigo                                      
+  240,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, SS4,19930325,20200229,     ,                    
+  241,105113,GENEVE OBSERVATOIRE                     ,CH,+46:12:00,+006:09:00, 405, SS3,19010101,19661231,   32,Gergely Rigo                                      
+  241,105118,GENEVE COINTRIN                         ,CH,+46:15:00,+006:08:00, 420, SS3,19580101,20210531,   32,Gergely Rigo                                      
+  241,906700,GENEVE-COINTRIN                         ,CH,+46:15:00,+006:08:00, 413, SS4,19930325,20200229,     ,                    

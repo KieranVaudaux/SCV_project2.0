@@ -1,0 +1,32 @@
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}          & Mean\_detrended  & \textbf{  No. Observations:  } &    121      \\
+\textbf{Model:}                  &  ARIMA(0, 0, 2)  & \textbf{  Log Likelihood     } &  -88.285    \\
+\textbf{Date:}                   & Wed, 27 Oct 2021 & \textbf{  AIC                } &  184.571    \\
+\textbf{Time:}                   &     09:23:20     & \textbf{  BIC                } &  195.754    \\
+\textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  189.113    \\
+\textbf{}                        &       - 121      & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+                & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+\midrule
+\textbf{const}  &      -0.0113  &        0.063     &    -0.180  &         0.857        &       -0.134    &        0.112     \\
+\textbf{ma.L1}  &       0.1460  &        0.107     &     1.370  &         0.171        &       -0.063    &        0.355     \\
+\textbf{ma.L2}  &       0.2202  &        0.090     &     2.453  &         0.014        &        0.044    &        0.396     \\
+\textbf{sigma2} &       0.2517  &        0.036     &     6.948  &         0.000        &        0.181    &        0.323     \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lclc}
+\textbf{Ljung-Box (L1) (Q):}     & 0.02 & \textbf{  Jarque-Bera (JB):  } &  0.64  \\
+\textbf{Prob(Q):}                & 0.89 & \textbf{  Prob(JB):          } &  0.72  \\
+\textbf{Heteroskedasticity (H):} & 1.57 & \textbf{  Skew:              } & -0.02  \\
+\textbf{Prob(H) (two-sided):}    & 0.16 & \textbf{  Kurtosis:          } &  2.64  \\
+\bottomrule
+\end{tabular}
+%\caption{SARIMAX Results}
+\end{center}
+
+Warnings: \newline
+ [1] Covariance matrix calculated using the outer product of gradients (complex-step).
