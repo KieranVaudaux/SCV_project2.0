@@ -7,6 +7,17 @@ import streamlit as st
 plt.style.use('fivethirtyeight')
 matplotlib.rcParams.update({'font.size': 10})
 
+def plot_mean_temp_global(years, x, ax, df_av, element):
+    
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Average " + element)
+    ax.set_title("Average " + element + " curve")
+    ax.plot('Year','ATG',data=df_av, label='Yearly average', linewidth=2.5, color='steelblue')
+    temps = [df_av[df_av.Year==year]['ATG'] for year in years]
+    ax.plot(years[x], temps[x], 'ro')
+    ax.legend()
+    
+
 def pie_chart_missing(year, ax, df):
     
     """
@@ -43,10 +54,10 @@ def plot_mean_temp(year, ax, df, element):
     ax.plot('Day_of_year','TG',data=df[df.Year==year], label=year, linewidth=1)
     ax.legend()
     
-def plot_hist_mean(year, ax, df, element):
+def plot_hist_mean(year, ax, df, element, bins):
     
     """
-    Plot a histogram wrt to the current year index (slider)
+    Plot a histogram wrt the current year index (slider)
     
     Args : 
         year : int
@@ -58,7 +69,7 @@ def plot_hist_mean(year, ax, df, element):
     ax.set_xlabel("Day of the year")
     ax.set_ylabel(element)
     ax.set_title(element + " histogram")
-    ax.hist(df[df.Year==year]['TG'], 50, facecolor='g', alpha=0.75)
+    ax.hist(df[df.Year==year]['TG'], bins, facecolor='g', alpha=0.75)
     ax.legend()
     
 def plot_min(years, x, ax, df, element):
@@ -79,9 +90,9 @@ def plot_min(years, x, ax, df, element):
     if element=="Mean temperature":
         ax.set_title("Minimum temperatures")
         ax.set_ylabel("Min temperature")
-    elif element=="Sunshine":
-        ax.set_title("Minimum sunshine")
-        ax.set_ylabel("Min sunshine")
+    elif element=="Sunshine duration":
+        ax.set_title("Minimum sunshine duration")
+        ax.set_ylabel("Min sunshine duration (0.1 hours)")
     
 def plot_max(years, x, ax, df, element):
     """
@@ -101,9 +112,9 @@ def plot_max(years, x, ax, df, element):
     if element=="Mean temperature":
         ax.set_title("Maximum temperatures")
         ax.set_ylabel("Max temperature")
-    elif element=="Sunshine":
-        ax.set_title("Maximum sunshine")
-        ax.set_ylabel("Max sunshine")
+    elif element=="Sunshine duration":
+        ax.set_title("Maximum sunshine duration")
+        ax.set_ylabel("Max sunshine duration (0.1 hours)")
     
 def plot_std(years, x, ax, df):
     """
