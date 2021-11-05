@@ -174,5 +174,8 @@ def plot_stats_window(years, df, element):
 
     interact(interact_plot, x=widgets.IntSlider(
         min=0, max=len(years)-1, step=1, value=0))
+    
+    
+    
 
 

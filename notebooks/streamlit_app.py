@@ -42,7 +42,8 @@ if INFO == 'Project description':
 
     st.header('Our Goal')
     st.markdown('Within the statistical data analysis we make, we aim at answering a specific question :')
-    st.markdown('_Is there a significant increase in the average temperature trend in Switzerland from 1901 to the present day ?_')
+        
+    st.write("_Is there a significant increase in the average temperature trend in Switzerland from 1901 to the present day ?_")
 
 
     st.markdown('To try to answer this question, we will first focus on the evolution of the average temperature in Geneva. This will allow us to refine and improve our statistical study on the Geneva observatory data, before extending it to the rest of the weather stations.')
@@ -56,6 +57,16 @@ if INFO == 'Project description':
 elif INFO == 'Whole study':
     
     main()
+    
+    with open("../reports/SCV_report.pdf", "rb") as file:
+        btn = st.sidebar.download_button(
+            label="Download report",
+            data=file,
+            file_name="SCV_report.pdf",
+            mime="report/pdf"
+        )
+    
+    
     
     
 elif INFO == 'Data Visualization':
@@ -184,9 +195,9 @@ elif INFO == 'Data Visualization':
             st.markdown("#### p-values of the Ljung Box, Box-Pierce test, and McLeod-Li")
             st.image("p_values_ljung.png")
             
-            if st.checkbox('Show description'):
-                
-                st.markdown("Here is some text about some image wow well streamlit is definitely a cool tool.")
+            with st.expander("See explanation"):
+                st.write("""A nice description wow guys streamlit is so cool.
+                """)
             
             
             
@@ -195,40 +206,43 @@ elif INFO == 'Data Visualization':
             st.markdown("#### ACF and PACF")
             st.image("ACF_and_PACF.png")
             
-            if st.checkbox('Show description'):
+            with st.expander("See explanation"):
+                st.write("""A nice description wow guys streamlit is so cool.
+                """)
                 
-                st.markdown("Here is some text about some image wow well streamlit is definitely a cool tool.")
             
         elif elt == "QQ-plot":
             
             st.markdown("#### QQ-plot")
             st.image("QQ_plot.png")
             
-            if st.checkbox('Show description'):
-                
-                st.markdown("Here is some text about some image wow well streamlit is definitely a cool tool.")
+            with st.expander("See explanation"):
+                st.write("""A nice description wow guys streamlit is so cool.
+                """)
             
         elif elt == "p-values of the Mann-Whitney U test":
             
             st.markdown("#### p-values of the Mann-Whitney U test")
             st.image("mann_whitney.png")
             
-            if st.checkbox('Show description'):
-                
-                st.markdown("Here is some text about some image wow well streamlit is definitely a cool tool.")
+            with st.expander("See explanation"):
+                st.write("""A nice description wow guys streamlit is so cool.
+                """)
             
         
 
-st.sidebar.header("GitHub")
+if st.sidebar.button("GitHub"):
 
-st.sidebar.markdown("The entire code of the project, from source code to notebooks, is available at our GitHub repo ([here](https://github.com/LucaNyckees/SCV_project1)). Have a look!")
+    st.sidebar.markdown("The entire code of the project, from source code to notebooks, is available at our GitHub repo [here](https://github.com/LucaNyckees/SCV_project1). Have a look!")
 
-st.sidebar.header("Contacts")
+if st.sidebar.button("Contacts"):
     
-st.sidebar.markdown("""
-    * Luca Bracone ([EPFL](https://people.epfl.ch/luca.bracone), [GitHub](https://github.com/jkasalt))\n
-    * Luca Nyckees ([EPFL](https://people.epfl.ch/luca.nyckees), [GitHub](https://github.com/LucaNyckees))\n
-    * Blerton Rashiti [EPFL](https://people.epfl.ch/blerton.rashiti), [GitHub](https://github.com/BlertonRashiti))\n
-    * Kieran Vaudaux [EPFL](https://people.epfl.ch/kieran.vaudaux), [GitHub](https://github.com/KieranVaudaux)) 
-    """)
+    st.sidebar.markdown("""
+        * Luca Bracone ([EPFL](https://people.epfl.ch/luca.bracone), [GitHub](https://github.com/jkasalt))\n
+        * Luca Nyckees ([EPFL](https://people.epfl.ch/luca.nyckees), [GitHub](https://github.com/LucaNyckees))\n
+        * Blerton Rashiti [EPFL](https://people.epfl.ch/blerton.rashiti), [GitHub](https://github.com/BlertonRashiti))\n
+        * Kieran Vaudaux [EPFL](https://people.epfl.ch/kieran.vaudaux), [GitHub](https://github.com/KieranVaudaux)) 
+        """)
+    
+
                 
