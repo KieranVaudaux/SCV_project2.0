@@ -31,6 +31,7 @@ def main():
     
     st.title("The Whole Story")
     st.subheader("This is the project report, containing all the details of our data analysis.")
+    st.write("You have the possibility to download it - to do this, please check the sidebar.")
     
     with open("../reports/SCV_report.pdf","rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
