@@ -21,7 +21,10 @@ class RecNet(nn.Module):
 
 
 if __name__ == "__main__":
-    model = RecNet(dim_input=8, dim_recurrent=60, dim_output=1)
+    dim_recs = [30, 40, 50]
+    lrs = [1e-3, 1e-2, 1e-1]
+    window_size = 35
+    train_iters = 600
 
     df = utils.get_cointrin(remove_dubious=True)
 
@@ -35,27 +38,36 @@ if __name__ == "__main__":
     # Drop the few remaining rows with nans
     df.dropna(inplace=True)
 
-    train_iters, lr = 2000, 1e-3
-    window_size = 10
+    for dim in dim_recs:
+        for lr in lrs:
+            medians = []
+            mads = []
+            for _ in range(0,10):
+                model = RecNet(dim_input=9, dim_recurrent=dim, dim_output=9)
 
-    mse_loss = nn.MSELoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+                mse_loss = nn.MSELoss()
+                optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
-    losses = []
+                losses = []
 
-    for k in range(train_iters):
-        window = df.loc[k * window_size : (k + 1) * window_size, :]
-        # window = df.sample(window_size)
-        input_ = torch.from_numpy(window.drop("TG", axis=1).to_numpy()).float()
-        target = torch.from_numpy(window.TG.to_numpy()).float()
-        output = model(input_)
-        loss = mse_loss(output, target)
-        losses.append(loss.detach().data)
-        # print("output: {}, target: {}".format(output, target))
-        print("iter: {}, loss: {:.2f}".format(k, loss))
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+                for k in range(train_iters):
+                    window = df.loc[k * window_size : (k + 1) * window_size, :]
+                    # window = df.sample(window_size)
+                    input_ = torch.from_numpy(window.to_numpy()).float()
+                    target = torch.from_numpy(df.loc[(k + 1) * window_size + 1, :].to_numpy()).view(-1, 1).float()
+                    output = model(input_)
+                    loss = mse_loss(output, target)
+                    losses.append(loss.detach().data)
+                    # print("output: {}, target: {}".format(output.data, target))
+                    # print("iter: {}, loss: {:.2f}".format(k, loss))
+                    optimizer.zero_grad()
+                    loss.backward()
+                    optimizer.step()
 
-    losses = pd.Series(losses)
-    print("med: {}, std: {}".format(losses.median(), losses.std()))
+                losses = pd.Series(losses)
+                medians.append(losses.median())
+                mads.append((losses - losses.median()).median())
+            else:
+                medians = np.array(medians)
+                mads = np.array(mads)
+                print("[dim: {}, lr: {}, window: {}] avg_median: {:.2e}, avg_mad: {:.2e}".format(dim, lr, window_size, medians.mean(), mads.mean()))
