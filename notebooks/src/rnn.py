@@ -23,8 +23,8 @@ class RecNet(nn.Module):
 if __name__ == "__main__":
     dim_recs = [30, 40, 50]
     lrs = [1e-3, 1e-2, 1e-1]
-    window_size = 35
-    train_iters = 600
+    window_size = 2
+    train_iters = 400
 
     df = utils.get_cointrin(remove_dubious=True)
 
@@ -42,8 +42,8 @@ if __name__ == "__main__":
         for lr in lrs:
             medians = []
             mads = []
-            for _ in range(0,10):
-                model = RecNet(dim_input=9, dim_recurrent=dim, dim_output=9)
+            for _ in range(0, 10):
+                model = RecNet(dim_input=9, dim_recurrent=dim, dim_output=1)
 
                 mse_loss = nn.MSELoss()
                 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
@@ -54,8 +54,18 @@ if __name__ == "__main__":
                     window = df.loc[k * window_size : (k + 1) * window_size, :]
                     # window = df.sample(window_size)
                     input_ = torch.from_numpy(window.to_numpy()).float()
-                    target = torch.from_numpy(df.loc[(k + 1) * window_size + 1, :].to_numpy()).view(-1, 1).float()
+                    target = torch.from_numpy(
+                        df.loc[
+                            (k + 1) * window_size + 1 : (k + 2) * window_size + 1, :
+                        ].TG.to_numpy()
+                    ).view(-1,1).float()
                     output = model(input_)
+
+                    # print(
+                    #     "input: {}, output: {}, target: {}".format(
+                    #         input_.shape, output.shape, target.shape
+                    #     )
+                    # )
                     loss = mse_loss(output, target)
                     losses.append(loss.detach().data)
                     # print("output: {}, target: {}".format(output.data, target))
@@ -70,4 +80,8 @@ if __name__ == "__main__":
             else:
                 medians = np.array(medians)
                 mads = np.array(mads)
-                print("[dim: {}, lr: {}, window: {}] avg_median: {:.2e}, avg_mad: {:.2e}".format(dim, lr, window_size, medians.mean(), mads.mean()))
+                print(
+                    "[dim: {}, lr: {}, window: {}] avg_median: {:.2e}, avg_mad: {:.2e}".format(
+                        dim, lr, window_size, medians.mean(), mads.mean()
+                    )
+                )
