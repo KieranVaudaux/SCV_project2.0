@@ -4,7 +4,7 @@
 \textbf{Dep. Variable:}          & Mean\_detrended  & \textbf{  No. Observations:  } &    121      \\
 \textbf{Model:}                  &  ARIMA(2, 0, 0)  & \textbf{  Log Likelihood     } &  -89.382    \\
 \textbf{Date:}                   & Tue, 09 Nov 2021 & \textbf{  AIC                } &  186.764    \\
-\textbf{Time:}                   &     07:41:08     & \textbf{  BIC                } &  197.948    \\
+\textbf{Time:}                   &     07:53:29     & \textbf{  BIC                } &  197.948    \\
 \textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  191.306    \\
 \textbf{}                        &       - 121      & \textbf{                     } &             \\
 \textbf{Covariance Type:}        &       opg        & \textbf{                     } &             \\

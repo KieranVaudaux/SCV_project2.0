@@ -1,3 +1,7 @@
 Annual mean (no constant) : p-value = 0.8711270393253966
 Annual mean (constant + trend) : p-value = 0.016192173242480262
 Annual detrended mean (no constant) : p-value = 2.074843320447453e-08
+Annual detrended mean (no constant) : p-value = 4.6028267668758874e-07
+Annual detrended mean (no constant) : p-value = 4.6028267668758874e-07
+Annual detrended mean (no constant) : p-value = 4.6028267668758874e-07
+Annual detrended mean (no constant) : p-value = 4.6028267668758874e-07

@@ -1,0 +1,1 @@
+Annual detrended mean (no constant) : p-value = 4.6028267668758874e-07
