@@ -4,11 +4,12 @@
 \textbf{Dep. Variable:}    &       Mean       & \textbf{  R-squared:         } &     0.023   \\
 \textbf{Model:}            &       GLS        & \textbf{  Adj. R-squared:    } &     0.015   \\
 \textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     2.809   \\
-\textbf{Date:}             & Tue, 26 Oct 2021 & \textbf{  Prob (F-statistic):} &   0.0964    \\
-\textbf{Time:}             &     13:31:29     & \textbf{  Log-Likelihood:    } &   -74.867   \\
+\textbf{Date:}             & Tue, 09 Nov 2021 & \textbf{  Prob (F-statistic):} &   0.0964    \\
+\textbf{Time:}             &     18:07:01     & \textbf{  Log-Likelihood:    } &   -74.867   \\
 \textbf{No. Observations:} &         121      & \textbf{  AIC:               } &     153.7   \\
 \textbf{Df Residuals:}     &         119      & \textbf{  BIC:               } &     159.3   \\
 \textbf{Df Model:}         &           1      & \textbf{                     } &             \\
+\textbf{Covariance Type:}  &    nonrobust     & \textbf{                     } &             \\
 \bottomrule
 \end{tabular}
 \begin{tabular}{lcccccc}
