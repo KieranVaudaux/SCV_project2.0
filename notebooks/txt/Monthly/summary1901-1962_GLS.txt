@@ -3,9 +3,9 @@
 \toprule
 \textbf{Dep. Variable:}    &       Mean       & \textbf{  R-squared:         } &     0.992   \\
 \textbf{Model:}            &       GLS        & \textbf{  Adj. R-squared:    } &     0.992   \\
-\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } & 1.470e+04   \\
-\textbf{Date:}             & Sat, 06 Nov 2021 & \textbf{  Prob (F-statistic):} &     0.00    \\
-\textbf{Time:}             &     11:37:57     & \textbf{  Log-Likelihood:    } &   -2223.2   \\
+\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } & 1.412e+04   \\
+\textbf{Date:}             & Sat, 13 Nov 2021 & \textbf{  Prob (F-statistic):} &     0.00    \\
+\textbf{Time:}             &     18:42:19     & \textbf{  Log-Likelihood:    } &   -2223.1   \\
 \textbf{No. Observations:} &        1448      & \textbf{  AIC:               } &     4472.   \\
 \textbf{Df Residuals:}     &        1435      & \textbf{  BIC:               } &     4541.   \\
 \textbf{Df Model:}         &          12      & \textbf{                     } &             \\
@@ -15,26 +15,26 @@
 \begin{tabular}{lcccccc}
              & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
 \midrule
-\textbf{x1}  &       0.6060  &        0.191     &     3.169  &         0.002        &        0.231    &        0.981     \\
-\textbf{x2}  &       1.7328  &        0.191     &     9.071  &         0.000        &        1.358    &        2.107     \\
-\textbf{x3}  &       5.2092  &        0.191     &    27.297  &         0.000        &        4.835    &        5.584     \\
-\textbf{x4}  &       8.9036  &        0.191     &    46.673  &         0.000        &        8.529    &        9.278     \\
-\textbf{x5}  &      13.2231  &        0.191     &    69.385  &         0.000        &       12.849    &       13.597     \\
-\textbf{x6}  &      16.8788  &        0.191     &    88.594  &         0.000        &       16.505    &       17.253     \\
-\textbf{x7}  &      19.0486  &        0.190     &   100.078  &         0.000        &       18.675    &       19.422     \\
-\textbf{x8}  &      18.2411  &        0.190     &    95.955  &         0.000        &       17.868    &       18.614     \\
-\textbf{x9}  &      14.7982  &        0.190     &    77.992  &         0.000        &       14.426    &       15.170     \\
-\textbf{x10} &       9.7685  &        0.190     &    51.544  &         0.000        &        9.397    &       10.140     \\
-\textbf{x11} &       4.7902  &        0.189     &    25.290  &         0.000        &        4.419    &        5.162     \\
-\textbf{x12} &       1.6150  &        0.189     &     8.536  &         0.000        &        1.244    &        1.986     \\
+\textbf{x1}  &       0.6046  &        0.192     &     3.154  &         0.002        &        0.229    &        0.981     \\
+\textbf{x2}  &       1.7128  &        0.191     &     8.949  &         0.000        &        1.337    &        2.088     \\
+\textbf{x3}  &       5.2239  &        0.191     &    27.317  &         0.000        &        4.849    &        5.599     \\
+\textbf{x4}  &       8.9045  &        0.191     &    46.574  &         0.000        &        8.529    &        9.280     \\
+\textbf{x5}  &      13.2057  &        0.191     &    69.158  &         0.000        &       12.831    &       13.580     \\
+\textbf{x6}  &      16.8931  &        0.191     &    88.486  &         0.000        &       16.519    &       17.268     \\
+\textbf{x7}  &      19.0497  &        0.191     &    99.865  &         0.000        &       18.675    &       19.424     \\
+\textbf{x8}  &      18.2274  &        0.190     &    95.700  &         0.000        &       17.854    &       18.601     \\
+\textbf{x9}  &      14.8149  &        0.190     &    77.922  &         0.000        &       14.442    &       15.188     \\
+\textbf{x10} &       9.7673  &        0.190     &    51.425  &         0.000        &        9.395    &       10.140     \\
+\textbf{x11} &       4.7737  &        0.190     &    25.155  &         0.000        &        4.401    &        5.146     \\
+\textbf{x12} &       1.6322  &        0.190     &     8.609  &         0.000        &        1.260    &        2.004     \\
 \textbf{x13} &       0.0103  &        0.003     &     3.527  &         0.000        &        0.005    &        0.016     \\
 \bottomrule
 \end{tabular}
 \begin{tabular}{lclc}
-\textbf{Omnibus:}       & 20.344 & \textbf{  Durbin-Watson:     } &    1.984  \\
-\textbf{Prob(Omnibus):} &  0.000 & \textbf{  Jarque-Bera (JB):  } &   31.288  \\
-\textbf{Skew:}          & -0.115 & \textbf{  Prob(JB):          } & 1.61e-07  \\
-\textbf{Kurtosis:}      &  3.682 & \textbf{  Cond. No.          } &     846.  \\
+\textbf{Omnibus:}       & 20.006 & \textbf{  Durbin-Watson:     } &    1.984  \\
+\textbf{Prob(Omnibus):} &  0.000 & \textbf{  Jarque-Bera (JB):  } &   30.746  \\
+\textbf{Skew:}          & -0.112 & \textbf{  Prob(JB):          } & 2.11e-07  \\
+\textbf{Kurtosis:}      &  3.677 & \textbf{  Cond. No.          } &     847.  \\
 \bottomrule
 \end{tabular}
 %\caption{GLS Regression Results}

@@ -2,10 +2,10 @@
 \begin{tabular}{lclc}
 \toprule
 \textbf{Dep. Variable:}          & Mean\_detrended  & \textbf{  No. Observations:  } &    121      \\
-\textbf{Model:}                  &  ARIMA(2, 0, 0)  & \textbf{  Log Likelihood     } &  -89.828    \\
-\textbf{Date:}                   & Sat, 13 Nov 2021 & \textbf{  AIC                } &  187.656    \\
-\textbf{Time:}                   &     17:30:45     & \textbf{  BIC                } &  198.839    \\
-\textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  192.198    \\
+\textbf{Model:}                  &  ARIMA(2, 0, 0)  & \textbf{  Log Likelihood     } &  -88.893    \\
+\textbf{Date:}                   & Sat, 13 Nov 2021 & \textbf{  AIC                } &  185.787    \\
+\textbf{Time:}                   &     18:37:25     & \textbf{  BIC                } &  196.970    \\
+\textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  190.328    \\
 \textbf{}                        &       - 121      & \textbf{                     } &             \\
 \textbf{Covariance Type:}        &       opg        & \textbf{                     } &             \\
 \bottomrule
@@ -13,17 +13,17 @@
 \begin{tabular}{lcccccc}
                 & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
 \midrule
-\textbf{const}  &       0.0326  &        0.081     &     0.400  &         0.689        &       -0.127    &        0.192     \\
-\textbf{ar.L1}  &       0.2063  &        0.104     &     1.977  &         0.048        &        0.002    &        0.411     \\
-\textbf{ar.L2}  &       0.2232  &        0.093     &     2.400  &         0.016        &        0.041    &        0.406     \\
-\textbf{sigma2} &       0.2581  &        0.036     &     7.252  &         0.000        &        0.188    &        0.328     \\
+\textbf{const}  &       0.0315  &        0.081     &     0.387  &         0.699        &       -0.128    &        0.191     \\
+\textbf{ar.L1}  &       0.2038  &        0.103     &     1.979  &         0.048        &        0.002    &        0.406     \\
+\textbf{ar.L2}  &       0.2314  &        0.093     &     2.476  &         0.013        &        0.048    &        0.415     \\
+\textbf{sigma2} &       0.2541  &        0.034     &     7.461  &         0.000        &        0.187    &        0.321     \\
 \bottomrule
 \end{tabular}
 \begin{tabular}{lclc}
-\textbf{Ljung-Box (L1) (Q):}     & 0.01 & \textbf{  Jarque-Bera (JB):  } &  0.18  \\
-\textbf{Prob(Q):}                & 0.93 & \textbf{  Prob(JB):          } &  0.91  \\
-\textbf{Heteroskedasticity (H):} & 1.47 & \textbf{  Skew:              } & -0.01  \\
-\textbf{Prob(H) (two-sided):}    & 0.22 & \textbf{  Kurtosis:          } &  2.81  \\
+\textbf{Ljung-Box (L1) (Q):}     & 0.01 & \textbf{  Jarque-Bera (JB):  } &  0.05  \\
+\textbf{Prob(Q):}                & 0.92 & \textbf{  Prob(JB):          } &  0.98  \\
+\textbf{Heteroskedasticity (H):} & 1.45 & \textbf{  Skew:              } & -0.00  \\
+\textbf{Prob(H) (two-sided):}    & 0.25 & \textbf{  Kurtosis:          } &  2.90  \\
 \bottomrule
 \end{tabular}
 %\caption{SARIMAX Results}

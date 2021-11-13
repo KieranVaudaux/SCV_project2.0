@@ -1,1 +1,3 @@
 Annual Seasonless mean (no constant) : p-value = 4.233905832370854e-05
+Monthly Seasonless mean (no constant) (model 1) : p-value = 4.231132821210104e-05
+Monthly Seasonless mean (no constant) (model 1) : p-value = 4.231132821210104e-05
