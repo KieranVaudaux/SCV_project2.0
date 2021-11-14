@@ -172,5 +172,131 @@ def descriptions(index):
     with st.expander("See explanation"):
         
         st.markdown(descriptions[index])
+   
+##  ANNUAL ANALYSIS PART ##################################################
 
+import scipy as sc
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import pandas as pd
+from datetime import datetime
+from datetime import date
+#import statistics as st
+from statsmodels.graphics.gofplots import qqplot
+from statsmodels.tsa.seasonal import seasonal_decompose
+from statsmodels.tsa.seasonal import STL
+import statsmodels.api as sm
+from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.tsa.stattools import adfuller, kpss
+from statsmodels.distributions.empirical_distribution import ECDF
+from TimeSerie_fct import create_monthly_avg_time_serie
+import statsmodels.api as sm
+from sklearn.linear_model import LinearRegression
+from statsmodels.tsa.stattools import acf, pacf
+from sklearn.utils import resample
+import plotly.figure_factory as ff
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import plotly.express as px
+
+
+
+def annual_analysis():
+    
+    data_Y = pd.read_csv("DataGenerated/Annual/Annual_Mean.csv")
+
+    st.title("Evolution of the Mean Temperature at Geneva Observatory")
+    
+    st.markdown(r'In this section, we will focus on the modelling of our data, which we will see as Times Series.\\We have the daily average temperatures at the Geneva observatory from 1$$^{\text{er}}$$ January 1901 to August 2 2021. That is to say 44044 average temperature record, spread over a period of more than 120 years. As this amount of data is very large, we have chosen to proceed in stages. To do this, we will first look for the presence of a significant increase in the trend in the Time Series of annual mean temperatures at the Geneva observatory, which we have calculated from the daily data. We can then make our study more complex by looking at the time series of monthly, weekly and daily mean temperatures.')
+    
+    
+    st.header("Annual Mean Temperature at Geneva Observatory")
+    
+    st.markdown('It seems natural to ask whether transforming our data by averaging the annual temperature is relevant. Indeed, knowing that during a year the temperature can vary from $-10\degree$C in winter to more than $30\degree$C in summer, does it really make sense to consider the average of these values? How do we correctly interpret these values and what would it really mean if there was a significant increase in the trend from 1901 to the present? While we have more refined data than annual average temperatures, looking at this one could be debated. However, as many studies also look at annual mean temperatures, we will accept, for the purposes of this project, that the presence of a significant increase in the trend of annual mean temperatures in Geneva would be an additional indication of the presence of climate warming (in Geneva). To confirm this idea, Figure \ref{mean_median_std} below allows us to see that the global behaviour of the Time Series of annual averages is similar to that of the Time Series of annual median temperatures, as well as the standard deviation of the annual average temperatures seems to be homoskedastic. This supports the idea that the annual mean temperatures are not overly affected by the presence of extreme temperatures or by the increase in temperature variability during a year.')
+    
+    fig = make_subplots(
+        rows=3, cols=1,
+        row_heights=[1./3,1./3,1./3],
+        column_widths=[1],
+        specs=[[{"type": "scatter"}],
+                [{"type": "scatter"}],
+                [{"type": "scatter"}]],
+        
+        subplot_titles = ['Annual mean temperature',
+                        'Annual median temperature',
+                        'Annual standard deviation from the mean temperature'],
+        x_title = 'Years', y_title = 'Temperature (°C)'
+        )
+
+    fig.add_trace(
+        go.Scatter(x=data_Y.Years, y=data_Y.Mean, showlegend = False),
+            row=1, col=1
+        )
+    fig.add_trace(
+        go.Scatter(x=data_Y.Years, y=data_Y.Median, showlegend = False),
+            row=2, col=1
+        )
+    fig.add_trace(
+        go.Scatter(x=data_Y.Years, y=data_Y.Std, showlegend = False),
+            row=3, col=1
+        )
+    
+    st.plotly_chart(fig)
+    
+    st.markdown('The Time Series of average temperatures appears to have an increasing trend over the years, but with a sudden cooling from 1962.\\In order to distinguish more clearly the periods that correspond to a warming or not, we present on Figure \ref{anom_annuelle} the histogram of the annual anomalies that we have standardised. We recall that the temperature anomaly is the difference between the temperature measured in a place (here Geneva), compared to the normal average temperature observed in this same place. ')
+    
+    anomalie = pd.read_csv("DataGenerated/Annual/Annual_anomalie.csv")
+    anom1 = pd.read_csv("DataGenerated/Annual/Annual_anom1.csv")
+    anom2 = pd.read_csv("DataGenerated/Annual/Annual_anom2.csv")
+    
+    
+    bar1 = pd.DataFrame()
+    bar1["Years"] = data_Y.Years
+    bar1["anomalie"] = anomalie.Mean
+    bar1["split_anom"] = np.concatenate([np.array(anom1.Mean),np.array(anom2.Mean)])
+    xx = np.array(data_Y.Years)
+    yy = np.array(anomalie.Mean)
+    fig1 = make_subplots(
+        rows=3, cols=1,
+        row_heights=[1./3,1./3,1./3],
+        column_widths=[1],
+        specs=[[{"type": "Bar"}],
+                [{"type": "Bar"}],
+                [{"type": "Bar"}]],
+        shared_xaxes = False,
+        subplot_titles = ['Annual mean temperature',
+                        'Annual median temperature',
+                        'Annual standard deviation from the mean temperature'],
+        x_title = 'Years', y_title = 'Anomalies'
+        )
+
+    fig1.add_trace(
+        go.Bar(x=xx, y=yy),
+            row=1, col=1
+        )
+    fig1.add_trace(
+        go.Bar(x=xx, y=yy),
+            row=2, col=1
+        )
+    fig1.add_trace(
+        go.Bar(x=xx, y=yy),
+            row=3, col=1
+        )
+    st.plotly_chart(fig1)
+    
+    #bar1 = pd.DataFrame()
+    #bar1["Years"] = data_Y.Years
+    #bar1["anomalie"] = anomalie
+    #bar1["split_anom"] = np.concatenate([np.array(anom1),np.array(anom2)])
+    
+    #fig = px.bar(bar1,y="anomalie",x="Years")
+    #st.plotly_chart(fig)
+    
+    #st.bar_chart(anomalie[:,1])
+#########################################################################################
+
+
+    
     

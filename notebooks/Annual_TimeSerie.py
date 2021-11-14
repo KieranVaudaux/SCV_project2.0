@@ -63,6 +63,7 @@ data_Y = pd.DataFrame(np.array([[df[df.Year == y].TG.mean(),
 data_Y.to_csv("DataGenerated/Annual_Mean.csv",index=False)
 
 
+
 # In[83]:
 
 

@@ -1,33 +1,46 @@
-\begin{center}
-\begin{tabular}{lclc}
+\begin{tabular}{lrrr}
 \toprule
-\textbf{Dep. Variable:}          & Mean\_detrended  & \textbf{  No. Observations:  } &    121      \\
-\textbf{Model:}                  &  ARIMA(2, 0, 0)  & \textbf{  Log Likelihood     } &  -88.893    \\
-\textbf{Date:}                   & Sat, 13 Nov 2021 & \textbf{  AIC                } &  185.787    \\
-\textbf{Time:}                   &     18:37:25     & \textbf{  BIC                } &  196.970    \\
-\textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  190.328    \\
-\textbf{}                        &       - 121      & \textbf{                     } &             \\
-\textbf{Covariance Type:}        &       opg        & \textbf{                     } &             \\
-\bottomrule
-\end{tabular}
-\begin{tabular}{lcccccc}
-                & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+{} &  param\_p &  param\_q &         AIC \\
 \midrule
-\textbf{const}  &       0.0315  &        0.081     &     0.387  &         0.699        &       -0.128    &        0.191     \\
-\textbf{ar.L1}  &       0.2038  &        0.103     &     1.979  &         0.048        &        0.002    &        0.406     \\
-\textbf{ar.L2}  &       0.2314  &        0.093     &     2.476  &         0.013        &        0.048    &        0.415     \\
-\textbf{sigma2} &       0.2541  &        0.034     &     7.461  &         0.000        &        0.187    &        0.321     \\
+0  &      0.0 &      0.0 &  198.899805 \\
+1  &      0.0 &      1.0 &  194.622270 \\
+2  &      0.0 &      2.0 &  188.959268 \\
+3  &      0.0 &      3.0 &  189.425609 \\
+4  &      0.0 &      4.0 &  191.416967 \\
+5  &      0.0 &      5.0 &  192.112453 \\
+6  &      0.0 &      6.0 &  193.994728 \\
+7  &      0.0 &      7.0 &  195.631043 \\
+8  &      0.0 &      8.0 &  194.051120 \\
+9  &      0.0 &      9.0 &  194.726111 \\
+10 &      1.0 &      0.0 &  191.721098 \\
+11 &      1.0 &      1.0 &  187.660483 \\
+12 &      1.0 &      2.0 &  189.469648 \\
+13 &      1.0 &      3.0 &  189.555696 \\
+14 &      1.0 &      4.0 &  191.558487 \\
+15 &      1.0 &      5.0 &  192.244132 \\
+16 &      1.0 &      6.0 &  194.024108 \\
+17 &      1.0 &      7.0 &  195.224618 \\
+18 &      1.0 &      8.0 &  195.723064 \\
+19 &      1.0 &      9.0 &  195.114090 \\
+20 &      2.0 &      0.0 &  187.655766 \\
+21 &      2.0 &      1.0 &  189.487323 \\
+22 &      2.0 &      2.0 &  191.449542 \\
+23 &      2.0 &      3.0 &  191.531044 \\
+24 &      2.0 &      4.0 &  189.908220 \\
+25 &      2.0 &      5.0 &  191.794662 \\
+26 &      2.0 &      6.0 &  193.337047 \\
+27 &      2.0 &      7.0 &  195.335612 \\
+28 &      2.0 &      8.0 &  195.419616 \\
+29 &      2.0 &      9.0 &  196.447500 \\
+30 &      3.0 &      0.0 &  189.438776 \\
+31 &      3.0 &      1.0 &  187.966420 \\
+32 &      3.0 &      2.0 &  189.969591 \\
+33 &      3.0 &      3.0 &  191.966116 \\
+34 &      3.0 &      4.0 &  193.531348 \\
+35 &      3.0 &      5.0 &  192.840515 \\
+36 &      3.0 &      6.0 &  194.727661 \\
+37 &      3.0 &      7.0 &  190.184347 \\
+38 &      3.0 &      8.0 &  198.759406 \\
+39 &      3.0 &      9.0 &  198.029704 \\
 \bottomrule
 \end{tabular}
-\begin{tabular}{lclc}
-\textbf{Ljung-Box (L1) (Q):}     & 0.01 & \textbf{  Jarque-Bera (JB):  } &  0.05  \\
-\textbf{Prob(Q):}                & 0.92 & \textbf{  Prob(JB):          } &  0.98  \\
-\textbf{Heteroskedasticity (H):} & 1.45 & \textbf{  Skew:              } & -0.00  \\
-\textbf{Prob(H) (two-sided):}    & 0.25 & \textbf{  Kurtosis:          } &  2.90  \\
-\bottomrule
-\end{tabular}
-%\caption{SARIMAX Results}
-\end{center}
-
-Warnings: \newline
- [1] Covariance matrix calculated using the outer product of gradients (complex-step).

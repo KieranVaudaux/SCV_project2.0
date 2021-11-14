@@ -10,7 +10,7 @@ import matplotlib
 import base64
 from paths import paths
 
-from streamlit_functions import display_date_slider, st_display_pdf, main, description, plot_stats_window_st, results_display, github, contacts
+from streamlit_functions import *
 
 
 # STREAMLIT STRUCTURAL CONFIGURATION
@@ -38,15 +38,15 @@ if INFO == 'Project description':
 # Written analysis with time series
 elif INFO == 'Time Series Analysis':
     
-    SELECTED_MODE = st.sidebar.selectbox("Visualization mode", MODES_TS, index=0)
+    SELECTED_MODE = st.sidebar.selectbox("Part", MODES_TS, index=0)
     if SELECTED_MODE == MODES_TS[0]:
-        
+        description()
     elif SELECTED_MODE == MODES_TS[1]:
-        
+        annual_analysis()
     elif SELECTED_MODE == MODES_TS[2]:
-        
+        description()
     elif SELECTED_MODE == MODES_TS[3]:
-        
+        description()
 # DISPLAYING PDF REPORT
     
 elif INFO == 'Whole study':
