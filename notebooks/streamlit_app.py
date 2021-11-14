@@ -17,6 +17,11 @@ from streamlit_functions import *
 
 st.set_page_config(layout='wide')
 
+#-----
+
+
+#-----
+
 st.markdown("<h1 style='text-align: center;'> Meteorological data visualization</h1>",
             unsafe_allow_html=True)
 

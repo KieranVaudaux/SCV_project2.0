@@ -202,7 +202,6 @@ from plotly.subplots import make_subplots
 import plotly.express as px
 
 
-
 def annual_analysis():
     
     data_Y = pd.read_csv("DataGenerated/Annual/Annual_Mean.csv")
@@ -227,7 +226,7 @@ def annual_analysis():
         subplot_titles = ['Annual mean temperature',
                         'Annual median temperature',
                         'Annual standard deviation from the mean temperature'],
-        x_title = 'Years', y_title = 'Temperature (°C)'
+        x_title = 'Years', y_title = 'Temperature (°C)',
         )
 
     fig.add_trace(
@@ -242,7 +241,7 @@ def annual_analysis():
         go.Scatter(x=data_Y.Years, y=data_Y.Std, showlegend = False),
             row=3, col=1
         )
-    
+    fig.update_layout(width=1000, height=600)
     st.plotly_chart(fig)
     
     st.markdown('The Time Series of average temperatures appears to have an increasing trend over the years, but with a sudden cooling from 1962.\\In order to distinguish more clearly the periods that correspond to a warming or not, we present on Figure \ref{anom_annuelle} the histogram of the annual anomalies that we have standardised. We recall that the temperature anomaly is the difference between the temperature measured in a place (here Geneva), compared to the normal average temperature observed in this same place. ')
@@ -251,13 +250,6 @@ def annual_analysis():
     anom1 = pd.read_csv("DataGenerated/Annual/Annual_anom1.csv")
     anom2 = pd.read_csv("DataGenerated/Annual/Annual_anom2.csv")
     
-    
-    bar1 = pd.DataFrame()
-    bar1["Years"] = data_Y.Years
-    bar1["anomalie"] = anomalie.Mean
-    bar1["split_anom"] = np.concatenate([np.array(anom1.Mean),np.array(anom2.Mean)])
-    xx = np.array(data_Y.Years)
-    yy = np.array(anomalie.Mean)
     fig1 = make_subplots(
         rows=3, cols=1,
         row_heights=[1./3,1./3,1./3],
@@ -266,35 +258,99 @@ def annual_analysis():
                 [{"type": "Bar"}],
                 [{"type": "Bar"}]],
         shared_xaxes = False,
-        subplot_titles = ['Annual mean temperature',
-                        'Annual median temperature',
-                        'Annual standard deviation from the mean temperature'],
-        x_title = 'Years', y_title = 'Anomalies'
+        subplot_titles = ['Annual standardized temperature anomalies over the period 1901-2021',
+                        'Annual standardized temperature anomalies over the period 1901-1961',
+                        'Annual standardized temperature anomalies over the period 1962-2021'],
+        x_title = 'Years', y_title = 'Standardized  anomalies'
         )
 
     fig1.add_trace(
-        go.Bar(x=xx, y=yy),
+        go.Bar(x=data_Y.Years, y=anomalie.Mean,showlegend=False),
             row=1, col=1
         )
     fig1.add_trace(
-        go.Bar(x=xx, y=yy),
+        go.Bar(x=data_Y[data_Y.Years<1962].Years, y=anom1.Mean,showlegend=False),
             row=2, col=1
         )
     fig1.add_trace(
-        go.Bar(x=xx, y=yy),
+        go.Bar(x=data_Y[data_Y.Years>=1962].Years, y=anom2.Mean,showlegend=False),
             row=3, col=1
         )
+    fig1.update_layout(width=1000, height=500)
     st.plotly_chart(fig1)
     
-    #bar1 = pd.DataFrame()
-    #bar1["Years"] = data_Y.Years
-    #bar1["anomalie"] = anomalie
-    #bar1["split_anom"] = np.concatenate([np.array(anom1),np.array(anom2)])
+    st.markdown('The visual analysis of these histograms allows us to distinguish four periods 1901-1942, 1943-1961, 1962-1987 and 1988-2021. During the first period, the anomalies tend to be negative, then positive during the second. From the third period, we again observe a cycle of negative and then positive anomalies, but this time more pronounced. This seems to be consistent with the Time Series of average temperatures, in which we had observed an increasing trend but a significant decrease in temperature at the beginning of this third period.')
     
-    #fig = px.bar(bar1,y="anomalie",x="Years")
-    #st.plotly_chart(fig)
+    st.markdown('In order to model our data, we will try to follow the principles of parsimony as much as possible, in order to choose the simplest model that effectively explains our data.')
     
-    #st.bar_chart(anomalie[:,1])
+    st.markdown(r'If we denote the Time Series of annual averages by $\{\mathbf{A}_{t}\}_{t}$ $t = 1901,... .2021$, one of the simplest models we could propose is that our observations $\{\mathbf{A}_{t}\}_{t}$ are from a normal distribution, $\mathbf{A}_{t} \stackrel{iid}{\sim} \mathcal{N}(\mu,\sigma^{2})$. To test this we will first compare the empirical distribution of our data with the distribution of a normal distribution of mean $\mathbf{\bar{A}}$ and variance $S^{2}$.')
+    
+    st.markdown(r'In Figures \ref{qqplot_annuelle} and \ref{ecdf_vs_cdf}, we see that our empirical distribution is quite close to that of a normal distribution, despite the fact that we only have 121 observations.')
+        
+        
+    qqplot_data = qqplot(data_Y.Mean, line='s').gca().lines
+    fig = go.Figure()
+    fig.add_trace({
+        'type': 'scatter',
+        'x': qqplot_data[0].get_xdata(),
+        'y': qqplot_data[0].get_ydata(),
+        'mode': 'markers',
+        'marker': {
+            'color': '#19d3f3'
+        }
+    })
+
+    fig.add_trace({
+        'type': 'scatter',
+        'x': qqplot_data[1].get_xdata(),
+        'y': qqplot_data[1].get_ydata(),
+        'mode': 'lines',
+        'line': {
+            'color': '#636efa'
+        }
+
+    })
+
+
+    fig['layout'].update({
+        'title': 'QQ-Plot of the mean temperature',
+        'title_x': 0.5,
+        'xaxis': {
+            'title': 'Theoritical Quantities',
+            'zeroline': False
+        },
+        'yaxis': {
+            'title': 'Sample Quantities'
+        },
+        'showlegend': False,
+        'width': 600,
+        'height': 500,
+    })
+    st.plotly_chart(fig)
+    
+   
+    fig = px.ecdf(data_Y.Mean)
+    fig['layout'].update({
+        'title': 'ECDF vs Normal CDF',
+        'title_x': 0.5,
+        'xaxis': {
+            'title': 'x',
+            'zeroline': False
+        },
+        'yaxis': {
+            'title':r'''$\mathbb{P}(TG<x)$'''
+        },
+        'showlegend': False,
+        'width': 600,
+        'height': 500,
+    })
+   
+    st.plotly_chart(fig)
+    
+    st.markdown(r'Nevertheless, Figure \ref{acf_pacf} highlights a significant correlation between the annual average temperatures. This leads us to question the independence of the $\mathbf{A}_{t}$ observations. Indeed, if $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ were independent and identically distributed, we should have that the auto-correlations as well as the partial auto-correlations on Figure \ref{acf_pacf} are approximately in the red zone, which corresponds to an approximate confidence interval for the auto-correlations in the case of an iid sequence.')
+    
+    
+    
 #########################################################################################
 
 
