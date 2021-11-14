@@ -21,11 +21,12 @@ st.markdown("<h1 style='text-align: center;'> Meteorological data visualization<
             unsafe_allow_html=True)
 
 
-MODES = ['Descriptive Statistics', 'Time Series Visualization', 'Time Series Analysis']
+MODES = ['Descriptive Statistics','Time Series Analysis', 'Time Series Visualization', 'Time Series Analysis']
+MODES_TS = ['Intro','Annual Analysis','Monthly Analysis','Description of statistical tools']
 
 st.sidebar.header('Options')
 
-INFO = st.sidebar.radio("Content",('Project description', 'Whole study', 'Data Visualization'))
+INFO = st.sidebar.radio("Content",('Project description', 'Time Series Analysis','Whole study', 'Data Visualization'))
     
 
 # PROJECT DESCRIPTION
@@ -34,7 +35,18 @@ if INFO == 'Project description':
     
     description()
     
-
+# Written analysis with time series
+elif INFO == 'Time Series Analysis':
+    
+    SELECTED_MODE = st.sidebar.selectbox("Visualization mode", MODES_TS, index=0)
+    if SELECTED_MODE == MODES_TS[0]:
+        
+    elif SELECTED_MODE == MODES_TS[1]:
+        
+    elif SELECTED_MODE == MODES_TS[2]:
+        
+    elif SELECTED_MODE == MODES_TS[3]:
+        
 # DISPLAYING PDF REPORT
     
 elif INFO == 'Whole study':

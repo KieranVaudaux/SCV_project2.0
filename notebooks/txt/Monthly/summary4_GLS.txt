@@ -1,0 +1,57 @@
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}    &       Mean       & \textbf{  R-squared:         } &     0.993   \\
+\textbf{Model:}            &       GLS        & \textbf{  Adj. R-squared:    } &     0.993   \\
+\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     8914.   \\
+\textbf{Date:}             & Sun, 14 Nov 2021 & \textbf{  Prob (F-statistic):} &     0.00    \\
+\textbf{Time:}             &     09:38:38     & \textbf{  Log-Likelihood:    } &   -2202.8   \\
+\textbf{No. Observations:} &        1448      & \textbf{  AIC:               } &     4454.   \\
+\textbf{Df Residuals:}     &        1424      & \textbf{  BIC:               } &     4580.   \\
+\textbf{Df Model:}         &          23      & \textbf{                     } &             \\
+\textbf{Covariance Type:}  &    nonrobust     & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+             & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+\midrule
+\textbf{x1}  &       0.4271  &        0.212     &     2.014  &         0.044        &        0.011    &        0.843     \\
+\textbf{x2}  &       1.6932  &        0.212     &     7.980  &         0.000        &        1.277    &        2.109     \\
+\textbf{x3}  &       5.1828  &        0.212     &    24.486  &         0.000        &        4.768    &        5.598     \\
+\textbf{x4}  &       8.9608  &        0.212     &    42.342  &         0.000        &        8.546    &        9.376     \\
+\textbf{x5}  &      13.6432  &        0.212     &    64.490  &         0.000        &       13.228    &       14.058     \\
+\textbf{x6}  &      16.9361  &        0.211     &    80.083  &         0.000        &       16.521    &       17.351     \\
+\textbf{x7}  &      19.0409  &        0.212     &    89.997  &         0.000        &       18.626    &       19.456     \\
+\textbf{x8}  &      18.1948  &        0.211     &    86.166  &         0.000        &       17.781    &       18.609     \\
+\textbf{x9}  &      15.0315  &        0.212     &    70.920  &         0.000        &       14.616    &       15.447     \\
+\textbf{x10} &       9.3582  &        0.212     &    44.161  &         0.000        &        8.943    &        9.774     \\
+\textbf{x11} &       4.7407  &        0.212     &    22.394  &         0.000        &        4.325    &        5.156     \\
+\textbf{x12} &       1.5786  &        0.211     &     7.472  &         0.000        &        1.164    &        1.993     \\
+\textbf{x13} &       0.0127  &        0.003     &     3.816  &         0.000        &        0.006    &        0.019     \\
+\textbf{x14} &       0.0110  &        0.003     &     3.285  &         0.001        &        0.004    &        0.018     \\
+\textbf{x15} &       0.0110  &        0.003     &     3.298  &         0.001        &        0.004    &        0.018     \\
+\textbf{x16} &       0.0095  &        0.003     &     2.862  &         0.004        &        0.003    &        0.016     \\
+\textbf{x17} &       0.0036  &        0.003     &     1.094  &         0.274        &       -0.003    &        0.010     \\
+\textbf{x18} &       0.0084  &        0.003     &     2.515  &         0.012        &        0.002    &        0.015     \\
+\textbf{x19} &       0.0106  &        0.003     &     3.162  &         0.002        &        0.004    &        0.017     \\
+\textbf{x20} &       0.0116  &        0.003     &     3.473  &         0.001        &        0.005    &        0.018     \\
+\textbf{x21} &       0.0061  &        0.003     &     1.803  &         0.072        &       -0.001    &        0.013     \\
+\textbf{x22} &       0.0169  &        0.003     &     5.035  &         0.000        &        0.010    &        0.024     \\
+\textbf{x23} &       0.0119  &        0.003     &     3.552  &         0.000        &        0.005    &        0.019     \\
+\textbf{x24} &       0.0107  &        0.003     &     3.184  &         0.001        &        0.004    &        0.017     \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lclc}
+\textbf{Omnibus:}       & 19.044 & \textbf{  Durbin-Watson:     } &    1.982  \\
+\textbf{Prob(Omnibus):} &  0.000 & \textbf{  Jarque-Bera (JB):  } &   28.419  \\
+\textbf{Skew:}          & -0.117 & \textbf{  Prob(JB):          } & 6.74e-07  \\
+\textbf{Kurtosis:}      &  3.645 & \textbf{  Cond. No.          } & 2.68e+03  \\
+\bottomrule
+\end{tabular}
+%\caption{GLS Regression Results}
+\end{center}
+
+Notes: \newline
+ [1] Standard Errors assume that the covariance matrix of the errors is correctly specified. \newline
+ [2] The condition number is large, 2.68e+03. This might indicate that there are \newline
+ strong multicollinearity or other numerical problems.
