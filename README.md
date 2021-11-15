@@ -23,6 +23,7 @@ src="https://pbs.twimg.com/profile_images/551035690234834945/JhdUiOPP.png" />
 * [People](#people)
 * [Description](#description)
 * [Aims](#aims)
+* [Streamlit Web App](#streamlit)
 * [Project Organization](#project-organization)
 * [Related Articles and Useful References](#refs)
 * [Interesting Material 🔍](#material)
@@ -47,6 +48,28 @@ Within the statistical data analysis we make, we aim at answering a set of speci
 * Can we make predictions on certain meteorological features, such as mean temperature ?
 * Can we establish a link (correlation and causality) between various meteorological features, such as precipitation and mean temperature ?
 * Can we predict the behavior of a single meteorological feature based on the data of several other correlated features ?
+
+## Streamlit Web App
+
+You can launch the Streamlit web application with the following commands. First, open a shell/terminal and go to the directory in which you saved the project - for example :
+
+```
+cd Desktop/levelset/zigzag
+```
+Then, go directly to the source code with 
+
+```
+cd src
+```
+
+Finally, type the command below in your shell and enjoy the app!
+```
+streamlit run st_app.py
+```
+For an original theme configuration, you may replace the last command with this one :
+```
+streamlit run st_app.py --theme.primaryColor="#3271e2" --theme.backgroundColor="#357dc5" --theme.secondaryBackgroundColor="#68708c" --theme.textColor="#dadde6"
+```
 
 ## Project Organization
 ------------
