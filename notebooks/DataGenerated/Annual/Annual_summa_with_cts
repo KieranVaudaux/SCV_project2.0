@@ -1,0 +1,23 @@
+                      GLS Regression Results                     
+Dep. Variable:   ,Mean            ,  R-squared:         ,   0.374
+Model:           ,GLS             ,  Adj. R-squared:    ,   0.364
+Method:          ,Least Squares   ,  F-statistic:       ,   35.29
+Date:            ,Mon, 15 Nov 2021,  Prob (F-statistic):,9.70e-13
+Time:            ,11:27:02        ,  Log-Likelihood:    , -57.477
+No. Observations:,   121          ,  AIC:               ,   121.0
+Df Residuals:    ,   118          ,  BIC:               ,   129.3
+Df Model:        ,     2          ,                     ,        
+Covariance Type: ,nonrobust       ,                     ,        
+     ,   coef   , std err ,    t    ,P>|t| ,  [0.025 ,  0.975] 
+const,  -47.4705,    6.876,   -6.904, 0.000,  -61.086,  -33.855
+x1   ,   -1.5218,    0.240,   -6.329, 0.000,   -1.998,   -1.046
+x2   ,    0.0298,    0.004,    8.398, 0.000,    0.023,    0.037
+Omnibus:      , 1.570,  Durbin-Watson:     ,   2.043
+Prob(Omnibus):, 0.456,  Jarque-Bera (JB):  ,   1.164
+Skew:         ,-0.225,  Prob(JB):          ,   0.559
+Kurtosis:     , 3.170,  Cond. No.          ,3.20e+05
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.2e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.

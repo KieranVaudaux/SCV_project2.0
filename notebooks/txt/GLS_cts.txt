@@ -1,0 +1,36 @@
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}    &       Mean       & \textbf{  R-squared:         } &     0.374   \\
+\textbf{Model:}            &       GLS        & \textbf{  Adj. R-squared:    } &     0.364   \\
+\textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     35.29   \\
+\textbf{Date:}             & Mon, 15 Nov 2021 & \textbf{  Prob (F-statistic):} &  9.70e-13   \\
+\textbf{Time:}             &     11:10:04     & \textbf{  Log-Likelihood:    } &   -57.477   \\
+\textbf{No. Observations:} &         121      & \textbf{  AIC:               } &     121.0   \\
+\textbf{Df Residuals:}     &         118      & \textbf{  BIC:               } &     129.3   \\
+\textbf{Df Model:}         &           2      & \textbf{                     } &             \\
+\textbf{Covariance Type:}  &    nonrobust     & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+               & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+\midrule
+\textbf{const} &     -47.4705  &        6.876     &    -6.904  &         0.000        &      -61.086    &      -33.855     \\
+\textbf{x1}    &      -1.5218  &        0.240     &    -6.329  &         0.000        &       -1.998    &       -1.046     \\
+\textbf{x2}    &       0.0298  &        0.004     &     8.398  &         0.000        &        0.023    &        0.037     \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lclc}
+\textbf{Omnibus:}       &  1.570 & \textbf{  Durbin-Watson:     } &    2.043  \\
+\textbf{Prob(Omnibus):} &  0.456 & \textbf{  Jarque-Bera (JB):  } &    1.164  \\
+\textbf{Skew:}          & -0.225 & \textbf{  Prob(JB):          } &    0.559  \\
+\textbf{Kurtosis:}      &  3.170 & \textbf{  Cond. No.          } & 3.20e+05  \\
+\bottomrule
+\end{tabular}
+%\caption{GLS Regression Results}
+\end{center}
+
+Notes: \newline
+ [1] Standard Errors assume that the covariance matrix of the errors is correctly specified. \newline
+ [2] The condition number is large, 3.2e+05. This might indicate that there are \newline
+ strong multicollinearity or other numerical problems.

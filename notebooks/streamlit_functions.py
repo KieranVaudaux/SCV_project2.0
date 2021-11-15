@@ -286,10 +286,50 @@ def annual_analysis():
     st.markdown(r'If we denote the Time Series of annual averages by $\{\mathbf{A}_{t}\}_{t}$ $t = 1901,... .2021$, one of the simplest models we could propose is that our observations $\{\mathbf{A}_{t}\}_{t}$ are from a normal distribution, $\mathbf{A}_{t} \stackrel{iid}{\sim} \mathcal{N}(\mu,\sigma^{2})$. To test this we will first compare the empirical distribution of our data with the distribution of a normal distribution of mean $\mathbf{\bar{A}}$ and variance $S^{2}$.')
     
     st.markdown(r'In Figures \ref{qqplot_annuelle} and \ref{ecdf_vs_cdf}, we see that our empirical distribution is quite close to that of a normal distribution, despite the fact that we only have 121 observations.')
+
+    data_Y["ecdf"] = data_Y.Mean
+    fig = px.ecdf(data_Y.ecdf)
+    
+    mean = data_Y.Mean.mean()
+    std = data_Y.Mean.std()
+    x = np.linspace(min(data_Y.Mean),max(data_Y.Mean),5000)
+    
+    fig.add_trace(go.Scatter(x = x,
+        y =sc.stats.norm.cdf(x,loc = data_Y.Mean.mean(),scale = std),name ='cdf'))
+    
+    fig['layout'].update({
+        'title': 'ECDF vs Normal CDF',
+        'title_x': 0.5,
+        'xaxis': {
+            'title': 'x',
+            'zeroline': False
+        },
+        'yaxis': {
+            'title':"P (X<=x)"
+        },
         
+        'width': 1200,
+        'height': 500,
+        'legend':{
+            'title':""
+                         }
+    })
+    
+    st.plotly_chart(fig)
         
     qqplot_data = qqplot(data_Y.Mean, line='s').gca().lines
-    fig = go.Figure()
+    ecdf = ECDF(data_Y.Mean)
+    fig =  make_subplots(
+        rows=1, cols=2,
+        row_heights=[1],
+        column_widths=[1./2,1./2],
+        specs=[[{"type": "Scatter"},
+                {"type": "Scatter"}]],
+        shared_xaxes = False,
+        shared_yaxes = False,
+        subplot_titles = ['QQ-Plot of the mean temperature',
+                        'Absolute deviation of the ecdf from the cdf']
+        )
     fig.add_trace({
         'type': 'scatter',
         'x': qqplot_data[0].get_xdata(),
@@ -298,7 +338,7 @@ def annual_analysis():
         'marker': {
             'color': '#19d3f3'
         }
-    })
+    },row = 1, col = 1)
 
     fig.add_trace({
         'type': 'scatter',
@@ -309,48 +349,104 @@ def annual_analysis():
             'color': '#636efa'
         }
 
-    })
-
-
+    },row = 1, col = 1)
+    
+    fig.add_trace(go.Scatter(x = x,
+        y = np.abs(ecdf(x)-sc.stats.norm.cdf(x,loc = data_Y.Mean.mean() ,scale = std)),
+        line= dict(color='darkcyan')),
+        row = 1, col = 2)
+        
+    fig.update_xaxes(title_text="Theoritical Quantities", row=1, col=1)
+    fig.update_yaxes(title_text="Sample Quantities", row=1, col=1)
+    fig.update_xaxes(title_text="x", row=1, col=2)
+    fig.update_yaxes(title_text="Absolute deviation", row=1, col=2)
+    
     fig['layout'].update({
-        'title': 'QQ-Plot of the mean temperature',
         'title_x': 0.5,
         'xaxis': {
-            'title': 'Theoritical Quantities',
             'zeroline': False
         },
-        'yaxis': {
-            'title': 'Sample Quantities'
-        },
         'showlegend': False,
-        'width': 600,
-        'height': 500,
+        'width': 1200,
+        'height': 600,
     })
+    
     st.plotly_chart(fig)
     
-   
-    fig = px.ecdf(data_Y.Mean)
-    fig['layout'].update({
-        'title': 'ECDF vs Normal CDF',
-        'title_x': 0.5,
-        'xaxis': {
-            'title': 'x',
-            'zeroline': False
-        },
-        'yaxis': {
-            'title':r'''$\mathbb{P}(TG<x)$'''
-        },
-        'showlegend': False,
-        'width': 600,
-        'height': 500,
-    })
-   
-    st.plotly_chart(fig)
     
     st.markdown(r'Nevertheless, Figure \ref{acf_pacf} highlights a significant correlation between the annual average temperatures. This leads us to question the independence of the $\mathbf{A}_{t}$ observations. Indeed, if $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ were independent and identically distributed, we should have that the auto-correlations as well as the partial auto-correlations on Figure \ref{acf_pacf} are approximately in the red zone, which corresponds to an approximate confidence interval for the auto-correlations in the case of an iid sequence.')
     
+    st.image("/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/figure/Annual_acf_pacf.png")
     
+    st.markdown(r'In order to test the independence of our observations, we will use the portmanteau test and several of its variations, namely the Ljung-Box, Box-Pierce and McLeod and Li tests. Figure 1 shows the p-values of these three tests for different numbers in the auto-correlation sequence considered in the test statistics. These tests all have the null hypothesis that the sequence $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ is iid.')
     
+    pval_ind1 = pd.read_csv("DataGenerated/Annual/Annual1_pvalue_indep")
+    
+    fig = px.line(pval_ind1, x=pval_ind1.index+1, y=['Ljung','Pierce','McLeod'],log_y = True,markers = True)
+    fig.add_hline(y=0.05,line_dash="dash", line_color="red")
+    
+    fig['layout'].update({
+        'title': 'P-values of the Ljung-Box ,Box-Pierce test and McLeod-Li',
+        'title_x': 0.5,
+        'xaxis': {
+            'title': 'Autocorrelation lags',
+            'zeroline': False
+        },
+        'yaxis': {
+            'title':'p-values'
+        },
+        'showlegend': False,
+        'width': 600,
+        'height': 500,
+    })
+    st.plotly_chart(fig)
+    
+    st.markdown(r'Since the p-values of these tests are all less than $10^{-11}$, we can conclude that at any significance level greater than $10^{-11}$, the sequence of mean annual temperatures is not from the model $\mathbf{A}_{t} \stackrel{iid}{\sim} \mathcal{N}(\mu,\,\sigma^{2})$.')
+    
+    st.markdown('To take these dependencies into account, we will consider a more general model from the Time Series study. First of all, we will test the stationarity of our Time Series in order to know which Time Series model could be applied to our data. Without going into formal definitions, a Time Series is stationary if it has a constant mean over time and if its variance is also time invariant.')
+    
+    st.markdown(r'The test we use to test the stationarity of our Time Series is the Augmented Dickey-Fuller test (ADF), which tests the null hypothesis that a unit root is present in the Time Series, which would make the Time Series non-stationary. This test gives us a p-value of $p = 0.8711$, which is far from significant. This result tends to make us think that the Time Series is not stationary, which can certainly be explained by the presence of an increasing trend that we had already noticed visually on Figure \ref{mean_median_std}. To test this we use another version of the Augmented Dickey-Fuller test to test the trend-stationarity of the Time Series. With this test we obtain a p-value of $p = 0.0162$ which is significant, at the standard significance level of $\alpha = 0.05$ for example.')
+    
+    st.markdown(r'Following this result, we are therefore led to first model the trend of our Time Series before trying to model our data with a stationary Time Series model. To model our trend we use a generalized linear regression, i.e. a linear regression in which we do not assume the independence of our errors. We chose to model the trend as an affine function of time $\mathbf{A}_{t} = \beta_{0}+\beta_{1}t + \epsilon_{t}$ with $\mathbf{\epsilon} = (\epsilon_{1901},...,\epsilon_{2021})^{T}\sim \mathcal{N}(0,\mathbf{\Sigma})$, so as to keep the model simple and to be able to easily infer the sign of $\beta_{1}$, which will allow us to detect or not a significant growth of the mean temperature trend. To do this, we estimated the covariance matrix of $\mathbf{\epsilon}$ by the Toeplitz matrix generated by the sequence of auto-correlations of our Time Series. Figure \ref{full_GLS}, shows us the fit of the trend estimate by a line. We notice visually that the fit is quite good overall, but that the line has difficulty in approximating the period 1960-1990 correctly. This is due to the fact that, as we saw in Figure \ref{mean_median_std}, the mean annual temperature drops sharply in 1962 before resuming a "normal" behaviour in relation to the rest of the Time Series.')
+    
+    fig = go.Figure()
+    
+    trendless_gls = pd.read_csv("DataGenerated/Annual/Annual1_trendlessMean_GLS")
+    
+    fig.add_trace(go.Scatter(x = data_Y.Years, y = data_Y.Mean,
+        name = 'Annual mean temperature'))
+    fig.add_trace(go.Scatter(x = data_Y.Years, y = trendless_gls.f_without_cts,
+        name = 'GLS without constant'))
+    fig.add_trace(go.Scatter(x = data_Y.Years, y = trendless_gls.f_cts,
+        name = 'GLS with constant',
+        marker = dict(color = 'mediumvioletred')))
+    
+    fig['layout'].update({
+        'title': 'Modelisation of the trend by GLS',
+        'title_x': 0.5,
+        'xaxis': {
+            'title': 'Years',
+            'zeroline': False
+        },
+        'yaxis': {
+            'title':'Annual mean temeprature (°C)'
+        },
+        'width': 1000,
+        'height': 500,
+    })
+    st.plotly_chart(fig)
+    
+    st.markdown('Initially, we wondered whether this sudden change was due to a change in equipment or to the automation of the temperature recordings, which could have affected the average daily temperatures and, by transitivity, the average annual temperatures. But, given the very large temperature difference, this seems unlikely and we have not found any information that would support this hypothesis. However, by doing some additional research we were able to find articles and websites on which the years 1962-1964 were described as particularly cold years with harsh winters. This sudden cooling could then be simply due to a temporary local cooling. We then considered this sudden cooling as a rare event, and in order not to affect our study too much, we chose to estimate the trend of the annual mean temperatures over the periods 1901-1961 and 1961-2021 separately. This led to the estimate in Figure 2 below.')
+    
+    st.markdown(r'The results of the two GLS estimates are summarised in the tables ref{split_GLS_summary1} and ref{split_GLS_summary2} which represent the results for the period 1901-1961 and the period 1962-2021 respectively.In the table ref{split_GLS_summary1}, we see that the p-value of the t-test is $p = 0.1$, on the first period we can only reject the null hypothesis, that $\beta_{1} = 0$, at a significance level of $\alpha = 0.1$. However, the 95\% confidence interval which is given contains $0$, so we cannot conclude anything about the positivity of $\beta_{1}$ at the threshold of $\alpha = 0.05$ on this period.')
+    
+    HtmlFile = open("DataGenerated/Annual/Annual_summa_without_cts", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+
+    st.markdown(source_code, unsafe_allow_html=True)
+    st.latex(r'''
+    ''')
+
 #########################################################################################
 
 
