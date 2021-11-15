@@ -682,6 +682,8 @@ def annual_analysis():
     st.markdown(r'We therefore seem to have obtained residuals that are independent of each other. Moreover, after performing the Jacques-Bera test, which has the null hypothesis that our data are from a normal distribution, and the Goldfeld-Quandt test, which has the null hypothesis that the data are homoskedastic, we get the p-values : ')
     
     
+    
+    
 #########################################################################################
 
 
