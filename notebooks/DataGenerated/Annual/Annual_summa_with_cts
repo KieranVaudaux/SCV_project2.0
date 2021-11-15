@@ -1,23 +1,58 @@
-                      GLS Regression Results                     
-Dep. Variable:   ,Mean            ,  R-squared:         ,   0.374
-Model:           ,GLS             ,  Adj. R-squared:    ,   0.364
-Method:          ,Least Squares   ,  F-statistic:       ,   35.29
-Date:            ,Mon, 15 Nov 2021,  Prob (F-statistic):,9.70e-13
-Time:            ,11:27:02        ,  Log-Likelihood:    , -57.477
-No. Observations:,   121          ,  AIC:               ,   121.0
-Df Residuals:    ,   118          ,  BIC:               ,   129.3
-Df Model:        ,     2          ,                     ,        
-Covariance Type: ,nonrobust       ,                     ,        
-     ,   coef   , std err ,    t    ,P>|t| ,  [0.025 ,  0.975] 
-const,  -47.4705,    6.876,   -6.904, 0.000,  -61.086,  -33.855
-x1   ,   -1.5218,    0.240,   -6.329, 0.000,   -1.998,   -1.046
-x2   ,    0.0298,    0.004,    8.398, 0.000,    0.023,    0.037
-Omnibus:      , 1.570,  Durbin-Watson:     ,   2.043
-Prob(Omnibus):, 0.456,  Jarque-Bera (JB):  ,   1.164
-Skew:         ,-0.225,  Prob(JB):          ,   0.559
-Kurtosis:     , 3.170,  Cond. No.          ,3.20e+05
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 3.2e+05. This might indicate that there are
-strong multicollinearity or other numerical problems.
+<table class="simpletable">
+<caption>GLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>Mean</td>       <th>  R-squared:         </th> <td>   0.374</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>GLS</td>       <th>  Adj. R-squared:    </th> <td>   0.364</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   35.29</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Mon, 15 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>9.70e-13</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>12:52:56</td>     <th>  Log-Likelihood:    </th> <td> -57.477</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   121</td>      <th>  AIC:               </th> <td>   121.0</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   118</td>      <th>  BIC:               </th> <td>   129.3</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th> <td>  -47.4705</td> <td>    6.876</td> <td>   -6.904</td> <td> 0.000</td> <td>  -61.086</td> <td>  -33.855</td>
+</tr>
+<tr>
+  <th>x1</th>    <td>   -1.5218</td> <td>    0.240</td> <td>   -6.329</td> <td> 0.000</td> <td>   -1.998</td> <td>   -1.046</td>
+</tr>
+<tr>
+  <th>x2</th>    <td>    0.0298</td> <td>    0.004</td> <td>    8.398</td> <td> 0.000</td> <td>    0.023</td> <td>    0.037</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 1.570</td> <th>  Durbin-Watson:     </th> <td>   2.043</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.456</td> <th>  Jarque-Bera (JB):  </th> <td>   1.164</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.225</td> <th>  Prob(JB):          </th> <td>   0.559</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.170</td> <th>  Cond. No.          </th> <td>3.20e+05</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 3.2e+05. This might indicate that there are<br/>strong multicollinearity or other numerical problems.
