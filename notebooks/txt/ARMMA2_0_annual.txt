@@ -3,8 +3,8 @@
 \toprule
 \textbf{Dep. Variable:}          & Mean\_detrended  & \textbf{  No. Observations:  } &    121      \\
 \textbf{Model:}                  &  ARIMA(2, 0, 0)  & \textbf{  Log Likelihood     } &  -89.828    \\
-\textbf{Date:}                   & Sun, 14 Nov 2021 & \textbf{  AIC                } &  187.656    \\
-\textbf{Time:}                   &     15:34:59     & \textbf{  BIC                } &  198.839    \\
+\textbf{Date:}                   & Tue, 16 Nov 2021 & \textbf{  AIC                } &  187.656    \\
+\textbf{Time:}                   &     08:55:51     & \textbf{  BIC                } &  198.839    \\
 \textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  192.198    \\
 \textbf{}                        &       - 121      & \textbf{                     } &             \\
 \textbf{Covariance Type:}        &       opg        & \textbf{                     } &             \\
