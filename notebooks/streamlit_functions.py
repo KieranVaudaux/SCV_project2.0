@@ -14,6 +14,9 @@ from stvis import pv_static
 from scipy.stats.stats import pearsonr 
 import seaborn as sns
 import plotly.graph_objects as go
+import plotly.express as px
+
+from plotly_features import plotly_mean_temp, plotly_hist_mean, plotly_min, plotly_max, plotly_std, plotly_mean_temp_global
 
 
 def display_date_slider(years):
@@ -117,22 +120,46 @@ def multiple_curves_window(df,elt):
 
     adate = [datetime.strptime(str(date),"%Y%m%d") for date in df['DATE']]
     df['Day_of_year'] = [d.timetuple().tm_yday for d in adate]
-
-    fig1, ax1 = plt.subplots(1)
-    fig2, ax2 = plt.subplots(1)
-
+    
+    fig1 = go.Figure()
+    fig2 = go.Figure()
+    
+    fig1['layout'].update({
+        'showlegend': True,
+        'width': 600,
+        'height': 500,
+    })
+    fig2['layout'].update({
+        'showlegend': True,
+        'width': 600,
+        'height': 500,
+    })
+    
+    fig1.update_layout(
+    title="TIME-WINDOW VIEWPOINT : CURVES",
+    xaxis_title="day of the year",
+    yaxis_title=elt
+    )
+    
+    fig2.update_layout(
+    title="TIME-WINDOW VIEWPOINT : HISTOGRAMS",
+    xaxis_title="sunshine duration",
+    yaxis_title="count of days"
+    )
+    
     values = st.sidebar.slider('Select a range of years',1901, 2020, (1965, 1967))
-    bins = [5*i for i in range(10,21)]
+    #bins = [5*i for i in range(10,21)]
     bin_ = st.sidebar.slider('Bins in histogram', 50, 100, 75)
 
     for year in range(values[0],values[1]+1):
-
-        plot_mean_temp(year=year, ax=ax1, df=df, element=elt)
-        plot_hist_mean(year=year, ax=ax2, df=df, element=elt, bins=bin_)
-
-    left_column.pyplot(fig1, figsize=(10, 10))
-    right_column.pyplot(fig2, figsize=(10, 10))
+        
+        plotly_mean_temp(year=year, fig=fig1, df=df, elt=elt)
+        plotly_hist_mean(year=year, fig=fig2, df=df, elt=elt, bins=bin_, iterate=True)
+        
+    #fig2.update_layout(barmode='stack')
     
+    left_column.plotly_chart(fig1)
+    right_column.plotly_chart(fig2)
     
     
     
@@ -160,40 +187,57 @@ def plot_stats_window_st(df,elt):
     years = np.delete(years, years.shape[0]-1)
     year = display_date_slider(years)
 
-    bins = [5*i for i in range(10,21)]
+    #bins = [5*i for i in range(10,21)]
     bin_ = st.sidebar.slider('Bins in histogram', 50, 100, 75)
     
     left_column, right_column = st.columns(2)
 
     # 1. Mean temperature curve over one year
-
-    fig1, ax1 = plt.subplots(1)
-    plot_mean_temp(year=year, ax=ax1, df=df, element=elt)
-    left_column.pyplot(fig1, figsize=(10, 10))
-
-    fig2, ax2 = plt.subplots(1)
-    plot_hist_mean(year=year, ax=ax2, df=df, element=elt, bins=bin_)
-    right_column.pyplot(fig2, figsize=(10, 10))
-
-    fig3, ax3 = plt.subplots(1)
-    plot_min(years, x=list(years).index(year), ax=ax3, df=df, element=elt)
-    left_column.pyplot(fig3, figsize=(10, 10))
-
-    fig4, ax4 = plt.subplots(1)
-    plot_max(years, x=list(years).index(year), ax=ax4, df=df, element=elt)
-    right_column.pyplot(fig4, figsize=(10, 10))
-
-    fig5, ax5 = plt.subplots(1)
-    plot_std(years, x=list(years).index(year), ax=ax5, df=df)
-    left_column.pyplot(fig5, figsize=(10, 10))
-
-    fig6, ax6 = plt.subplots(1)
-    pie_chart_missing(years, ax=ax6, df=df)
-    st.sidebar.pyplot(fig6,ax6)
     
-    fig7, ax7 = plt.subplots(1)
-    plot_mean_temp_global(years, x=list(years).index(year), ax=ax7, df_av=df_av, element=elt)
-    right_column.pyplot(fig7, figsize=(10, 10))
+
+
+    fig1 = go.Figure()
+    plotly_mean_temp(year=year, fig=fig1, df=df, elt=elt)
+    left_column.plotly_chart(fig1)
+    
+    fig2 = go.Figure()
+    plotly_hist_mean(year=year, fig=fig2, df=df, elt=elt, bins=bin_)
+    right_column.plotly_chart(fig2)
+
+    fig3 = go.Figure()
+    plotly_min(years, x=list(years).index(year), fig=fig3, df=df, elt=elt)
+    left_column.plotly_chart(fig3)
+
+    
+    fig4 = go.Figure()
+    plotly_max(years, x=list(years).index(year), fig=fig4, df=df, elt=elt)
+    right_column.plotly_chart(fig4)
+    
+    fig5 = go.Figure()
+    plotly_std(years, x=list(years).index(year), fig=fig5, df=df)
+    left_column.plotly_chart(fig5)
+    
+    x=list(years).index(year)
+    fig6 = px.pie(df[df['Year']==years[x]], values='Q_TG')
+    #plotly_pie_chart_missing(years, x=list(years).index(year), fig=fig6, df=df)
+
+    labels = 'Recorded', 'Missing'
+    df_ = df[df['Year']==years[x]]
+    values = [len(df_)-len(df_[df_['Q_TG']==9]), len(df_[df_['Q_TG']==9])]
+    fig6 = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    fig6['layout'].update({
+        'showlegend': True,
+        'width': 400,
+        'height': 400,
+    })
+    fig6.update_layout(
+    title="Proportion of missing values"
+    )
+    st.sidebar.plotly_chart(fig6)
+    
+    fig7 = go.Figure()
+    plotly_mean_temp_global(years, x=list(years).index(year), fig=fig7, df_av=df_av, element=elt)
+    right_column.plotly_chart(fig7)
     
     
     
