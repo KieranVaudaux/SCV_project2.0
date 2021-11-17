@@ -11,6 +11,7 @@ import base64
 from paths import paths
 
 from streamlit_functions import *
+from streamlit_forecasting import st_forecasting
 
 
 # STREAMLIT STRUCTURAL CONFIGURATION
@@ -86,7 +87,23 @@ elif INFO == 'Data Visualization':
         
         df = pd.read_table(path, sep = ',', names = ['SOUID','DATE','TG','Q_TG'], skiprows = range(0,20))
 
-        plot_stats_window_st(df,elt)
+        if st.checkbox("Descriptive statistics summary"):
+            
+            plot_stats_window_st(df,elt)
+            
+        elif st.checkbox("Display time-window feature"):
+            
+            multiple_curves_window(df,elt)
+        
+        elif st.checkbox("Display correlation network feature"):
+            
+            correlation_net(df, elt)
+            
+        elif st.checkbox("Try temperature forecasting model"):
+            
+            st_forecasting()
+            
+            
 
 
     #elif SELECTED_MODE == MODES[1]:

@@ -8,6 +8,15 @@ import numpy as np
 from datetime import datetime
 import pandas as pd
 from visual_features import *
+import networkx as nx
+from pyvis.network import Network
+from stvis import pv_static
+from scipy.stats.stats import pearsonr 
+import seaborn as sns
+import plotly.graph_objects as go
+import plotly.express as px
+
+from plotly_features import plotly_mean_temp, plotly_hist_mean, plotly_min, plotly_max, plotly_std, plotly_mean_temp_global
 
 
 def display_date_slider(years):
@@ -38,6 +47,122 @@ def main():
     
     
     
+def correlation_net(df, elt):
+    
+    st.markdown("We plot the correlation matrix between each year's mean temperature vector.")
+    
+    df['Year'] = [int(str(d)[:4]) for d in df.DATE]
+    df['Month'] = [int(str(d)[4:6]) for d in df.DATE]
+    df['Day'] = [int(str(d)[6:8]) for d in df.DATE]
+    
+    values = st.sidebar.slider('Window of years to correlate',1901, 2020, (1990, 2020))
+    
+    nb_nodes = len(range(values[0],values[1]+1))
+        
+    corr = np.zeros((nb_nodes,nb_nodes))
+
+    for i in range(nb_nodes):
+        for j in range(nb_nodes):
+
+            year1 = i+values[0]
+            year2 = j+values[0]
+            if len(df[df.Year==year1]['TG']) == len(df[df.Year==year2]['TG']):
+                corr[i,j] = pearsonr(df[df.Year==year1]['TG'],df[df.Year==year2]['TG'])[0]
+           
+                
+    G = nx.Graph()
+    nodes = [i+values[0] for i in range(nb_nodes)]
+    G.add_nodes_from(nodes)
+    
+    edges = []
+    
+    threshold = st.sidebar.slider("Correlation threshold", 0.0, 1.0, value=0.8)
+
+    for i in range(nb_nodes):
+        for j in range(nb_nodes):
+            if corr[i,j]>threshold and i!=j:
+                edges.append((i+values[0],j+values[0]))
+
+
+    G.add_edges_from(edges)
+    
+
+    nt = Network("340px", "860px",notebook=True)
+    nt.from_nx(G)
+    
+    l,m,r = st.columns([2,1,1])
+    
+    fig, ax = plt.subplots(1)
+    ax.imshow(corr)
+    
+    l.pyplot(fig)
+    
+    st.markdown("For each slider value, we plot a threshold-network induced by the correlation matrix between each year.")
+        
+        
+    with st.expander("Show parametrized correlation network"):
+        
+        pv_static(nt)
+        
+        
+def multiple_curves_window(df,elt):
+    
+    st.markdown("For visual simplicity and better interpretation, we recommend to choose a small time-window (e.g. 2 to 4 years).")
+                
+    left_column, right_column = st.columns(2)
+
+    df['Year'] = [int(str(d)[:4]) for d in df.DATE]
+    df['Month'] = [int(str(d)[4:6]) for d in df.DATE]
+    df['Day'] = [int(str(d)[6:8]) for d in df.DATE]
+
+    #Compute the day of the year for each year
+    day_of_year = np.array(len(df['Day']))
+
+    adate = [datetime.strptime(str(date),"%Y%m%d") for date in df['DATE']]
+    df['Day_of_year'] = [d.timetuple().tm_yday for d in adate]
+    
+    fig1 = go.Figure()
+    fig2 = go.Figure()
+    
+    fig1['layout'].update({
+        'showlegend': True,
+        'width': 600,
+        'height': 500,
+    })
+    fig2['layout'].update({
+        'showlegend': True,
+        'width': 600,
+        'height': 500,
+    })
+    
+    fig1.update_layout(
+    title="TIME-WINDOW VIEWPOINT : CURVES",
+    xaxis_title="day of the year",
+    yaxis_title=elt
+    )
+    
+    fig2.update_layout(
+    title="TIME-WINDOW VIEWPOINT : HISTOGRAMS",
+    xaxis_title="sunshine duration",
+    yaxis_title="count of days"
+    )
+    
+    values = st.sidebar.slider('Select a range of years',1901, 2020, (1965, 1967))
+    #bins = [5*i for i in range(10,21)]
+    bin_ = st.sidebar.slider('Bins in histogram', 50, 100, 75)
+
+    for year in range(values[0],values[1]+1):
+        
+        plotly_mean_temp(year=year, fig=fig1, df=df, elt=elt)
+        plotly_hist_mean(year=year, fig=fig2, df=df, elt=elt, bins=bin_, iterate=True)
+        
+    #fig2.update_layout(barmode='stack')
+    
+    left_column.plotly_chart(fig1)
+    right_column.plotly_chart(fig2)
+    
+    
+    
     
 def plot_stats_window_st(df,elt):
     
@@ -62,40 +187,57 @@ def plot_stats_window_st(df,elt):
     years = np.delete(years, years.shape[0]-1)
     year = display_date_slider(years)
 
-    bins = [5*i for i in range(10,21)]
+    #bins = [5*i for i in range(10,21)]
     bin_ = st.sidebar.slider('Bins in histogram', 50, 100, 75)
     
     left_column, right_column = st.columns(2)
 
     # 1. Mean temperature curve over one year
-
-    fig1, ax1 = plt.subplots(1)
-    plot_mean_temp(year=year, ax=ax1, df=df, element=elt)
-    left_column.pyplot(fig1, figsize=(10, 10))
-
-    fig2, ax2 = plt.subplots(1)
-    plot_hist_mean(year=year, ax=ax2, df=df, element=elt, bins=bin_)
-    right_column.pyplot(fig2, figsize=(10, 10))
-
-    fig3, ax3 = plt.subplots(1)
-    plot_min(years, x=list(years).index(year), ax=ax3, df=df, element=elt)
-    left_column.pyplot(fig3, figsize=(10, 10))
-
-    fig4, ax4 = plt.subplots(1)
-    plot_max(years, x=list(years).index(year), ax=ax4, df=df, element=elt)
-    right_column.pyplot(fig4, figsize=(10, 10))
-
-    fig5, ax5 = plt.subplots(1)
-    plot_std(years, x=list(years).index(year), ax=ax5, df=df)
-    left_column.pyplot(fig5, figsize=(10, 10))
-
-    fig6, ax6 = plt.subplots(1)
-    pie_chart_missing(years, ax=ax6, df=df)
-    st.sidebar.pyplot(fig6,ax6)
     
-    fig7, ax7 = plt.subplots(1)
-    plot_mean_temp_global(years, x=list(years).index(year), ax=ax7, df_av=df_av, element=elt)
-    right_column.pyplot(fig7, figsize=(10, 10))
+
+
+    fig1 = go.Figure()
+    plotly_mean_temp(year=year, fig=fig1, df=df, elt=elt)
+    left_column.plotly_chart(fig1)
+    
+    fig2 = go.Figure()
+    plotly_hist_mean(year=year, fig=fig2, df=df, elt=elt, bins=bin_)
+    right_column.plotly_chart(fig2)
+
+    fig3 = go.Figure()
+    plotly_min(years, x=list(years).index(year), fig=fig3, df=df, elt=elt)
+    left_column.plotly_chart(fig3)
+
+    
+    fig4 = go.Figure()
+    plotly_max(years, x=list(years).index(year), fig=fig4, df=df, elt=elt)
+    right_column.plotly_chart(fig4)
+    
+    fig5 = go.Figure()
+    plotly_std(years, x=list(years).index(year), fig=fig5, df=df)
+    left_column.plotly_chart(fig5)
+    
+    x=list(years).index(year)
+    fig6 = px.pie(df[df['Year']==years[x]], values='Q_TG')
+    #plotly_pie_chart_missing(years, x=list(years).index(year), fig=fig6, df=df)
+
+    labels = 'Recorded', 'Missing'
+    df_ = df[df['Year']==years[x]]
+    values = [len(df_)-len(df_[df_['Q_TG']==9]), len(df_[df_['Q_TG']==9])]
+    fig6 = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    fig6['layout'].update({
+        'showlegend': True,
+        'width': 400,
+        'height': 400,
+    })
+    fig6.update_layout(
+    title="Proportion of missing values"
+    )
+    st.sidebar.plotly_chart(fig6)
+    
+    fig7 = go.Figure()
+    plotly_mean_temp_global(years, x=list(years).index(year), fig=fig7, df_av=df_av, element=elt)
+    right_column.plotly_chart(fig7)
     
     
     
