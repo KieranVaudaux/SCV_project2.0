@@ -445,7 +445,7 @@ def annual_analysis():
     
     st.markdown(r'Following this result, we are therefore led to first model the trend of our time series before trying to model our data with a stationary time series model. To model our trend we use a generalized linear regression, i.e. a linear regression in which we do not assume the independence of our errors. We first chose to model the trend as an affine function of time $\mathbf{A}_{t} = \beta_{0}+\beta_{1}t + \epsilon_{t}$ with $\mathbf{\epsilon} = (\epsilon_{1901},...,\epsilon_{2021})^{T}\sim \mathcal{N}(0,\mathbf{\Sigma})$, so as to keep the model simple as possible and to be able to easily infer the sign of $\beta_{1}$, which will allow us to detect or not a significant growth of the mean temperature trend. Furthermore, we do not include higher polynomial degree in the trend to avoid obtaining a model with extreme behaviour at these "ends", which we believe is a reasonable restriction given that we are working with average annual temperature data.')
     
-    st.markdown(r"To do this, we follow a given procedure for estimate the covariance matrix of $\mathbf{\epsilon}$. This procedure is fully explained below. The following figure shows us the fit of the trend estimate by a line using the GLS. We notice visually that the fit is quite good overall, but that the line has difficulty in approximating the period 1960-1990 correctly. This is due to the fact that, as we saw in the plot of the mean temperature, the mean annual temperature drops sharply in 1962 before resuming a \'normal\' behaviour in relation to the rest of the time series.")
+    st.markdown(r"To do this, we follow a given procedure for estimate the covariance matrix of $\mathbf{\epsilon}$. This procedure is fully explained below. The following figure shows us the fit of the trend estimate by a line using the GLS. We notice visually that the fit is quite good overall, but that the line has difficulty in approximating the period 1960-1990 correctly. This is due to the fact that, as we saw in the plot of the mean temperature, the mean annual temperature drops sharply in 1962 before resuming a 'normal' behaviour in relation to the rest of the time series.")
     
     with st.expander("Procedure for the estimation of the covariance matrix of the residus"):
         st.markdown(r'''
@@ -484,9 +484,9 @@ def annual_analysis():
         
     st.plotly_chart(fig)
     
-    st.markdown(r'Initially, we wondered whether this sudden change was due to a change in equipment or to the automation of the temperature recordings, which could have affected the average daily temperatures and, by transitivity, the average annual temperatures. But, given the very large temperature difference, this seems unlikely and we have not found any information that would support this hypothesis. However, by doing some additional research we were able to find articles and websites on which the years 1962-1964 were described as particularly cold years with harsh winters. This sudden cooling could then be simply due to a temporary local cooling. We then considered this sudden cooling as a rare event, and in order not to affect our study too much, we chose to estimate the trend of the annual mean temperatures as before but this time with a constant shift in the trend since 1962. Mathematically speaking, this leads to the following model $\mathbf{A}_{t} = \beta_{0 } + \beta_{1}t + \beta_{2}\mathbb{I}(t \geq 1962) + \epsilon_{t}$ with $\mathbf{\epsilon} =  (\epsilon_{1901},...,\epsilon_{2021})^{T}\sim \mathcal{N}(0,\mathbf{\Sigma})$. This led to the estimate GLS estimate on the above figure, where the covariance matrix of the $\mathbf{\epsilon}$ are compute with the same procedure as before.')
+    st.markdown(r'Initially, we wondered whether this sudden change was due to a change in equipment or to the automation of the temperature recordings, which could have affected the average daily temperatures and, by transitivity, the average annual temperatures. But, given the very large temperature difference, this seems unlikely and we have not found any information that would support this hypothesis. However, by doing some additional research we were able to find articles and websites on which the years 1962-1964 were described as particularly cold years with harsh winters. This sudden cooling could then be simply due to a temporary local cooling. We then considered this sudden cooling as a rare event, and in order not to affect our study too much, we chose to estimate the trend of the annual mean temperatures as before but this time with a constant shift in the trend since 1962. Mathematically speaking, this leads to the following model $\mathbf{A}_{t} = \beta_{0 } + \beta_{1}\mathbb{I}(t \geq 1962)  + \beta_{2}t + \epsilon_{t}$ with $\mathbf{\epsilon} =  (\epsilon_{1901},...,\epsilon_{2021})^{T}\sim \mathcal{N}(0,\mathbf{\Sigma})$. This led to the estimate GLS estimate on the above figure, where the covariance matrix of the $\mathbf{\epsilon}$ are compute with the same procedure as before.')
     
-    st.markdown(r'The results of the two GLS estimates are summarised in the following tables which respectively represent the results of "simple" linear model and the results of the linear model with the addition of a constant from 1962. In the table ref{split_GLS_summary1}, we see that the p-value of the t-test is $p = 0.1$, on the first period we can only reject the null hypothesis, that $\beta_1=0$, at a significance level of $\alpha = 0.1$ . However, the 95% confidence interval which is given contains $0$, so we cannot conclude anything about the positivity of $\beta_1$ at the threshold of $\alpha = 0.05$ on this period.')
+    st.markdown(r'The results of the two GLS estimates are summarised in the following tables which respectively represent the results of "simple" linear model and the results of the linear model with the addition of a constant from 1962. On the first table, we see that the estimated trend of the time series is $\beta_1 = 0.0106$ and that the p-value of the t-test for the covariate $\beta_1$ is $p = 0.001$ under the null hypothesis that $\beta_1 = 0$, therefore we have that a 95% confidence interval for $\beta_1$  is [0.005, 0.016] and, thus we can reject the fact that $\beta_{1} = 0$ at the significance level $\alpha = 0.05$. This suggests that the trend in the time series is significantly increasing, provided that our model proves to be consistent.')
     
     
     col1, col2, col3 = st.columns([1,3,1])
@@ -497,7 +497,7 @@ def annual_analysis():
         st.markdown(source_code, unsafe_allow_html=True)
  
     
-    st.markdown(r'On the other hand, the table \ref{split_GLS_summary2} allows us to reject the null hypothesis, which is that $\beta_{1} = 0$ over the period 1962-2021, at the significance level $\alpha = 0.05$ because we obtain a p-value associated with the t-test of $\beta_{1}$ of $p = 0.042$. Moreover, the 95\% confidence interval of $\beta_{1}$ is [0.001,0.070], which contains only strictly positive values. If our model subsequently proves to be consistent with our data, then we would have a significant indication of an increasing trend in mean temperatures over the period 1962-2021.')
+    st.markdown(r'The second regression, given on the following table, have estimated the trend of the time series by $\beta_2 = 0.0298$ which is larger than the estimate of the previous model. Moreover, under the null hypothesis that $\beta_{2} = 0$, we obtain a p-value of $p = 1.16e-13$. Thus, we can also reject the null hypothesis. Here again, if our model subsequently proves to be consistent with our data, then we would have a significant indication of an increasing trend in mean temperatures.')
         
     col1, col2, col3 = st.columns([1,3,1])
     with col2:
@@ -506,8 +506,10 @@ def annual_analysis():
         source_code = HtmlFile.read()
         st.markdown(source_code, unsafe_allow_html=True)
     
+    st.markdown(r'''Even if the regression with a shift seems visually to better model the trend of our time series, we have a priori no reason to choose one model over the other. To find out if our second model brings a real advantage in the modelling we have performed a loglikelihood ratio test between our two nested models. In our case, the loglikelihood-ratio test allow us to compare the two model and to test if the addition of the shift in the second model bring some relevant information on the data or not. Formally speaking we will test the null hypothesis $\beta_{1} = 0$. This loglikelihood test give us a p-value of $p = 4.70e-07$ which allow us to reject the null hypothesis at a standard significante level of $\alpha = 0.05$.
+        ''')
     
-    st.markdown(r'We will now consider the Time Series $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ which is the Time Series $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ from which we have subtracted the trend calculated above, over two disjoint periods. Figure \ref{dentrend_mean} allows us to visualise this new Time Series.')
+    st.markdown(r'From now we choose to consider the second model for estimate the trend, the one with the shift in 1962. This choice is justified by the result of the previous loglikelihood test and by the think that the sudden drop in temperature in 1962 is the result of a rare event, which we believe should be removed from the data so as not to influence our simple trend estimate. As this sudden drop in temperature is estimated at $\beta_1 = -1.522\degree C$ by the second regression model, it would be relevant to study this phenomenon in more details in future analyses. Therefore, in the following of this study we will consider the new time series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$ which is the time series $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ from which we have subtracted the trend calculated above. The figure below allows us to visualise this new Time Series.')
     
     fig = make_subplots(
         rows=1, cols=3,
@@ -539,7 +541,8 @@ def annual_analysis():
     )
     st.plotly_chart(fig)
     
-    st.markdown(r'Therefore, it is interesting to test again the independence of the elements of the new Time Series. For this we proceed as before, we have calculated the auto-correlation and partial auto-correlation sequences of the new Time Series, which can be seen in Figure \ref{dentrend_acf}. Almost all terms of the sequence are within the approximate confidence interval in red, but one can see that some terms are still outside. Moreover, for a number of lags greater than 20, we see in Figure \ref{dentrend_LjungTest} that the p-values associated with the Ljung-Box and Box-Pierce tests allow us to reject the null hypothesis of independence of the Time Series elements. ')
+    st.markdown(r'''Now, it is interesting to test again the independence of the elements of the new time series. Especially since this new time series is now stationary. Indeed, the Augmented Dickey-Fuller test on this one gives us a p-value of $p = 2.08e-08$ and thus allows us to reject the null hypothesis of non-stationarity at a significance level of $\alpha = 0.05$. To test the independence of the time series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$, we proceed as before, we have calculated the auto-correlation and partial auto-correlation sequences of the time series, which can be seen in the figure below. Almost all terms of the acf are within the approximate confidence interval in blue, but one can see that some terms are still outside. Moreover, we see on the other plot that the p-values associated with the Ljung-Box tests allow us to reject the null hypothesis of independence of the time series elements, even if the McLeod-Li test allow us to reject the null hypothesis only for few lags.
+        ''')
     
     st.image("/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/figure/Detrended_mean_acf_pacf_cst.png")
     
@@ -557,16 +560,13 @@ def annual_analysis():
     fig.add_trace(go.Scatter(x=pval_ind2.index+1, y=pval_ind2.Ljung,
         mode = 'lines+markers', name = 'Ljung-Box',
                     marker=dict(size=8)),row =1, col = 2)
-    fig.add_trace(go.Scatter(x=pval_ind2.index+1, y=pval_ind2.Pierce,
-        mode = 'lines+markers', name = 'Box-Pierce',
-                    marker=dict(size=8)),row =1, col = 2)
     fig.add_trace(go.Scatter(x=pval_ind2.index+1, y=pval_ind2.McLeod,
         mode = 'lines+markers',name = 'McLeod-Li',
                     marker=dict(size=8)),row =1, col = 2)
-    fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
+    #fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
     
     fig['layout'].update({
-        'title': 'P-values of the Ljung-Box ,Box-Pierce test and McLeod-Li on the trendless mean temperature',
+        'title': 'P-values of the Ljung-Box and McLeod-Li tests on the trendless mean temperature',
         'title_x': 0.5,
         'xaxis': {
             'zeroline': False
@@ -583,10 +583,9 @@ def annual_analysis():
     
     st.plotly_chart(fig)
     
-    st.markdown(r'Even though removing the trend from the Time Series of mean annual temperatures has reduced the dependence between observations, there is still enough dependence between observations to use a Times Series model to model $\{\mathbf{\Tilde{A}}_{t}\}_{t=1901}^{2021}$. Especially since this new Time Series is now stationary. Indeed, the Augmented Dickey-Fuller test on this one gives us a p-value of $p = 2.0748e-08$ and thus allows us to reject the null hypothesis of non-stationarity at a significance level of $\alpha = 0.05$.')
+    st.markdown(r'Even though removing the trend from the time series of mean annual temperatures has reduced the dependence between observations, there is still enough dependence between observations to use a times series model to model $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$. ')
     
-    st.markdown(r'Figure \ref{detrended_modelSelection} allows us to compare several models for the Time Series $\{\mathbf{\Tilde{A}}_{t}\}_{t=1901}^{2021}$ thanks to the Akaike information criterion (AIC). We have tried to model the Time Series as arising from an $ARMA(p,q)$ for $p\in\{0,...,3\}$ and $q\in\{0,...,9\}$. Our choice of restricting $p$ and $q$ is mainly due to the fact that our Time Series is not very large and that we wanted to try to keep the model as simple as possible to model our data.')
-    
+    st.markdown(r'Then, we now have choose a good time series model to model our time series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$.The following figure allows us to compare several models for the time series thanks to the Akaike information criterion (AIC). We use the AIC in order to make a model selection since it is an estimator of prediction error and thereby relative quality of statistical models for our set of data. We have tried to model the time series as arising from an $ARMA(p,q)$ for $p\in\{0,...,3\}$ and $q\in\{0,...,9\}$. Our choice of restricting $p$ and $q$ is mainly due to the fact that our time series is not very large and that we wanted to try to keep the model as simple as possible to model our data. To estimate the coefficients of a given model, we use the method "ARIMA" in the \textbf{statsmodels} packages on python.')
     
     aic =pd.read_csv(
     "/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/DataGenerated/Annual/Annual_modelSelection.csv")
@@ -625,7 +624,7 @@ def annual_analysis():
     
     st.plotly_chart(fig)
 
-    st.markdown(r'By choosing the model which minimises the AIC, we are led to consider the model $ARMA(0,2)$ to model the Time Series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$, which amounts to considering a model $MA(2)$.')
+    st.markdown(r'By choosing the model which minimises the AIC, we are led to consider the model $ARMA(2,0)$ to model the time series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$, which amounts to considering a model $AR(2)$. On the following plot, we see the residus of the estimation of the trendless time series as a $AR(2)$ process, given by $\mathbf{\tilde{A}_{t}} = \hat{\phi_1} \mathbf{\tilde{A}_{t-1}} + \hat{\phi_2}\mathbf{\tilde{A}_{t-2}} + \mathbf{\tilde{\epsilon}_{t}}$ with $\mathbf{\tilde{\epsilon}_{t}}\sim \mathcal{N}(0,\mathbf{\hat{\sigma^2}})$, where the "ARIMA" method estimate the coefficient with $\hat{\phi_1} = 0.206260, \hat{\phi_1} = 0.223250 \text{ and } \hat{\sigma^2} = 0.258059$ ')
     
     resid_arma2_0 =pd.read_csv("DataGenerated/Annual_resid_ARMA2_0.csv")
     
@@ -660,7 +659,7 @@ def annual_analysis():
     )
     st.plotly_chart(fig)
     
-    st.markdown(r'In order to confirm the consistency of our model, we tested the independence and distribution of the residuals obtained. Figure \ref{Ljungbox_residu} allows us to see that the residuals of our model do not allow us to reject the null hypothesis of independence of the Ljung-Box, Box-Pierce and McLeod-Li tests, at a significance level of $\alpha = 0.05$, except for the McLeod-Li test which rejects the null hypothesis for a value of the auto-correlation lags.')
+    st.markdown(r'In order to confirm the consistency of our model, we tested the independence and the distribution of the residuals obtained. The following figure show us the result of the Ljung-Box and McLeod-Li test on the residuals of our model, we see that the results do not allow us to reject the null hypothesis of independence of the tests, at a significance level of $\alpha = 0.05$. Thus, the $AR(2)$ model seems to capture well the correlation structure between the elements of the time series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$.')
     
     pval_ind3 =pd.read_csv(
     "/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/DataGenerated/Annual/Annual2_pvalue_indep_ARMA2_0")
@@ -676,16 +675,13 @@ def annual_analysis():
     fig.add_trace(go.Scatter(x=pval_ind3.index+1, y=pval_ind3.Ljung,
         mode = 'lines+markers', name = 'Ljung-Box',
                     marker=dict(size=8)),row =1, col = 2)
-    fig.add_trace(go.Scatter(x=pval_ind3.index+1, y=pval_ind3.Pierce,
-        mode = 'lines+markers', name = 'Box-Pierce',
-                    marker=dict(size=8)),row =1, col = 2)
     fig.add_trace(go.Scatter(x=pval_ind3.index+1, y=pval_ind3.McLeod,
         mode = 'lines+markers',name = 'McLeod-Li',
                     marker=dict(size=8)),row =1, col = 2)
-    fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
+    #fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
     
     fig['layout'].update({
-        'title': 'P-values of the Ljung-Box ,Box-Pierce test and McLeod-Li on the residus of the ARMA(2,0)',
+        'title': 'P-values of the Ljung-Box and McLeod-Li tests on the residus of the ARMA(2,0)',
         'title_x': 0.5,
         'xaxis': {
             'zeroline': False
@@ -699,10 +695,7 @@ def annual_analysis():
     
     st.plotly_chart(fig)
     
-    
-    st.markdown(r'Now that our data appear to be independent we can use the Mann-Whitney U test, which compares the distribution of the first $n$ of data with the distribution of the rest of the data. This test has the null hypothesis that the probability that a variable generated by the first distribution is greater than a variable generated by the second distribution is equal to the probability that a variable generated by the second distribution is greater than a variable generated by the first distribution. In Figure \ref{MannWhitney}, we have the p-values obtained by this test for different values of $n = 1,...,119$.')
-    
-    st.markdown(r'We therefore seem to have obtained residuals that are independent of each other. Moreover, after performing the Jacques-Bera test, which has the null hypothesis that our data are from a normal distribution, and the Goldfeld-Quandt test, which has the null hypothesis that the data are homoskedastic, we get the p-values : ')
+    st.markdown(r'We therefore seem to have obtained residuals that are independent of each other. Moreover, after performing the Jarque-Bera test, which has the null hypothesis that our data are from a normal distribution, and the Goldfeld-Quandt test, which has the null hypothesis that the data are homoskedastic, we get the p-values : ')
     
     
     col1,col2,col3 = st.columns([1,1,1])
@@ -712,8 +705,20 @@ def annual_analysis():
                 \text{Heteroskedasticity test : }p_{value} = 0.157
         ''')
         
+    with st.expander("Jarque-Bera and Goldfeld_Quandt tests"):
+        st.markdown(r'''$\textbf{The Jarques-Bera test}$ :  is a goodness-of-fit test of whether sample data have the skewness and kurtosis matching a normal distribution. The test statistic is defined as : $JB = \frac{n}{6} \left( S^2 + \frac{1}{4} \left(K-3\right)^2 \right)$, where $S =\frac{ \frac{1}{n} \sum_{i=1}^{n} (x_i-\bar{x})^3 }{ \left( \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2 \right)^{\frac{3}{2}} }$ and $K =\frac{ \frac{1}{n} \sum_{i=1}^{n} (x_i-\bar{x})^4 }{ \left( \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2 \right)^{2} }$.\\
+            If the data comes from a normal distribution, the JB statistic asymptotically has a chi-squared distribution with two degrees of freedom, so the statistic can be used to test the hypothesis that the data are from a normal distribution. The null hypothesis is a joint hypothesis of the skewness being zero and the excess kurtosis being zero.''')
+        st.markdown(r'''$\textbf{The Goldfeld-Quandt tests}$ : is accomplished by undertaking separate least squares analyses on two subsets of the original dataset: these subsets are specified so that the observations for which the pre-identified explanatory variable takes the lowest values are in one subset, with higher values in the other. The subsets needs not be of equal size, nor contain all the observations between them. The test assumes that the errors have a normal distribution. There is an additional assumption here, that the design matrices for the two subsets of data are both of full rank. The test statistic used is the ratio of the mean square residual errors for the regressions on the two subsets. This test statistic corresponds to an F-test of equality of variances.
+            ''')
     
-    st.markdown(r'Both p-values are significant at a threshold of $\alpha = 0.05$, so we cannot reject the null hypotheses of normality and homoscedasticity.')
+    st.markdown(r'Both p-values are not significant at a threshold of $\alpha = 0.05$, so we cannot reject the null hypotheses of normality and homoscedasticity. Therefore, it seems that the model we develop for the original time series of mean temperature is appropriate, in the sense that  that the trend that we estimate with the GLS is ')
+    
+    c1,c2,c3 = st.columns([1,2,1])
+    with c2:
+        st.title("Discussion of the Results")
+    
+    st.markdown(r"In this preliminary part of our study on the evolution of the mean temperature trend, we have restricted our analyses to the mean annual temperatures at the Geneva observatory. This allowed us to obtain initial results regarding the increase in the annual trend of mean temperatures at Geneva. We found the presence of an increase in the annual trend of the mean temeprature. Indeed, we estiamte the trend as a linear trend with a estimated slope of $\beta_2 = 0.0298$ in the 95% confidence interval $[0.023, 0.037]$. However, we should not forgot that we model our data in order to remove the sudden drop of the mean temeprature in 1962. Therefore, even though we estimated the slope of the linear trend to be $\beta_2 = 0.0298$ which implies a strong increase in the annual temperature trend, we do not know if this sudden drop in temperature is an isolated event or if it is a phenomenon that is likely to be repeated over a longer period than the one we are studying, which would question our result regarding the increase in the trend.")
+    st.markdown(r'PREVISION WITH PARALLEL WITH FORECATSING')
 #########################################################################################
 
 

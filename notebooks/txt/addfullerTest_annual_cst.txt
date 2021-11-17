@@ -5,3 +5,4 @@ Annual detrended mean (no constant) : p-value = 5.016916723234805e-07
 Annual detrended mean (no constant) : p-value = 5.915914151096202e-07
 Annual detrended mean (no constant) : p-value = 5.915914151096202e-07
 Annual detrended mean (no constant) : p-value = 5.016916723234805e-07
+Annual detrended mean (no constant) : p-value = 5.016916723234805e-07
