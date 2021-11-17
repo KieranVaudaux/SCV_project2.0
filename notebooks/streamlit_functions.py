@@ -8,6 +8,12 @@ import numpy as np
 from datetime import datetime
 import pandas as pd
 from visual_features import *
+import networkx as nx
+from pyvis.network import Network
+from stvis import pv_static
+from scipy.stats.stats import pearsonr 
+import seaborn as sns
+import plotly.graph_objects as go
 
 
 def display_date_slider(years):
@@ -35,6 +41,98 @@ def main():
         pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
         
     st.markdown(pdf_display, unsafe_allow_html=True)
+    
+    
+    
+def correlation_net(df, elt):
+    
+    st.markdown("We plot the correlation matrix between each year's mean temperature vector.")
+    
+    df['Year'] = [int(str(d)[:4]) for d in df.DATE]
+    df['Month'] = [int(str(d)[4:6]) for d in df.DATE]
+    df['Day'] = [int(str(d)[6:8]) for d in df.DATE]
+    
+    values = st.sidebar.slider('Window of years to correlate',1901, 2020, (1990, 2020))
+    
+    nb_nodes = len(range(values[0],values[1]+1))
+        
+    corr = np.zeros((nb_nodes,nb_nodes))
+
+    for i in range(nb_nodes):
+        for j in range(nb_nodes):
+
+            year1 = i+values[0]
+            year2 = j+values[0]
+            if len(df[df.Year==year1]['TG']) == len(df[df.Year==year2]['TG']):
+                corr[i,j] = pearsonr(df[df.Year==year1]['TG'],df[df.Year==year2]['TG'])[0]
+           
+                
+    G = nx.Graph()
+    nodes = [i+values[0] for i in range(nb_nodes)]
+    G.add_nodes_from(nodes)
+    
+    edges = []
+    
+    threshold = st.sidebar.slider("Correlation threshold", 0.0, 1.0, value=0.8)
+
+    for i in range(nb_nodes):
+        for j in range(nb_nodes):
+            if corr[i,j]>threshold and i!=j:
+                edges.append((i+values[0],j+values[0]))
+
+
+    G.add_edges_from(edges)
+    
+
+    nt = Network("340px", "860px",notebook=True)
+    nt.from_nx(G)
+    
+    l,m,r = st.columns([2,1,1])
+    
+    fig, ax = plt.subplots(1)
+    ax.imshow(corr)
+    
+    l.pyplot(fig)
+    
+    st.markdown("For each slider value, we plot a threshold-network induced by the correlation matrix between each year.")
+        
+        
+    with st.expander("Show parametrized correlation network"):
+        
+        pv_static(nt)
+        
+        
+def multiple_curves_window(df,elt):
+    
+    st.markdown("For visual simplicity and better interpretation, we recommend to choose a small time-window (e.g. 2 to 4 years).")
+                
+    left_column, right_column = st.columns(2)
+
+    df['Year'] = [int(str(d)[:4]) for d in df.DATE]
+    df['Month'] = [int(str(d)[4:6]) for d in df.DATE]
+    df['Day'] = [int(str(d)[6:8]) for d in df.DATE]
+
+    #Compute the day of the year for each year
+    day_of_year = np.array(len(df['Day']))
+
+    adate = [datetime.strptime(str(date),"%Y%m%d") for date in df['DATE']]
+    df['Day_of_year'] = [d.timetuple().tm_yday for d in adate]
+
+    fig1, ax1 = plt.subplots(1)
+    fig2, ax2 = plt.subplots(1)
+
+    values = st.sidebar.slider('Select a range of years',1901, 2020, (1965, 1967))
+    bins = [5*i for i in range(10,21)]
+    bin_ = st.sidebar.slider('Bins in histogram', 50, 100, 75)
+
+    for year in range(values[0],values[1]+1):
+
+        plot_mean_temp(year=year, ax=ax1, df=df, element=elt)
+        plot_hist_mean(year=year, ax=ax2, df=df, element=elt, bins=bin_)
+
+    left_column.pyplot(fig1, figsize=(10, 10))
+    right_column.pyplot(fig2, figsize=(10, 10))
+    
     
     
     
