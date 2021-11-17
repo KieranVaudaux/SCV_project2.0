@@ -202,18 +202,20 @@ from plotly.subplots import make_subplots
 import plotly.express as px
 
 
-def annual_analysis():
-    
-    data_Y = pd.read_csv("DataGenerated/Annual/Annual_Mean.csv")
-
+def annual_intro():
     st.title("Evolution of the Mean Temperature at Geneva Observatory")
     
     st.markdown(r'In this section, we will focus on the modelling of our data, which we will see as Times Series.\\We have the daily average temperatures at the Geneva observatory from 1$$^{\text{er}}$$ January 1901 to August 2 2021. That is to say 44044 average temperature record, spread over a period of more than 120 years. As this amount of data is very large, we have chosen to proceed in stages. To do this, we will first look for the presence of a significant increase in the trend in the Time Series of annual mean temperatures at the Geneva observatory, which we have calculated from the daily data. We can then make our study more complex by looking at the time series of monthly, weekly and daily mean temperatures.')
+
+def annual_analysis():
     
+    data_Y = pd.read_csv("DataGenerated/Annual/Annual_Mean.csv")
     
-    st.header("Annual Mean Temperature at Geneva Observatory")
+    c1,c2,c3 = st.columns([1,10,1])
+    with c2:
+        st.title("Annual Mean Temperature at Geneva Observatory")
     
-    st.markdown('It seems natural to ask whether transforming our data by averaging the annual temperature is relevant. Indeed, knowing that during a year the temperature can vary from $-10\degree$C in winter to more than $30\degree$C in summer, does it really make sense to consider the average of these values? How do we correctly interpret these values and what would it really mean if there was a significant increase in the trend from 1901 to the present? While we have more refined data than annual average temperatures, looking at this one could be debated. However, as many studies also look at annual mean temperatures, we will accept, for the purposes of this project, that the presence of a significant increase in the trend of annual mean temperatures in Geneva would be an additional indication of the presence of climate warming (in Geneva). To confirm this idea, Figure \ref{mean_median_std} below allows us to see that the global behaviour of the Time Series of annual averages is similar to that of the Time Series of annual median temperatures, as well as the standard deviation of the annual average temperatures seems to be homoskedastic. This supports the idea that the annual mean temperatures are not overly affected by the presence of extreme temperatures or by the increase in temperature variability during a year.')
+    st.markdown('It seems natural to ask whether transforming our data by averaging the annual temperature is relevant. Indeed, knowing that during a year the temperature can vary from $-10\degree$C in winter to more than $30\degree$C in summer, does it really make sense to consider the average of these values? How do we correctly interpret these values and what would it really mean if there was a significant increase in the trend from 1901 to the present ? While we have more refined data than annual average temperatures, looking at this one could be debated. However, as many studies also look at annual mean temperatures, we will accept, for the purposes of this project, that the presence of a significant increase in the trend of annual mean temperatures in Geneva would be an additional indication of the presence of climate warming (in Geneva). To confirm this idea,the following figure allows us to see that the global behaviour of the Time Series of annual averages is similar to that of the Time Series of annual median temperatures, as well as the standard deviation of the annual average temperatures seems to be homoskedastic. This supports the idea that the annual mean temperatures are not overly affected by the presence of extreme temperatures or by the increase in temperature variability during a year.')
     
     fig = make_subplots(
         rows=3, cols=3,
@@ -248,7 +250,8 @@ def annual_analysis():
    
     st.plotly_chart(fig)
     
-    st.markdown('The Time Series of average temperatures appears to have an increasing trend over the years, but with a sudden cooling from 1962.\\In order to distinguish more clearly the periods that correspond to a warming or not, we present on Figure \ref{anom_annuelle} the histogram of the annual anomalies that we have standardised. We recall that the temperature anomaly is the difference between the temperature measured in a place (here Geneva), compared to the normal average temperature observed in this same place. ')
+    st.markdown(r'''The Time Series of average temperatures appears to have an increasing trend over the years, but with a sudden cooling from 1962.''')
+    st.markdown(r'In order to distinguish more clearly the periods that correspond to a warming or not, we present on the following figure the histogram of the annual anomalies that we have standardised.')
     
     anomalie = pd.read_csv("DataGenerated/Annual/Annual_anomalie.csv")
     anom1 = pd.read_csv("DataGenerated/Annual/Annual_anom1.csv")
@@ -283,13 +286,16 @@ def annual_analysis():
     fig1.update_yaxes(title_text="Standardized  anomalies", row=2, col=2)
     st.plotly_chart(fig1)
     
+    with st.expander("Standardised anomalies explanation"):
+        st.markdown(r'The temperature anomaly is the difference between the temperature measured in a place (here the mean temperature at Geneva), compared to the normal average temperature observed in this same place over a certain period (here we look at the periods 1901-2021, 1901-1961, and 1962-2021). On a given period, the standardised anomalies are computed by normalizing the anomalies by the standard deviation of the temperature from the mean temperature of this period.')
+    
     st.markdown('The visual analysis of these histograms allows us to distinguish four periods 1901-1942, 1943-1961, 1962-1987 and 1988-2021. During the first period, the anomalies tend to be negative, then positive during the second. From the third period, we again observe a cycle of negative and then positive anomalies, but this time more pronounced. This seems to be consistent with the Time Series of average temperatures, in which we had observed an increasing trend but a significant decrease in temperature at the beginning of this third period.')
     
-    st.markdown('In order to model our data, we will try to follow the principles of parsimony as much as possible, in order to choose the simplest model that effectively explains our data.')
+    st.markdown('In order to model our data, we will try to follow the principles of parsimony (Occam\'s razor) as much as possible, in order to choose the simplest model that effectively explains our data.')
     
-    st.markdown(r'If we denote the Time Series of annual averages by $\{\mathbf{A}_{t}\}_{t}$ $t = 1901,... .2021$, one of the simplest models we could propose is that our observations $\{\mathbf{A}_{t}\}_{t}$ are from a normal distribution, $\mathbf{A}_{t} \stackrel{iid}{\sim} \mathcal{N}(\mu,\sigma^{2})$. To test this we will first compare the empirical distribution of our data with the distribution of a normal distribution of mean $\mathbf{\bar{A}}$ and variance $S^{2}$.')
+    st.markdown(r'If we denote the time series of annual averages by $\{\mathbf{A}_{t}\}_{t}$ for $t = 1901,... .2021$, one of the simplest models we could propose is that our observations $\{\mathbf{A}_{t}\}_{t}$ are from a normal distribution, $\mathbf{A}_{t} \stackrel{iid}{\sim} \mathcal{N}(\mu,\sigma^{2})$. To test this we will first compare the empirical distribution of our data with the distribution of a normal distribution of mean $\mathbf{\bar{A}}$ and variance $S^{2}$.')
     
-    st.markdown(r'In Figures \ref{qqplot_annuelle} and \ref{ecdf_vs_cdf}, we see that our empirical distribution is quite close to that of a normal distribution, despite the fact that we only have 121 observations.')
+    st.markdown(r'On the figures below, we see that our empirical distribution is quite close to that of a normal distribution, despite the fact that we only have 121 observations.')
 
     data_Y["ecdf"] = data_Y.Mean
     fig = px.ecdf(data_Y.ecdf)
@@ -321,7 +327,7 @@ def annual_analysis():
     
     st.plotly_chart(fig)
         
-    qqplot_data = qqplot(data_Y.Mean, line='s').gca().lines
+    qqplot_data = qqplot(data_Y.Mean,loc=data_Y.Mean.mean(),scale = data_Y.Mean.std(), line='45').gca().lines
     ecdf = ECDF(data_Y.Mean)
     fig =  make_subplots(
         rows=1, cols=2,
@@ -377,12 +383,19 @@ def annual_analysis():
     
     st.plotly_chart(fig)
     
+    st.markdown(r'CONFIDENCE INTERVAL FOR THE QQ PLOT')
     
-    st.markdown(r'Nevertheless, Figure \ref{acf_pacf} highlights a significant correlation between the annual average temperatures. This leads us to question the independence of the $\mathbf{A}_{t}$ observations. Indeed, if $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ were independent and identically distributed, we should have that the auto-correlations as well as the partial auto-correlations on Figure \ref{acf_pacf} are approximately in the red zone, which corresponds to an approximate confidence interval for the auto-correlations in the case of an iid sequence.')
+    st.markdown(r'In order to quantify and test the dependencies between temperatures, our observations must be stationary so that we can calculate the sequences of autocorrelations and partial autocorrelations of our data and make some statistical tests on it. To test the stationarity of our data the use the Augmented Dickey-Fuller test (ADF), which tests the null hypothesis that a unit root is present in a time series sample. Performing the ADF on our data we get a p-value of $0.871$, which allows us to reject the null hypothesis of stationarity.')
+    
+    
+    st.markdown(r'''Nevertheless, as stated in the book "Time Series Analysis With Applications in R" (p.125) by Jonathan D. Cryer and Kung-Sik Chan, the sample auto-correlation function (ACF) computed for nonstationary series will also usually indicate the nonstationarity.Indeed, for nonstationary series, the sample ACF typically fails to die out rapidly as the lags increase. This is due to the tendency for nonstationary series to drift slowly, either up or down, with apparent “trends”. With this in mind, the followings figure of the ACF and the partial auto-correlation function (PACF) highlights some "significants" correlations between the annual averages temperatures. This leads us to question the independence of the $\mathbf{A}_{t}$ observations. Indeed, if $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ were independent and identically distributed, we should have that the ACF and the PACF should lies in the blue zone on the figure below.''')
     
     st.image("/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/figure/Annual_acf_pacf.png")
     
-    st.markdown(r'In order to test the independence of our observations, we will use the portmanteau test and several of its variations, namely the Ljung-Box, Box-Pierce and McLeod and Li tests. Figure 1 shows the p-values of these three tests for different numbers in the auto-correlation sequence considered in the test statistics. These tests all have the null hypothesis that the sequence $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ is iid.')
+    with st.expander("Explanation of the test for the acf and pacf plot"):
+        st.markdown(r'On the two plot above, the blue zone corresponds to an approximate confidence interval for the acf and pacf under the null hypothesis that the acf and pacf are computedf from a iid sequence. This test is based on the fact that for large n the sample autocorrelations of an iid sequence $Y_1, . . . , Y_n$ with finite variance are approximately iid with distribution $\mathbb{N}(0, \frac{1}{n})$. We can therefore test whether or not the observed residuals are consistent with iid noise by examining the sample autocorrelations and partial autocorrelations of the residuals and rejecting the iid noise hypothesis if more than three or four out of 50 fall outside the bounds $\pm \frac{1.96}{\sqrt{n}}$ or if one falls far outside the bounds.')
+    
+    st.markdown(r'Even if the mean temperature aren\'t stationary, the acf and pacf suggest that we should question the independence of the mean temperature. In order to test the independence of our observations, we will use the portmanteau test and several of its variations, namely the Ljung-Box and McLeod-Li tests, but we should always keep in mind that this tests are also based on the acf of the mean temeprature and thus should be used with caution since our data seem to be nonstationary. The figure below shows the p-values of these two tests for different numbers in the auto-correlation sequence considered in the test statistics. These tests all have the null hypothesis that the sequence $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ is iid.')
     
     pval_ind1 = pd.read_csv("DataGenerated/Annual/Annual1_pvalue_indep")
     
@@ -396,14 +409,12 @@ def annual_analysis():
 
     fig.add_trace(go.Scatter(x=pval_ind1.index+1, y=pval_ind1.Ljung,
         mode = 'lines+markers', name = 'Ljung-Box'),row =1, col = 2)
-    fig.add_trace(go.Scatter(x=pval_ind1.index+1, y=pval_ind1.Pierce,
-        mode = 'lines+markers', name = 'Box-Pierce'),row =1, col = 2)
     fig.add_trace(go.Scatter(x=pval_ind1.index+1, y=pval_ind1.McLeod,
         mode = 'lines+markers',name = 'McLeod-Li'),row =1, col = 2)
     #fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
     
     fig['layout'].update({
-        'title': 'P-values of the Ljung-Box ,Box-Pierce test and McLeod-Li',
+        'title': 'P-values of the Ljung-Box and McLeod-Li tests',
         'title_x': 0.5,
         'xaxis': {
             'zeroline': False
@@ -420,13 +431,26 @@ def annual_analysis():
     
     st.plotly_chart(fig)
     
-    st.markdown(r'Since the p-values of these tests are all less than $10^{-11}$, we can conclude that at any significance level greater than $10^{-11}$, the sequence of mean annual temperatures is not from the model $\mathbf{A}_{t} \stackrel{iid}{\sim} \mathcal{N}(\mu,\,\sigma^{2})$.')
+    with st.expander("Explanation of the Ljung-Box and McLeod-Li tests"):
+        st.markdown(r'''
+        The idea behind these two tests is, instead of checking to see whether each sample autocorrelation $\rho (j)$ falls inside the bounds $\pm \frac{1.96}{\sqrt{n}}$, it is also possible to consider the either the statistic $\mathbf{Q}_{LB} = n(n+2)\sum_{j=1}^{h} \frac{\rho^2 (j)}{n-j}$ for the Ljung-Boy tests or the statistic $\mathbf{Q}_{ML} = n(n+2)\sum_{j=1}^{h} \frac{\rho_{ww}^2 (j)}{n-j}$ for the McLeod-Li test, where $\rho (j)$ is the acf and $\rho_{ww}(j)$ if the acf the squared data. Then, under the null hypothesis that our data are iid, this both statistics could be approximated by a chi-squared distribution with $h$ degree of freedom.
+        ''')
     
-    st.markdown('To take these dependencies into account, we will consider a more general model from the Time Series study. First of all, we will test the stationarity of our Time Series in order to know which Time Series model could be applied to our data. Without going into formal definitions, a Time Series is stationary if it has a constant mean over time and if its variance is also time invariant.')
+    st.markdown(r'Since the p-values of these tests are all less than $10^{-8}$, we can conclude that we can reject the null hypothesis of idd, at any significance level greater than $10^{-8}$. Thus, even is our data do not seem to be stationary, the behaviour of the acf and pacf do not appear to be in favour of the null hypothesis of iid data. Thus, it seems reasonable to think that the sequence of mean annual temperatures does not come from the model $\mathbf{A}_{t} \stackrel{iid}{\sim} \mathcal{N}(\mu,\,\sigma^{2})$.')
     
-    st.markdown(r'The test we use to test the stationarity of our Time Series is the Augmented Dickey-Fuller test (ADF), which tests the null hypothesis that a unit root is present in the Time Series, which would make the Time Series non-stationary. This test gives us a p-value of $p = 0.8711$, which is far from significant. This result tends to make us think that the Time Series is not stationary, which can certainly be explained by the presence of an increasing trend that we had already noticed visually on Figure \ref{mean_median_std}. To test this we use another version of the Augmented Dickey-Fuller test to test the trend-stationarity of the Time Series. With this test we obtain a p-value of $p = 0.0162$ which is significant, at the standard significance level of $\alpha = 0.05$ for example.')
+    st.markdown('In order to make statistical inferences about the structure of a stochastic process on the basis of an observed record of that process, we must usually make some simplifying assumptions about that structure. The most important such assumption is that of stationarity. Without going into formal definitions, a Time Series is stationary if it has a constant mean over time and if its variance is also time invariant. Thus, to take these dependencies into account, we will consider a more general model from the Time Series study. First of all, we will test the stationarity of our Time Series in order to know which Time Series model could be applied to our data.')
     
-    st.markdown(r'Following this result, we are therefore led to first model the trend of our Time Series before trying to model our data with a stationary Time Series model. To model our trend we use a generalized linear regression, i.e. a linear regression in which we do not assume the independence of our errors. We chose to model the trend as an affine function of time $\mathbf{A}_{t} = \beta_{0}+\beta_{1}t + \epsilon_{t}$ with $\mathbf{\epsilon} = (\epsilon_{1901},...,\epsilon_{2021})^{T}\sim \mathcal{N}(0,\mathbf{\Sigma})$, so as to keep the model simple and to be able to easily infer the sign of $\beta_{1}$, which will allow us to detect or not a significant growth of the mean temperature trend. To do this, we estimated the covariance matrix of $\mathbf{\epsilon}$ by the Toeplitz matrix generated by the sequence of auto-correlations of our Time Series. Figure \ref{full_GLS}, shows us the fit of the trend estimate by a line. We notice visually that the fit is quite good overall, but that the line has difficulty in approximating the period 1960-1990 correctly. This is due to the fact that, as we saw in Figure \ref{mean_median_std}, the mean annual temperature drops sharply in 1962 before resuming a "normal" behaviour in relation to the rest of the Time Series.')
+    st.markdown(r'As stated previously in this study, the test we use to test the stationarity of our Time Series is the Augmented Dickey-Fuller test (ADF). We recall that this test gives us a p-value of $p = 0.871$, which is far from significant. This result tends to make us think that the time teries is not stationary, which can certainly be explained by the presence of an increasing trend that we had already noticed visually on the plot of the mean temperature. To test this hypothesis of the presence of a tendency, we use another version of the Augmented Dickey-Fuller test to test the trend-stationarity of the time series. In our case, the trend-stationarity of a time serie mean that this time series is stationary if we remove the appropriate polynomial trend from it. Therefore, using this test with the hypothesis of the presence of a linear trend, we obtain a p-value of $p = 0.016$ which is significant, at the standard significance level of $\alpha = 0.05$ for example. Thus, it seems reasonable to suspect the presence of a trend in the mean temperature.')
+    
+    
+    st.markdown(r'Following this result, we are therefore led to first model the trend of our time series before trying to model our data with a stationary time series model. To model our trend we use a generalized linear regression, i.e. a linear regression in which we do not assume the independence of our errors. We first chose to model the trend as an affine function of time $\mathbf{A}_{t} = \beta_{0}+\beta_{1}t + \epsilon_{t}$ with $\mathbf{\epsilon} = (\epsilon_{1901},...,\epsilon_{2021})^{T}\sim \mathcal{N}(0,\mathbf{\Sigma})$, so as to keep the model simple as possible and to be able to easily infer the sign of $\beta_{1}$, which will allow us to detect or not a significant growth of the mean temperature trend. Furthermore, we do not include higher polynomial degree in the trend to avoid obtaining a model with extreme behaviour at these "ends", which we believe is a reasonable restriction given that we are working with average annual temperature data.')
+    
+    st.markdown(r"To do this, we follow a given procedure for estimate the covariance matrix of $\mathbf{\epsilon}$. This procedure is fully explained below. The following figure shows us the fit of the trend estimate by a line using the GLS. We notice visually that the fit is quite good overall, but that the line has difficulty in approximating the period 1960-1990 correctly. This is due to the fact that, as we saw in the plot of the mean temperature, the mean annual temperature drops sharply in 1962 before resuming a \'normal\' behaviour in relation to the rest of the time series.")
+    
+    with st.expander("Procedure for the estimation of the covariance matrix of the residus"):
+        st.markdown(r'''
+        For estimate, $\mathbf{\Sigma}$, the covariance matrix of the $\mathbf{\epsilon}$, we want to compute the acf of the time series in order to estimate $\mathbf{\Sigma}$ by $\mathbf{\Sigma}\approx \hat{\sigma}^2\mathbf{T}$, where $\mathbf{T}$ is the Toeplitz matrix generated by the sequence of auto-correlations of our time series. But, as we discuss before, our time series is not stationary and so we normaly cannot compute his autocorrelation sequence. To get around this problem, we use a non-parametric method to make our time series stationary. The method that we use is the LOESS (locally estimated scatterplot smoothing), which is a generalization of moving average and polynomial regression. We iterated this estimation by reducing the number of data used to fit each local polynomial each time, until stationary residuals were obtained. After obtaining a stationary time series, we then have a first estimate of the covariance matrix. With this estimate we are now able to compute a generalized least square (GLS) on our original time series. This GLS regression give us some residus from which, after checking their stationarity, we compute the acf and obtain a new estimation of the covariance matrix as before. Finally, we iterate this last step until convergence of the covariance matrix in the Frobenius norm.
+        ''')
     
     fig = make_subplots(
         rows=1, cols=3,
@@ -443,14 +467,13 @@ def annual_analysis():
     fig.add_trace(go.Scatter(x = data_Y.Years, y = trendless_gls.f_without_cts,
         name = 'GLS without constant'),row = 1, col = 2)
     fig.add_trace(go.Scatter(x = data_Y.Years, y = trendless_gls.f_cts,
-        name = 'GLS with constant',
+        name = r'GLS with $\beta_2$',
         marker = dict(color = 'mediumvioletred')),row = 1, col = 2)
     
     fig['layout'].update({
         'title': 'Modelisation of the trend by GLS',
         'title_x': 0.5,
         'xaxis': {
-            'title': 'Years',
             'zeroline': False
         },
         'width': 1200,
@@ -461,9 +484,9 @@ def annual_analysis():
         
     st.plotly_chart(fig)
     
-    st.markdown('Initially, we wondered whether this sudden change was due to a change in equipment or to the automation of the temperature recordings, which could have affected the average daily temperatures and, by transitivity, the average annual temperatures. But, given the very large temperature difference, this seems unlikely and we have not found any information that would support this hypothesis. However, by doing some additional research we were able to find articles and websites on which the years 1962-1964 were described as particularly cold years with harsh winters. This sudden cooling could then be simply due to a temporary local cooling. We then considered this sudden cooling as a rare event, and in order not to affect our study too much, we chose to estimate the trend of the annual mean temperatures over the periods 1901-1961 and 1961-2021 separately. This led to the estimate in Figure 2 below.')
+    st.markdown(r'Initially, we wondered whether this sudden change was due to a change in equipment or to the automation of the temperature recordings, which could have affected the average daily temperatures and, by transitivity, the average annual temperatures. But, given the very large temperature difference, this seems unlikely and we have not found any information that would support this hypothesis. However, by doing some additional research we were able to find articles and websites on which the years 1962-1964 were described as particularly cold years with harsh winters. This sudden cooling could then be simply due to a temporary local cooling. We then considered this sudden cooling as a rare event, and in order not to affect our study too much, we chose to estimate the trend of the annual mean temperatures as before but this time with a constant shift in the trend since 1962. Mathematically speaking, this leads to the following model $\mathbf{A}_{t} = \beta_{0 } + \beta_{1}t + \beta_{2}\mathbb{I}(t \geq 1962) + \epsilon_{t}$ with $\mathbf{\epsilon} =  (\epsilon_{1901},...,\epsilon_{2021})^{T}\sim \mathcal{N}(0,\mathbf{\Sigma})$. This led to the estimate GLS estimate on the above figure, where the covariance matrix of the $\mathbf{\epsilon}$ are compute with the same procedure as before.')
     
-    st.markdown(r'The results of the two GLS estimates are summarised in the tables ref{split_GLS_summary1} and ref{split_GLS_summary2} which represent the results for the period 1901-1961 and the period 1962-2021 respectively.In the table ref{split_GLS_summary1}, we see that the p-value of the t-test is $p = 0.1$, on the first period we can only reject the null hypothesis, that $\beta_1=0$, at a significance level of $\alpha = 0.1$ . However, the 95% confidence interval which is given contains $0$, so we cannot conclude anything about the positivity of $\beta_1$ at the threshold of $\alpha = 0.05$ on this period.')
+    st.markdown(r'The results of the two GLS estimates are summarised in the following tables which respectively represent the results of "simple" linear model and the results of the linear model with the addition of a constant from 1962. In the table ref{split_GLS_summary1}, we see that the p-value of the t-test is $p = 0.1$, on the first period we can only reject the null hypothesis, that $\beta_1=0$, at a significance level of $\alpha = 0.1$ . However, the 95% confidence interval which is given contains $0$, so we cannot conclude anything about the positivity of $\beta_1$ at the threshold of $\alpha = 0.05$ on this period.')
     
     
     col1, col2, col3 = st.columns([1,3,1])
@@ -682,8 +705,15 @@ def annual_analysis():
     st.markdown(r'We therefore seem to have obtained residuals that are independent of each other. Moreover, after performing the Jacques-Bera test, which has the null hypothesis that our data are from a normal distribution, and the Goldfeld-Quandt test, which has the null hypothesis that the data are homoskedastic, we get the p-values : ')
     
     
+    col1,col2,col3 = st.columns([1,1,1])
     
+    with col2:
+        st.latex(r'''\text{Normality test : }p_{value} = 0.725 \\
+                \text{Heteroskedasticity test : }p_{value} = 0.157
+        ''')
+        
     
+    st.markdown(r'Both p-values are significant at a threshold of $\alpha = 0.05$, so we cannot reject the null hypotheses of normality and homoscedasticity.')
 #########################################################################################
 
 

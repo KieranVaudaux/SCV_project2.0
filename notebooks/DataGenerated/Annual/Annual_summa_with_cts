@@ -10,10 +10,10 @@
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   35.29</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Mon, 15 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>9.70e-13</td>
+  <th>Date:</th>             <td>Tue, 16 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>9.70e-13</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>12:52:56</td>     <th>  Log-Likelihood:    </th> <td> -57.477</td>
+  <th>Time:</th>                 <td>08:55:03</td>     <th>  Log-Likelihood:    </th> <td> -57.477</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   121</td>      <th>  AIC:               </th> <td>   121.0</td>
