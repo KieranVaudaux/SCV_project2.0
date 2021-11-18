@@ -4,7 +4,7 @@
 \textbf{Dep. Variable:}          & Mean\_Seasonless & \textbf{  No. Observations:  } &    1448     \\
 \textbf{Model:}                  &  ARIMA(4, 0, 3)  & \textbf{  Log Likelihood     } & -2668.294   \\
 \textbf{Date:}                   & Thu, 18 Nov 2021 & \textbf{  AIC                } &  5354.588   \\
-\textbf{Time:}                   &     10:54:29     & \textbf{  BIC                } &  5402.089   \\
+\textbf{Time:}                   &     18:08:45     & \textbf{  BIC                } &  5402.089   \\
 \textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  5372.315   \\
 \textbf{}                        &      - 1448      & \textbf{                     } &             \\
 \textbf{Covariance Type:}        &       opg        & \textbf{                     } &             \\
