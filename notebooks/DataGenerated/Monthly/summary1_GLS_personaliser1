@@ -1,0 +1,46 @@
+
+<table class="simpletable">
+<tr>
+   <td></td>      <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>x1</th>  <td>    0.6046</td> <td>    0.192</td> <td>    3.154</td> <td> 0.002</td> <td>    0.229</td> <td>    0.981</td>
+</tr>
+<tr>
+  <th>x2</th>  <td>    1.7128</td> <td>    0.191</td> <td>    8.949</td> <td> 0.000</td> <td>    1.337</td> <td>    2.088</td>
+</tr>
+<tr>
+  <th>x3</th>  <td>    5.2239</td> <td>    0.191</td> <td>   27.317</td> <td> 0.000</td> <td>    4.849</td> <td>    5.599</td>
+</tr>
+<tr>
+  <th>x4</th>  <td>    8.9045</td> <td>    0.191</td> <td>   46.574</td> <td> 0.000</td> <td>    8.529</td> <td>    9.280</td>
+</tr>
+<tr>
+  <th>x5</th>  <td>   13.2057</td> <td>    0.191</td> <td>   69.158</td> <td> 0.000</td> <td>   12.831</td> <td>   13.580</td>
+</tr>
+<tr>
+  <th>x6</th>  <td>   16.8931</td> <td>    0.191</td> <td>   88.486</td> <td> 0.000</td> <td>   16.519</td> <td>   17.268</td>
+</tr>
+<tr>
+  <th>x7</th>  <td>   19.0497</td> <td>    0.191</td> <td>   99.865</td> <td> 0.000</td> <td>   18.675</td> <td>   19.424</td>
+</tr>
+<tr>
+  <th>x8</th>  <td>   18.2274</td> <td>    0.190</td> <td>   95.700</td> <td> 0.000</td> <td>   17.854</td> <td>   18.601</td>
+</tr>
+<tr>
+  <th>x9</th>  <td>   14.8149</td> <td>    0.190</td> <td>   77.922</td> <td> 0.000</td> <td>   14.442</td> <td>   15.188</td>
+</tr>
+<tr>
+  <th>x10</th> <td>    9.7673</td> <td>    0.190</td> <td>   51.425</td> <td> 0.000</td> <td>    9.395</td> <td>   10.140</td>
+</tr>
+<tr>
+  <th>x11</th> <td>    4.7737</td> <td>    0.190</td> <td>   25.155</td> <td> 0.000</td> <td>    4.401</td> <td>    5.146</td>
+</tr>
+<tr>
+  <th>x12</th> <td>    1.6322</td> <td>    0.190</td> <td>    8.609</td> <td> 0.000</td> <td>    1.260</td> <td>    2.004</td>
+</tr>
+<tr>
+  <th>x13</th> <td>    0.0103</td> <td>    0.003</td> <td>    3.527</td> <td> 0.000</td> <td>    0.005</td> <td>    0.016</td>
+</tr>
+</table>
+<br/>

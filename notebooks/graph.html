@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 860px;
+            height: 340px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": 1990, "label": 1990, "shape": "dot", "size": 10}, {"id": 1991, "label": 1991, "shape": "dot", "size": 10}, {"id": 1993, "label": 1993, "shape": "dot", "size": 10}, {"id": 1994, "label": 1994, "shape": "dot", "size": 10}, {"id": 1995, "label": 1995, "shape": "dot", "size": 10}, {"id": 1997, "label": 1997, "shape": "dot", "size": 10}, {"id": 1998, "label": 1998, "shape": "dot", "size": 10}, {"id": 1999, "label": 1999, "shape": "dot", "size": 10}, {"id": 2001, "label": 2001, "shape": "dot", "size": 10}, {"id": 2002, "label": 2002, "shape": "dot", "size": 10}, {"id": 2003, "label": 2003, "shape": "dot", "size": 10}, {"id": 2005, "label": 2005, "shape": "dot", "size": 10}, {"id": 2006, "label": 2006, "shape": "dot", "size": 10}, {"id": 2009, "label": 2009, "shape": "dot", "size": 10}, {"id": 2010, "label": 2010, "shape": "dot", "size": 10}, {"id": 2013, "label": 2013, "shape": "dot", "size": 10}, {"id": 2014, "label": 2014, "shape": "dot", "size": 10}, {"id": 2015, "label": 2015, "shape": "dot", "size": 10}, {"id": 2017, "label": 2017, "shape": "dot", "size": 10}, {"id": 2018, "label": 2018, "shape": "dot", "size": 10}, {"id": 2019, "label": 2019, "shape": "dot", "size": 10}, {"id": 2011, "label": 2011, "shape": "dot", "size": 10}, {"id": 1992, "label": 1992, "shape": "dot", "size": 10}, {"id": 1996, "label": 1996, "shape": "dot", "size": 10}, {"id": 2000, "label": 2000, "shape": "dot", "size": 10}, {"id": 2004, "label": 2004, "shape": "dot", "size": 10}, {"id": 2008, "label": 2008, "shape": "dot", "size": 10}, {"id": 2012, "label": 2012, "shape": "dot", "size": 10}, {"id": 2016, "label": 2016, "shape": "dot", "size": 10}, {"id": 2020, "label": 2020, "shape": "dot", "size": 10}, {"id": 2007, "label": 2007, "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": 1990, "to": 1991, "weight": 1}, {"from": 1990, "to": 1993, "weight": 1}, {"from": 1990, "to": 1994, "weight": 1}, {"from": 1990, "to": 1995, "weight": 1}, {"from": 1990, "to": 1997, "weight": 1}, {"from": 1990, "to": 1998, "weight": 1}, {"from": 1990, "to": 1999, "weight": 1}, {"from": 1990, "to": 2001, "weight": 1}, {"from": 1990, "to": 2002, "weight": 1}, {"from": 1990, "to": 2003, "weight": 1}, {"from": 1990, "to": 2005, "weight": 1}, {"from": 1990, "to": 2006, "weight": 1}, {"from": 1990, "to": 2009, "weight": 1}, {"from": 1990, "to": 2010, "weight": 1}, {"from": 1990, "to": 2013, "weight": 1}, {"from": 1990, "to": 2014, "weight": 1}, {"from": 1990, "to": 2015, "weight": 1}, {"from": 1990, "to": 2017, "weight": 1}, {"from": 1990, "to": 2018, "weight": 1}, {"from": 1990, "to": 2019, "weight": 1}, {"from": 1991, "to": 1994, "weight": 1}, {"from": 1991, "to": 1997, "weight": 1}, {"from": 1991, "to": 1998, "weight": 1}, {"from": 1991, "to": 1999, "weight": 1}, {"from": 1991, "to": 2003, "weight": 1}, {"from": 1991, "to": 2005, "weight": 1}, {"from": 1991, "to": 2009, "weight": 1}, {"from": 1991, "to": 2010, "weight": 1}, {"from": 1991, "to": 2011, "weight": 1}, {"from": 1991, "to": 2013, "weight": 1}, {"from": 1991, "to": 2014, "weight": 1}, {"from": 1991, "to": 2015, "weight": 1}, {"from": 1991, "to": 2017, "weight": 1}, {"from": 1991, "to": 2018, "weight": 1}, {"from": 1991, "to": 2019, "weight": 1}, {"from": 1992, "to": 1996, "weight": 1}, {"from": 1992, "to": 2000, "weight": 1}, {"from": 1992, "to": 2004, "weight": 1}, {"from": 1992, "to": 2008, "weight": 1}, {"from": 1992, "to": 2012, "weight": 1}, {"from": 1992, "to": 2016, "weight": 1}, {"from": 1992, "to": 2020, "weight": 1}, {"from": 1993, "to": 1997, "weight": 1}, {"from": 1993, "to": 1998, "weight": 1}, {"from": 1993, "to": 1999, "weight": 1}, {"from": 1993, "to": 2003, "weight": 1}, {"from": 1993, "to": 2005, "weight": 1}, {"from": 1993, "to": 2009, "weight": 1}, {"from": 1993, "to": 2010, "weight": 1}, {"from": 1993, "to": 2011, "weight": 1}, {"from": 1993, "to": 2013, "weight": 1}, {"from": 1993, "to": 2014, "weight": 1}, {"from": 1993, "to": 2015, "weight": 1}, {"from": 1993, "to": 2018, "weight": 1}, {"from": 1993, "to": 2019, "weight": 1}, {"from": 1994, "to": 1998, "weight": 1}, {"from": 1994, "to": 1999, "weight": 1}, {"from": 1994, "to": 2001, "weight": 1}, {"from": 1994, "to": 2003, "weight": 1}, {"from": 1994, "to": 2005, "weight": 1}, {"from": 1994, "to": 2006, "weight": 1}, {"from": 1994, "to": 2009, "weight": 1}, {"from": 1994, "to": 2010, "weight": 1}, {"from": 1994, "to": 2011, "weight": 1}, {"from": 1994, "to": 2013, "weight": 1}, {"from": 1994, "to": 2015, "weight": 1}, {"from": 1994, "to": 2017, "weight": 1}, {"from": 1994, "to": 2018, "weight": 1}, {"from": 1994, "to": 2019, "weight": 1}, {"from": 1995, "to": 1997, "weight": 1}, {"from": 1995, "to": 1999, "weight": 1}, {"from": 1995, "to": 2001, "weight": 1}, {"from": 1995, "to": 2002, "weight": 1}, {"from": 1995, "to": 2003, "weight": 1}, {"from": 1995, "to": 2005, "weight": 1}, {"from": 1995, "to": 2006, "weight": 1}, {"from": 1995, "to": 2009, "weight": 1}, {"from": 1995, "to": 2010, "weight": 1}, {"from": 1995, "to": 2013, "weight": 1}, {"from": 1995, "to": 2014, "weight": 1}, {"from": 1995, "to": 2015, "weight": 1}, {"from": 1995, "to": 2017, "weight": 1}, {"from": 1995, "to": 2018, "weight": 1}, {"from": 1995, "to": 2019, "weight": 1}, {"from": 1996, "to": 2000, "weight": 1}, {"from": 1996, "to": 2004, "weight": 1}, {"from": 1996, "to": 2008, "weight": 1}, {"from": 1996, "to": 2012, "weight": 1}, {"from": 1996, "to": 2020, "weight": 1}, {"from": 1997, "to": 1998, "weight": 1}, {"from": 1997, "to": 1999, "weight": 1}, {"from": 1997, "to": 2003, "weight": 1}, {"from": 1997, "to": 2009, "weight": 1}, {"from": 1997, "to": 2010, "weight": 1}, {"from": 1997, "to": 2011, "weight": 1}, {"from": 1997, "to": 2013, "weight": 1}, {"from": 1997, "to": 2014, "weight": 1}, {"from": 1997, "to": 2015, "weight": 1}, {"from": 1997, "to": 2017, "weight": 1}, {"from": 1998, "to": 1999, "weight": 1}, {"from": 1998, "to": 2001, "weight": 1}, {"from": 1998, "to": 2003, "weight": 1}, {"from": 1998, "to": 2005, "weight": 1}, {"from": 1998, "to": 2006, "weight": 1}, {"from": 1998, "to": 2009, "weight": 1}, {"from": 1998, "to": 2010, "weight": 1}, {"from": 1998, "to": 2011, "weight": 1}, {"from": 1998, "to": 2013, "weight": 1}, {"from": 1998, "to": 2014, "weight": 1}, {"from": 1998, "to": 2015, "weight": 1}, {"from": 1998, "to": 2017, "weight": 1}, {"from": 1998, "to": 2018, "weight": 1}, {"from": 1998, "to": 2019, "weight": 1}, {"from": 1999, "to": 2001, "weight": 1}, {"from": 1999, "to": 2003, "weight": 1}, {"from": 1999, "to": 2005, "weight": 1}, {"from": 1999, "to": 2006, "weight": 1}, {"from": 1999, "to": 2009, "weight": 1}, {"from": 1999, "to": 2010, "weight": 1}, {"from": 1999, "to": 2011, "weight": 1}, {"from": 1999, "to": 2013, "weight": 1}, {"from": 1999, "to": 2014, "weight": 1}, {"from": 1999, "to": 2015, "weight": 1}, {"from": 1999, "to": 2017, "weight": 1}, {"from": 1999, "to": 2018, "weight": 1}, {"from": 1999, "to": 2019, "weight": 1}, {"from": 2000, "to": 2004, "weight": 1}, {"from": 2000, "to": 2008, "weight": 1}, {"from": 2000, "to": 2016, "weight": 1}, {"from": 2000, "to": 2020, "weight": 1}, {"from": 2001, "to": 2005, "weight": 1}, {"from": 2001, "to": 2009, "weight": 1}, {"from": 2001, "to": 2017, "weight": 1}, {"from": 2002, "to": 2003, "weight": 1}, {"from": 2002, "to": 2005, "weight": 1}, {"from": 2002, "to": 2009, "weight": 1}, {"from": 2002, "to": 2013, "weight": 1}, {"from": 2002, "to": 2014, "weight": 1}, {"from": 2002, "to": 2017, "weight": 1}, {"from": 2002, "to": 2019, "weight": 1}, {"from": 2003, "to": 2005, "weight": 1}, {"from": 2003, "to": 2006, "weight": 1}, {"from": 2003, "to": 2007, "weight": 1}, {"from": 2003, "to": 2009, "weight": 1}, {"from": 2003, "to": 2010, "weight": 1}, {"from": 2003, "to": 2011, "weight": 1}, {"from": 2003, "to": 2013, "weight": 1}, {"from": 2003, "to": 2014, "weight": 1}, {"from": 2003, "to": 2015, "weight": 1}, {"from": 2003, "to": 2017, "weight": 1}, {"from": 2003, "to": 2018, "weight": 1}, {"from": 2003, "to": 2019, "weight": 1}, {"from": 2004, "to": 2008, "weight": 1}, {"from": 2004, "to": 2012, "weight": 1}, {"from": 2004, "to": 2016, "weight": 1}, {"from": 2004, "to": 2020, "weight": 1}, {"from": 2005, "to": 2006, "weight": 1}, {"from": 2005, "to": 2009, "weight": 1}, {"from": 2005, "to": 2010, "weight": 1}, {"from": 2005, "to": 2011, "weight": 1}, {"from": 2005, "to": 2013, "weight": 1}, {"from": 2005, "to": 2014, "weight": 1}, {"from": 2005, "to": 2015, "weight": 1}, {"from": 2005, "to": 2017, "weight": 1}, {"from": 2005, "to": 2018, "weight": 1}, {"from": 2005, "to": 2019, "weight": 1}, {"from": 2006, "to": 2009, "weight": 1}, {"from": 2006, "to": 2010, "weight": 1}, {"from": 2006, "to": 2013, "weight": 1}, {"from": 2006, "to": 2014, "weight": 1}, {"from": 2006, "to": 2015, "weight": 1}, {"from": 2006, "to": 2017, "weight": 1}, {"from": 2006, "to": 2018, "weight": 1}, {"from": 2006, "to": 2019, "weight": 1}, {"from": 2007, "to": 2009, "weight": 1}, {"from": 2007, "to": 2011, "weight": 1}, {"from": 2007, "to": 2014, "weight": 1}, {"from": 2007, "to": 2018, "weight": 1}, {"from": 2008, "to": 2012, "weight": 1}, {"from": 2008, "to": 2016, "weight": 1}, {"from": 2008, "to": 2020, "weight": 1}, {"from": 2009, "to": 2010, "weight": 1}, {"from": 2009, "to": 2011, "weight": 1}, {"from": 2009, "to": 2013, "weight": 1}, {"from": 2009, "to": 2014, "weight": 1}, {"from": 2009, "to": 2015, "weight": 1}, {"from": 2009, "to": 2017, "weight": 1}, {"from": 2009, "to": 2018, "weight": 1}, {"from": 2009, "to": 2019, "weight": 1}, {"from": 2010, "to": 2011, "weight": 1}, {"from": 2010, "to": 2013, "weight": 1}, {"from": 2010, "to": 2014, "weight": 1}, {"from": 2010, "to": 2015, "weight": 1}, {"from": 2010, "to": 2017, "weight": 1}, {"from": 2010, "to": 2018, "weight": 1}, {"from": 2010, "to": 2019, "weight": 1}, {"from": 2011, "to": 2014, "weight": 1}, {"from": 2011, "to": 2015, "weight": 1}, {"from": 2011, "to": 2017, "weight": 1}, {"from": 2011, "to": 2018, "weight": 1}, {"from": 2011, "to": 2019, "weight": 1}, {"from": 2012, "to": 2016, "weight": 1}, {"from": 2012, "to": 2020, "weight": 1}, {"from": 2013, "to": 2014, "weight": 1}, {"from": 2013, "to": 2015, "weight": 1}, {"from": 2013, "to": 2017, "weight": 1}, {"from": 2013, "to": 2018, "weight": 1}, {"from": 2013, "to": 2019, "weight": 1}, {"from": 2014, "to": 2015, "weight": 1}, {"from": 2014, "to": 2017, "weight": 1}, {"from": 2014, "to": 2018, "weight": 1}, {"from": 2014, "to": 2019, "weight": 1}, {"from": 2015, "to": 2017, "weight": 1}, {"from": 2015, "to": 2018, "weight": 1}, {"from": 2015, "to": 2019, "weight": 1}, {"from": 2016, "to": 2020, "weight": 1}, {"from": 2017, "to": 2019, "weight": 1}, {"from": 2018, "to": 2019, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

@@ -2,10 +2,10 @@
 \begin{tabular}{lclc}
 \toprule
 \textbf{Dep. Variable:}          & Mean\_Seasonless & \textbf{  No. Observations:  } &    1448     \\
-\textbf{Model:}                  &  ARIMA(5, 0, 4)  & \textbf{  Log Likelihood     } & -2661.996   \\
-\textbf{Date:}                   & Sun, 14 Nov 2021 & \textbf{  AIC                } &  5345.992   \\
-\textbf{Time:}                   &     09:51:57     & \textbf{  BIC                } &  5404.049   \\
-\textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  5367.658   \\
+\textbf{Model:}                  &  ARIMA(4, 0, 3)  & \textbf{  Log Likelihood     } & -2668.294   \\
+\textbf{Date:}                   & Thu, 18 Nov 2021 & \textbf{  AIC                } &  5354.588   \\
+\textbf{Time:}                   &     10:54:29     & \textbf{  BIC                } &  5402.089   \\
+\textbf{Sample:}                 &        0         & \textbf{  HQIC               } &  5372.315   \\
 \textbf{}                        &      - 1448      & \textbf{                     } &             \\
 \textbf{Covariance Type:}        &       opg        & \textbf{                     } &             \\
 \bottomrule
@@ -13,24 +13,22 @@
 \begin{tabular}{lcccccc}
                 & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
 \midrule
-\textbf{const}  &       0.0692  &        0.229     &     0.303  &         0.762        &       -0.379    &        0.517     \\
-\textbf{ar.L1}  &      -1.0202  &        0.038     &   -27.057  &         0.000        &       -1.094    &       -0.946     \\
-\textbf{ar.L2}  &       0.2687  &        0.046     &     5.793  &         0.000        &        0.178    &        0.360     \\
-\textbf{ar.L3}  &       1.1881  &        0.032     &    37.609  &         0.000        &        1.126    &        1.250     \\
-\textbf{ar.L4}  &       0.7055  &        0.044     &    15.997  &         0.000        &        0.619    &        0.792     \\
-\textbf{ar.L5}  &      -0.1745  &        0.027     &    -6.522  &         0.000        &       -0.227    &       -0.122     \\
-\textbf{ma.L1}  &       1.2142  &        0.033     &    36.791  &         0.000        &        1.149    &        1.279     \\
-\textbf{ma.L2}  &       0.0162  &        0.035     &     0.460  &         0.646        &       -0.053    &        0.085     \\
-\textbf{ma.L3}  &      -1.1163  &        0.034     &   -32.765  &         0.000        &       -1.183    &       -1.049     \\
-\textbf{ma.L4}  &      -0.9179  &        0.030     &   -30.255  &         0.000        &       -0.977    &       -0.858     \\
-\textbf{sigma2} &       2.3094  &        0.082     &    28.094  &         0.000        &        2.148    &        2.470     \\
+\textbf{const}  &       0.0696  &        0.229     &     0.304  &         0.761        &       -0.379    &        0.518     \\
+\textbf{ar.L1}  &      -0.0392  &        0.037     &    -1.051  &         0.293        &       -0.112    &        0.034     \\
+\textbf{ar.L2}  &       0.3105  &        0.029     &    10.741  &         0.000        &        0.254    &        0.367     \\
+\textbf{ar.L3}  &       0.8933  &        0.030     &    29.463  &         0.000        &        0.834    &        0.953     \\
+\textbf{ar.L4}  &      -0.1808  &        0.027     &    -6.751  &         0.000        &       -0.233    &       -0.128     \\
+\textbf{ma.L1}  &       0.2250  &        0.030     &     7.596  &         0.000        &        0.167    &        0.283     \\
+\textbf{ma.L2}  &      -0.2100  &        0.027     &    -7.776  &         0.000        &       -0.263    &       -0.157     \\
+\textbf{ma.L3}  &      -0.9171  &        0.028     &   -32.686  &         0.000        &       -0.972    &       -0.862     \\
+\textbf{sigma2} &       2.3327  &        0.074     &    31.485  &         0.000        &        2.187    &        2.478     \\
 \bottomrule
 \end{tabular}
 \begin{tabular}{lclc}
-\textbf{Ljung-Box (L1) (Q):}     & 0.00 & \textbf{  Jarque-Bera (JB):  } & 66.39  \\
-\textbf{Prob(Q):}                & 0.98 & \textbf{  Prob(JB):          } &  0.00  \\
-\textbf{Heteroskedasticity (H):} & 0.96 & \textbf{  Skew:              } & -0.23  \\
-\textbf{Prob(H) (two-sided):}    & 0.69 & \textbf{  Kurtosis:          } &  3.94  \\
+\textbf{Ljung-Box (L1) (Q):}     & 0.00 & \textbf{  Jarque-Bera (JB):  } & 64.82  \\
+\textbf{Prob(Q):}                & 0.96 & \textbf{  Prob(JB):          } &  0.00  \\
+\textbf{Heteroskedasticity (H):} & 0.98 & \textbf{  Skew:              } & -0.23  \\
+\textbf{Prob(H) (two-sided):}    & 0.79 & \textbf{  Kurtosis:          } &  3.93  \\
 \bottomrule
 \end{tabular}
 %\caption{SARIMAX Results}

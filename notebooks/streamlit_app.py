@@ -12,6 +12,7 @@ from paths import paths
 
 from streamlit_functions import *
 from streamlit_forecasting import st_forecasting
+from streamlit_monthly import monthly_analysis
 
 
 # STREAMLIT STRUCTURAL CONFIGURATION
@@ -28,7 +29,7 @@ st.markdown("<h1 style='text-align: center;'> Meteorological data visualization<
 
 
 MODES = ['Descriptive Statistics','Time Series Analysis', 'Time Series Visualization', 'Time Series Analysis']
-MODES_TS = ["Evolution of the Mean Temperature at Geneva Observatory","Analysis of annual Mean Temperature at Geneva Observatory","Analysis of monthly Mean Temperature at Geneva Observatory",'Description of statistical tools']
+MODES_TS = ["Evolution of the Mean Temperature at Geneva Observatory","Analysis of annual Mean Temperature at Geneva Observatory","Analysis of monthly Mean Temperature at Geneva Observatory"]
 
 st.sidebar.header('Options')
 
@@ -50,9 +51,8 @@ elif INFO == "Evolution of the Mean Temperature at Geneva Observatory":
     elif SELECTED_MODE == MODES_TS[1]:
         annual_analysis()
     elif SELECTED_MODE == MODES_TS[2]:
-        description()
-    elif SELECTED_MODE == MODES_TS[3]:
-        description()
+        monthly_analysis()
+
 # DISPLAYING PDF REPORT
     
 elif INFO == 'Whole study':
