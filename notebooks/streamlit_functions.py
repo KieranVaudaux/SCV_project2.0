@@ -18,6 +18,8 @@ import plotly.express as px
 
 from plotly_features import plotly_mean_temp, plotly_hist_mean, plotly_min, plotly_max, plotly_std, plotly_mean_temp_global
 
+from streamlit_forecasting import st_forecasting
+
 
 def display_date_slider(years):
     
@@ -48,6 +50,8 @@ def main():
     
     
 def correlation_net(df, elt):
+    
+    st.subheader("Correlation network feature")
     
     st.markdown("We plot the correlation matrix between each year's mean temperature vector.")
     
@@ -91,11 +95,26 @@ def correlation_net(df, elt):
     nt.from_nx(G)
     
     l,m,r = st.columns([2,1,1])
+    #data__=np.array([[1, 25, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, 5, 20]])
+    fig = px.imshow(corr,
+                labels=dict(x="year", y="year", color="Correlation"),
+                x=list(range(values[0],values[1]+1)),
+                y=list(range(values[0],values[1]+1))
+               )
+    fig.update_layout(
+    title="Correlation matrix - a vector is one year's mean temperatures"
+    )
     
-    fig, ax = plt.subplots(1)
-    ax.imshow(corr)
+    l.plotly_chart(fig)
     
-    l.pyplot(fig)
+    with st.expander("See explanation"):
+        
+        st.markdown("For $k\in\{1901,1902,...,2020\}$, let $\mathbf{x}_k$ be the vector of mean temperatures recorded in year $k$. we define the *sample Pearson correlation coefficient between two vectors* $x$ and $y$ of size $n$ as the quantity")
+        st.latex(r'''\mathrm{Corr}(\mathbf{x}_i,\mathbf{x}_j)=\frac{\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^n (x_i-\bar{x})^2}\sqrt{\sum_{i=1}^n (y_i-\bar{y})^2}},\\
+        \text{where } \bar{v} \text{ denotes the mean } \frac{1}{n}\sum_{i=1}^n v_i \text{ of a vector } v=(v_i)_{i=1}^n.
+        ''')
+        st.markdown("For two integer indices $i,j\in\{1901,1902,...,2020\}$, we define a matrix entry $M_{i,j}$ as $\mathrm{Corr}(\mathbf{x}_i,\mathbf{x}_j)$. Now, depending on the choice of time-window $\Omega=\{m_{start},m_{start}+1,...,m_{end}\}$ (*i.e.* a finite range of consecutive years), we plot the correlation matrix $M=(M_{i,j})_{i,j\in\Omega}$ as a regular heatmap (*cf.* the colorbar on the side).")
+        
     
     st.markdown("For each slider value, we plot a threshold-network induced by the correlation matrix between each year.")
         
@@ -104,8 +123,14 @@ def correlation_net(df, elt):
         
         pv_static(nt)
         
+    with st.expander("See explanation"):
+        
+        st.markdown("Based on the correlation matrix $M$ defined above, and a choice of threshold value $C\in[0,1]$, we define a graph $G=G_{(M,C)}$ as follows. For each year $i\in\Omega$ (where $\Omega$ is the time-window as above), we create a node $i$ in $G$. Moreover, for each pair of nodes $n_i,n_j$ in $G$, we draw an edge $(n_i,n_j)$ if and only if we have $M_{i,j}\geq C$, *i.e* if the years $i$ and $j$ are correlated enough.")
+        
         
 def multiple_curves_window(df,elt):
+    
+    st.subheader("Time-window visualization")
     
     st.markdown("For visual simplicity and better interpretation, we recommend to choose a small time-window (e.g. 2 to 4 years).")
                 
@@ -161,10 +186,18 @@ def multiple_curves_window(df,elt):
     left_column.plotly_chart(fig1)
     right_column.plotly_chart(fig2)
     
+    with st.expander("See explanation"):
+        
+        st.markdown("For a choice of time-window $\Omega=\{m_{start},m_{start}+1,...,m_{end}\}$ (*i.e.* a finite range of consecutive years), we produce two plots. On the left, we show the evolution curve $\{(x,f_T(x)):x\in Y\}\subset\mathbf{R}^2$, for each year $T\in\Omega$, where the function $f_T$ assigns to each day $x$ of year $T$ its recorded mean temperature. On the right, we show the histogram distribution of the data. More precisely, depending on a choice of time-window $\Omega$ and a number of bins $N$, we separate the axis of mean temperature values into $N$ regular-sized intervals and create bins accordingly. For each year $T\in\Omega$, and for each interval $I$, we create and plot a bin $B_I$ whose height represents the counting index $n(I)=|\{x\in T:f_T(x)\in I\}|$.")
+    
+    
+    
     
     
     
 def plot_stats_window_st(df,elt):
+    
+    st.subheader("Interactive descriptive summary")
     
     df['Year'] = [int(str(d)[:4]) for d in df.DATE]
     df['Month'] = [int(str(d)[4:6]) for d in df.DATE]
@@ -239,6 +272,11 @@ def plot_stats_window_st(df,elt):
     plotly_mean_temp_global(years, x=list(years).index(year), fig=fig7, df_av=df_av, element=elt)
     right_column.plotly_chart(fig7)
     
+    with st.expander("See interpretation"):
+        
+        st.markdown("""We observe a two-step increasing pattern for the mean temperature, in the sense that there the average temperature curve oscillates around a line $l_1$ with positive derivative, then around a line $l_2$ with positive derivative too. The transition happens around the year 1963, where we observe a heavy drop in temperatures. This motivates us to fit models in two steps : one for the period 1901-1963 and the other one for the period 1964-1965. The maximum mean temperature presents a similar two-phase pattern, with higher amplitude oscillations during the first phase. Also, note that for a given year, we almost consistently observe the same mean temperature curve. The sunshine duration shows a constant increase from the year 1980 up to now, with a more complex pattern in the years before that.""")
+
+    
     
     
 def description():
@@ -261,6 +299,10 @@ def description():
 
 
     st.markdown('To try to answer this question, we will first focus on the evolution of the average temperature in Geneva. This will allow us to refine and improve our statistical study on the Geneva observatory data, before extending it to the rest of the weather stations.')
+    
+def datasets():
+    
+    st.sidebar.markdown("The data we work with can be found [here](https://www.ecad.eu/utils/showselection.php?99j9a2jpggb49ha5t4mc9evpol).")
     
 
 def github():
@@ -342,6 +384,8 @@ import plotly.figure_factory as ff
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
+
+import pingouin as pg
 
 
 def annual_intro():
@@ -526,6 +570,9 @@ def annual_analysis():
     st.plotly_chart(fig)
     
     st.markdown(r'CONFIDENCE INTERVAL FOR THE QQ PLOT')
+    
+    
+    
     
     st.markdown(r'In order to quantify and test the dependencies between temperatures, our observations must be stationary so that we can calculate the sequences of autocorrelations and partial autocorrelations of our data and make some statistical tests on it. To test the stationarity of our data the use the Augmented Dickey-Fuller test (ADF), which tests the null hypothesis that a unit root is present in a time series sample. Performing the ADF on our data we get a p-value of $0.871$, which allows us to reject the null hypothesis of stationarity.')
     
@@ -862,8 +909,62 @@ def annual_analysis():
     
     st.markdown(r"In this preliminary part of our study on the evolution of the mean temperature trend, we have restricted our analyses to the mean annual temperatures at the Geneva observatory. This allowed us to obtain initial results regarding the increase in the annual trend of mean temperatures at Geneva. We found the presence of an increase in the annual trend of the mean temeprature. Indeed, we estiamte the trend as a linear trend with a estimated slope of $\beta_2^2 = 0.0298$ in the 95% confidence interval $[0.023, 0.037]$. However, we should not forgot that we model our data in order to remove the sudden drop of the mean temeprature in 1962. Therefore, even though we estimated the slope of the linear trend to be $\beta_2^2 = 0.0298$ which implies a strong increase in the annual temperature trend, we do not know if this sudden drop in temperature is an isolated event or if it is a phenomenon that is likely to be repeated over a longer period than the one we are studying, which would question our result regarding the increase in the trend.")
     st.markdown(r'PREVISION WITH PARALLEL WITH FORECATSING')
+    
+    
+    st_forecasting()
 #########################################################################################
 
 
+def introduction():
     
+    st.header("Introduction")
+
+    st.markdown("Statistical and visual analysis of data are major components of the general data science domain. In this project, we look at various datasets revolving around meteorological recordings from various stations within Switzerland. Statistical analysis of meteorological data plays an important role in understanding and modeling key features in climate change, as well as making short to long-term predictions on certain meteorological elements. Here, we are interested in providing an efficient pipeline aiming at analysing meteorological data through basic statistical methods such as linear regression and time series analysis. Moreover, we concentrate in providing a significant amount of visualization tools to combine with the statistical results.")
+
+    st.markdown("The main question we try to answer revolves around the mean temperature element, recorded across Switzerland. We formulate it as follows.")
+
+    st.markdown("*Question.* Is there a significant increase in the average temperature trend in Switzerland from 1901 to the present day?")
+
+    st.markdown("To try to answer this question, we will first focus on the evolution of the average temperature in Geneva. This will allow us to refine and improve our statistical study on the Geneva observatory data, before extending it to other weather stations. The main mathematical objects of our study are time-series of mean temperatures, which we create along various conventions (*i.e.* as weekly, monthly and yearly averages). This resembles the approach seen in [[1]](https://www.researchgate.net/publication/271306657_Statistical_Analysis_from_Time_Series_Related_to_Climate_Data), where so-called *climate-indices* are computed on different time-range averages, based on restrictions on the proportion of missing values within the data.")
+    
+    st.markdown("Analysis of meteorological data plays an important role within the scientific community, and we refer to various articles and papers regarding the way we formulate our questions and study the data. Our work is motivated by the inference (see [[2]](https://www.geneve.ch/fr/actualites/dossiers-information/changement-climatique-geneve/comprendre/effets-suisse-geneve#)) that Geneva is one the towns in the world whose increase in temperature during the period 2020-2029 is the highest, being of approximately 2.5°C. Although our analysis is based on mean temperature recordings, we give the possibility to observe and interact with data concerning sunshine duration records as well with the data visualization option. This is motivated by the fact that sunshine duration presents a behavior similar to mean temperature in the sense that it heavily increased in the past 40 years (see [[3]](https://www.ge.ch/statistique/tel/publications/2006/analyses/coup_doeil/an-co-2006-26.pdf)).")
+
+    st.write("""The entirety of our work is contained in this *Streamlit* web application, structured as follows. There is a left sidebar on which you can find the link to our GitHub repository, as well as our contacts (GitHub and EPFL profiles). Now, the sidebar also contains a list of main options to choose from, as follows.""")
+    st.write(
+        """
+    - Project description
+    - Time-series analysis
+    - Data visualization
+    """
+    )
+
+
+    st.subheader("Project description")
+
+    st.write("""
+
+With this option, you can find the global description of our project, quite equivalent to a \textit{Readme} file on GitHub. We introduce the subject, the context and the aims of our study.""")
+
+    st.subheader("Time series analysis")
+
+    st.write("""Here, you can read about our statistical analysis in more details and have access to the statistical results of the study. This essentially encapsulates a final report, as well as a good way of observing plots and figure, as they are produced with the \textit{Plotly} library. The deeper statistical study heavily relies on time-series analysis and forecasting models, for which we notably refer to the book [[4]](https://link.springer.com/book/10.1007/978-3-319-29854-2). We also implement a part of our linear regression methods based on a to-Python translation of the R tutorial [[5]](https://lbelzile.github.io/lineaRmodels/).""")
+
+    st.subheader("Data visualization")
+
+    st.write("""Finally, you can choose this option to interact with the data directly. There are four main visualization features implemented here, as follows. The first three features aim at providing a summary of descriptive statistics, while the fourth one offers a way of interacting with an annual forecasting model.""")
+    
+    st.write(
+        """
+    - Display time-slider summary
+    - Display time-window feature
+    - Display correlation network feature
+    - Interactive forecasting model
+    """
+    )
+
+
+
+    st.markdown("""We make the data interaction possible through checkboxes, sliders and other widget options.""")
+
+
     

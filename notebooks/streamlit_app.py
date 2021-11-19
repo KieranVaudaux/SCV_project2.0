@@ -33,7 +33,7 @@ MODES_TS = ["Evolution of the Mean Temperature at Geneva Observatory","Analysis 
 
 st.sidebar.header('Options')
 
-INFO = st.sidebar.radio("Content",('Project description', 'Evolution of the Mean Temperature at Geneva Observatory','Whole study', 'Data Visualization'))
+INFO = st.sidebar.radio("Content",('Project description', 'Evolution of the Mean Temperature at Geneva Observatory', 'Data Visualization'))
     
 
 # PROJECT DESCRIPTION
@@ -53,20 +53,6 @@ elif INFO == "Evolution of the Mean Temperature at Geneva Observatory":
     elif SELECTED_MODE == MODES_TS[2]:
         monthly_analysis()
 
-# DISPLAYING PDF REPORT
-    
-elif INFO == 'Whole study':
-    
-    main()
-    
-    with open("../reports/SCV_report.pdf", "rb") as file:
-        btn = st.sidebar.download_button(
-            label="Download report",
-            data=file,
-            file_name="SCV_report.pdf",
-            mime="report/pdf"
-        )
-    
     
 # INTERACTIVE AND STATIC DATA VISUALIZATION
 
@@ -99,10 +85,6 @@ elif INFO == 'Data Visualization':
             
             correlation_net(df, elt)
             
-        elif st.checkbox("Try temperature forecasting model"):
-            
-            st_forecasting()
-            
             
 
 
@@ -114,6 +96,10 @@ elif INFO == 'Data Visualization':
             
         
 # SIDEBAR BONUS OPTIONS
+
+if st.sidebar.button("Data"):
+
+    datasets()
 
 if st.sidebar.button("GitHub"):
 
