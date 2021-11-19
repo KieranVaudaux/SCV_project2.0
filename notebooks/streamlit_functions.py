@@ -19,6 +19,7 @@ import plotly.express as px
 from plotly_features import plotly_mean_temp, plotly_hist_mean, plotly_min, plotly_max, plotly_std, plotly_mean_temp_global
 
 from streamlit_forecasting import st_forecasting
+import streamlit.components.v1 as components
 
 
 def display_date_slider(years):
@@ -512,48 +513,26 @@ def annual_analysis():
     })
     
     st.plotly_chart(fig)
-        
+    import pingouin as pg
     qqplot_data = qqplot(data_Y.Mean,loc=data_Y.Mean.mean(),scale = data_Y.Mean.std(), line='45').gca().lines
     ecdf = ECDF(data_Y.Mean)
     fig =  make_subplots(
-        rows=1, cols=2,
+        rows=1, cols=3,
         row_heights=[1],
-        column_widths=[1./2,1./2],
-        specs=[[{"type": "Scatter"},
-                {"type": "Scatter"}]],
+        column_widths=[1./4,1./2,1./4],
+        specs=[[None,
+                {"type": "Scatter"},None]],
         shared_xaxes = False,
         shared_yaxes = False,
-        subplot_titles = ['QQ-Plot of the mean temperature',
-                        'Absolute deviation of the ecdf from the cdf']
+        subplot_titles = ['Absolute deviation of the ECDF from the CDF']
         )
-    fig.add_trace({
-        'type': 'scatter',
-        'x': qqplot_data[0].get_xdata(),
-        'y': qqplot_data[0].get_ydata(),
-        'mode': 'markers',
-        'marker': {
-            'color': '#19d3f3'
-        }
-    },row = 1, col = 1)
-
-    fig.add_trace({
-        'type': 'scatter',
-        'x': qqplot_data[1].get_xdata(),
-        'y': qqplot_data[1].get_ydata(),
-        'mode': 'lines',
-        'line': {
-            'color': '#636efa'
-        }
-
-    },row = 1, col = 1)
-    
     fig.add_trace(go.Scatter(x = x,
         y = np.abs(ecdf(x)-sc.stats.norm.cdf(x,loc = data_Y.Mean.mean() ,scale = std)),
         line= dict(color='darkcyan')),
         row = 1, col = 2)
         
-    fig.update_xaxes(title_text="Theoritical Quantities", row=1, col=1)
-    fig.update_yaxes(title_text="Sample Quantities", row=1, col=1)
+    #fig.update_xaxes(title_text="Theoritical Quantities", row=1, col=1)
+    #fig.update_yaxes(title_text="Sample Quantities", row=1, col=1)
     fig.update_xaxes(title_text="x", row=1, col=2)
     fig.update_yaxes(title_text="Absolute deviation", row=1, col=2)
     
@@ -568,23 +547,20 @@ def annual_analysis():
     })
     
     st.plotly_chart(fig)
+    c1,c2,c3 = st.columns([1.3,2,1])
+    with c2:
+        HtmlFile = open("tempQQplot.html", 'r', encoding='utf-8')
+
+        source_code = HtmlFile.read()
+
+        components.html(source_code, height = 500)
     
     st.markdown(r'In order to quantify and test the dependencies between temperatures, our observations must be stationary so that we can calculate the sequences of autocorrelations and partial autocorrelations of our data and make some statistical tests on it. To test the stationarity of our data the use the Augmented Dickey-Fuller test (ADF), which tests the null hypothesis that a unit root is present in a time series sample. Performing the ADF on our data we get a p-value of $p_{value} = 0.871$, which allows us to reject the null hypothesis of stationarity.')
     
     
     st.markdown(r'''Nevertheless, as stated in the book "Time Series Analysis With Applications in R" (p.125) ([[4]](https://link.springer.com/book/10.1007/978-0-387-75959-3?token=M3aff43&utm_campaign=3_fjp8312_springer_katte_M3aff43&countryChanged=true&gclid=Cj0KCQjw5oiMBhDtARIsAJi0qk0A0ZQ5Ip1dgVTIeG-NgmclH396p2BwCJeMZJAwQMk1iW_ct9GaPnEaAiudEALw_wcB)), the sample auto-correlation function (ACF) computed for nonstationary series will also usually indicate the nonstationarity.Indeed, for nonstationary series, the sample ACF typically fails to die out rapidly as the lags increase. This is due to the tendency for nonstationary series to drift slowly, either up or down, with apparent “trend”. With this in mind, the followings figure of the ACF and the partial auto-correlation function (PACF) highlights some "significants" correlations between the annual averages temperatures. This leads us to question the independence of the $\mathbf{A}_{t}$ observations. Indeed, if $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ were independent and identically distributed, we should have that the ACF and the PACF should lies in the blue zone on the figure below.''')
     
-
     st.image("figure/Annual_acf_pacf.png")
-
-    
-    st.markdown(r'In order to quantify and test the dependencies between temperatures, our observations must be stationary so that we can calculate the sequences of autocorrelations and partial autocorrelations of our data and make some statistical tests on it. To test the stationarity of our data we use the Augmented Dickey-Fuller test (ADF), which tests the null hypothesis that a unit root is present in a time series sample. Performing the ADF on our data we get a p-value of $0.871$, which allows us to reject the null hypothesis of stationarity.')
-    
-    
-    st.markdown(r'''Nevertheless, as stated in the book "Time Series Analysis With Applications in R" (p.125) by Jonathan D. Cryer and Kung-Sik Chan, the sample auto-correlation function (ACF) computed for nonstationary series will also usually indicate the nonstationarity.Indeed, for nonstationary series, the sample ACF typically fails to die out rapidly as the lags increase. This is due to the tendency for nonstationary series to drift slowly, either up or down, with apparent “trends”. With this in mind, the followings figure of the ACF and the partial auto-correlation function (PACF) highlights some "significants" correlations between the annual averages temperatures. This leads us to question the independence of the $\mathbf{A}_{t}$ observations. Indeed, if $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ were independent and identically distributed, we should have that the ACF and the PACF should lies in the blue zone on the figure below.''')
-    
-
-
     
     with st.expander("Explanation of the test for the acf and pacf plot"):
         st.markdown(r'On the two plot above, the blue zone corresponds to an approximate confidence interval for the acf and pacf under the null hypothesis that the acf and pacf are computedf from a iid sequence. This test is based on the fact that for large n the sample autocorrelations of an iid sequence $Y_1, . . . , Y_n$ with finite variance are approximately iid with distribution $\mathbb{N}(0, \frac{1}{n})$. We can therefore test whether or not the observed residuals are consistent with iid noise by examining the sample autocorrelations and partial autocorrelations of the residuals and rejecting the iid noise hypothesis if more than three or four out of 50 fall outside the bounds $\pm \frac{1.96}{\sqrt{n}}$ or if one falls far outside the bounds.')
@@ -704,7 +680,7 @@ def annual_analysis():
     st.markdown(r'''Even if the regression with a shift seems visually to better model the trend of our time series, we have a priori no reason to choose one model over the other. To find out if our second model brings a real advantage in the modelling we have performed a loglikelihood ratio test between our two nested models. In our case, the loglikelihood-ratio test allow us to compare the two model and to test if the addition of the shift in the second model bring some relevant information on the data or not. Formally speaking we will test the null hypothesis $\beta_{1}^1 = 0$. This loglikelihood test give us a p-value of $p_{value} = 4.701e-07$ which allow us to reject the null hypothesis at a standard significante level of $\alpha = 0.05$. Thus, given that result, we are led to consider the second model since the loglikelihood-ratio make us reject the hypothesis that $\beta_{1}^1 = 0$.
         ''')
     
-    st.markdown(r'From now we choose to consider the second model for estimate the trend, the one with the shift in 1962. This choice is justified by the result of the previous loglikelihood test and by the think that the sudden drop in temperature in 1962 is the result of a rare event, which we believe should be removed from the data so as not to influence our simple trend estimate. As this sudden drop in temperature is estimated at $\beta_1^1 = -1.522\degree C$ by the second regression model, it would be relevant to study this phenomenon in more details in future analyses. Therefore, in the following of this study we will consider the new time series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$ which is the time series $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ from which we have subtracted the trend calculated above. The figure below allows us to visualise this new time series.')
+    st.markdown(r'From now we choose to consider the second model for estimate the trend, the one with the shift in 1962. This choice is justified by the result of the previous loglikelihood test and by the think that the sudden drop in temperature in 1962 is the result of a rare event, which we believe should be removed from the data so as not to influence our simple trend estimate. As this sudden drop in temperature is estimated at $\beta_1^1 = -1.522 (\degree C)$ by the second regression model, it would be relevant to study this phenomenon in more details in future analyses. Therefore, in the following of this study we will consider the new time series $\{\mathbf{\tilde{A}}_{t}\}_{t=1901}^{2021}$ which is the time series $\{\mathbf{A}_{t}\}_{t=1901}^{2021}$ from which we have subtracted the trend calculated above. The figure below allows us to visualise this new time series.')
     
     fig = make_subplots(
         rows=1, cols=3,
@@ -953,11 +929,11 @@ def introduction():
 
     st.write("""
 
-With this option, you can find the global description of our project, quite equivalent to a \textit{Readme} file on GitHub. We introduce the subject, the context and the aims of our study.""")
+With this option, you can find the global description of our project, quite equivalent to a $\textit{Readme}$ file on GitHub. We introduce the subject, the context and the aims of our study.""")
 
     st.subheader("Time series analysis")
 
-    st.write("""Here, you can read about our statistical analysis in more details and have access to the statistical results of the study. This essentially encapsulates a final report, as well as a good way of observing plots and figure, as they are produced with the \textit{Plotly} library. The deeper statistical study heavily relies on time-series analysis and forecasting models, for which we notably refer to the book [[4]](https://link.springer.com/book/10.1007/978-3-319-29854-2). We also implement a part of our linear regression methods based on a to-Python translation of the R tutorial [[5]](https://lbelzile.github.io/lineaRmodels/).""")
+    st.write("""Here, you can read about our statistical analysis in more details and have access to the statistical results of the study. This essentially encapsulates a final report, as well as a good way of observing plots and figure, as they are produced with the $\textit{Plotly}$ library. The deeper statistical study heavily relies on time-series analysis and forecasting models, for which we notably refer to the book [[4]](https://link.springer.com/book/10.1007/978-3-319-29854-2). We also implement a part of our linear regression methods based on a to-Python translation of the R tutorial [[5]](https://lbelzile.github.io/lineaRmodels/).""")
 
     st.subheader("Data visualization")
 
