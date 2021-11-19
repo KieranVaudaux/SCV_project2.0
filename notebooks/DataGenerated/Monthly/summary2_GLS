@@ -1,0 +1,121 @@
+<table class="simpletable">
+<caption>GLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>Mean</td>       <th>  R-squared:         </th> <td>   0.993</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>GLS</td>       <th>  Adj. R-squared:    </th> <td>   0.993</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   8914.</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Fri, 19 Nov 2021</td> <th>  Prob (F-statistic):</th>  <td>  0.00</td> 
+</tr>
+<tr>
+  <th>Time:</th>                 <td>13:09:58</td>     <th>  Log-Likelihood:    </th> <td> -2202.8</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  1448</td>      <th>  AIC:               </th> <td>   4454.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  1424</td>      <th>  BIC:               </th> <td>   4580.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    23</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+   <td></td>      <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>x1</th>  <td>    0.4271</td> <td>    0.212</td> <td>    2.014</td> <td> 0.044</td> <td>    0.011</td> <td>    0.843</td>
+</tr>
+<tr>
+  <th>x2</th>  <td>    1.6932</td> <td>    0.212</td> <td>    7.980</td> <td> 0.000</td> <td>    1.277</td> <td>    2.109</td>
+</tr>
+<tr>
+  <th>x3</th>  <td>    5.1828</td> <td>    0.212</td> <td>   24.486</td> <td> 0.000</td> <td>    4.768</td> <td>    5.598</td>
+</tr>
+<tr>
+  <th>x4</th>  <td>    8.9608</td> <td>    0.212</td> <td>   42.342</td> <td> 0.000</td> <td>    8.546</td> <td>    9.376</td>
+</tr>
+<tr>
+  <th>x5</th>  <td>   13.6432</td> <td>    0.212</td> <td>   64.490</td> <td> 0.000</td> <td>   13.228</td> <td>   14.058</td>
+</tr>
+<tr>
+  <th>x6</th>  <td>   16.9361</td> <td>    0.211</td> <td>   80.083</td> <td> 0.000</td> <td>   16.521</td> <td>   17.351</td>
+</tr>
+<tr>
+  <th>x7</th>  <td>   19.0409</td> <td>    0.212</td> <td>   89.997</td> <td> 0.000</td> <td>   18.626</td> <td>   19.456</td>
+</tr>
+<tr>
+  <th>x8</th>  <td>   18.1948</td> <td>    0.211</td> <td>   86.166</td> <td> 0.000</td> <td>   17.781</td> <td>   18.609</td>
+</tr>
+<tr>
+  <th>x9</th>  <td>   15.0315</td> <td>    0.212</td> <td>   70.920</td> <td> 0.000</td> <td>   14.616</td> <td>   15.447</td>
+</tr>
+<tr>
+  <th>x10</th> <td>    9.3582</td> <td>    0.212</td> <td>   44.161</td> <td> 0.000</td> <td>    8.943</td> <td>    9.774</td>
+</tr>
+<tr>
+  <th>x11</th> <td>    4.7407</td> <td>    0.212</td> <td>   22.394</td> <td> 0.000</td> <td>    4.325</td> <td>    5.156</td>
+</tr>
+<tr>
+  <th>x12</th> <td>    1.5786</td> <td>    0.211</td> <td>    7.472</td> <td> 0.000</td> <td>    1.164</td> <td>    1.993</td>
+</tr>
+<tr>
+  <th>x13</th> <td>    0.0127</td> <td>    0.003</td> <td>    3.816</td> <td> 0.000</td> <td>    0.006</td> <td>    0.019</td>
+</tr>
+<tr>
+  <th>x14</th> <td>    0.0110</td> <td>    0.003</td> <td>    3.285</td> <td> 0.001</td> <td>    0.004</td> <td>    0.018</td>
+</tr>
+<tr>
+  <th>x15</th> <td>    0.0110</td> <td>    0.003</td> <td>    3.298</td> <td> 0.001</td> <td>    0.004</td> <td>    0.018</td>
+</tr>
+<tr>
+  <th>x16</th> <td>    0.0095</td> <td>    0.003</td> <td>    2.862</td> <td> 0.004</td> <td>    0.003</td> <td>    0.016</td>
+</tr>
+<tr>
+  <th>x17</th> <td>    0.0036</td> <td>    0.003</td> <td>    1.094</td> <td> 0.274</td> <td>   -0.003</td> <td>    0.010</td>
+</tr>
+<tr>
+  <th>x18</th> <td>    0.0084</td> <td>    0.003</td> <td>    2.515</td> <td> 0.012</td> <td>    0.002</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>x19</th> <td>    0.0106</td> <td>    0.003</td> <td>    3.162</td> <td> 0.002</td> <td>    0.004</td> <td>    0.017</td>
+</tr>
+<tr>
+  <th>x20</th> <td>    0.0116</td> <td>    0.003</td> <td>    3.473</td> <td> 0.001</td> <td>    0.005</td> <td>    0.018</td>
+</tr>
+<tr>
+  <th>x21</th> <td>    0.0061</td> <td>    0.003</td> <td>    1.803</td> <td> 0.072</td> <td>   -0.001</td> <td>    0.013</td>
+</tr>
+<tr>
+  <th>x22</th> <td>    0.0169</td> <td>    0.003</td> <td>    5.035</td> <td> 0.000</td> <td>    0.010</td> <td>    0.024</td>
+</tr>
+<tr>
+  <th>x23</th> <td>    0.0119</td> <td>    0.003</td> <td>    3.552</td> <td> 0.000</td> <td>    0.005</td> <td>    0.019</td>
+</tr>
+<tr>
+  <th>x24</th> <td>    0.0107</td> <td>    0.003</td> <td>    3.184</td> <td> 0.001</td> <td>    0.004</td> <td>    0.017</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>19.044</td> <th>  Durbin-Watson:     </th> <td>   1.982</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  28.419</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.117</td> <th>  Prob(JB):          </th> <td>6.74e-07</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.645</td> <th>  Cond. No.          </th> <td>2.68e+03</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 2.68e+03. This might indicate that there are<br/>strong multicollinearity or other numerical problems.

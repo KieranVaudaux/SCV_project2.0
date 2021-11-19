@@ -1,0 +1,42 @@
+
+<table class="simpletable">
+<tr>
+   <td></td>      <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+<tr>
+  <th>x13</th> <td>    0.0127</td> <td>    0.003</td> <td>    3.816</td> <td> 0.000</td> <td>    0.006</td> <td>    0.019</td>
+</tr>
+<tr>
+  <th>x14</th> <td>    0.0110</td> <td>    0.003</td> <td>    3.285</td> <td> 0.001</td> <td>    0.004</td> <td>    0.018</td>
+</tr>
+<tr>
+  <th>x15</th> <td>    0.0110</td> <td>    0.003</td> <td>    3.298</td> <td> 0.001</td> <td>    0.004</td> <td>    0.018</td>
+</tr>
+<tr>
+  <th>x16</th> <td>    0.0095</td> <td>    0.003</td> <td>    2.862</td> <td> 0.004</td> <td>    0.003</td> <td>    0.016</td>
+</tr>
+<tr>
+  <th>x17</th> <td>    0.0036</td> <td>    0.003</td> <td>    1.094</td> <td> 0.274</td> <td>   -0.003</td> <td>    0.010</td>
+</tr>
+<tr>
+  <th>x18</th> <td>    0.0084</td> <td>    0.003</td> <td>    2.515</td> <td> 0.012</td> <td>    0.002</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>x19</th> <td>    0.0106</td> <td>    0.003</td> <td>    3.162</td> <td> 0.002</td> <td>    0.004</td> <td>    0.017</td>
+</tr>
+<tr>
+  <th>x20</th> <td>    0.0116</td> <td>    0.003</td> <td>    3.473</td> <td> 0.001</td> <td>    0.005</td> <td>    0.018</td>
+</tr>
+<tr>
+  <th>x21</th> <td>    0.0061</td> <td>    0.003</td> <td>    1.803</td> <td> 0.072</td> <td>   -0.001</td> <td>    0.013</td>
+</tr>
+<tr>
+  <th>x22</th> <td>    0.0169</td> <td>    0.003</td> <td>    5.035</td> <td> 0.000</td> <td>    0.010</td> <td>    0.024</td>
+</tr>
+<tr>
+  <th>x23</th> <td>    0.0119</td> <td>    0.003</td> <td>    3.552</td> <td> 0.000</td> <td>    0.005</td> <td>    0.019</td>
+</tr>
+<tr>
+  <th>x24</th> <td>    0.0107</td> <td>    0.003</td> <td>    3.184</td> <td> 0.001</td> <td>    0.004</td> <td>    0.017</td>
+</tr>
+</table>
+<br/>

@@ -2,3 +2,7 @@ Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-
 Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-05
 Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-05
 Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-05
+Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-05
+Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-05
+Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-05
+Monthly Seasonless mean (no constant) (model 1) : p-value = 4.3939664187988985e-05

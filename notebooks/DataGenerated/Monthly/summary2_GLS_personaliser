@@ -1,0 +1,30 @@
+<table class="simpletable">
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<tr>
+  <th>Dep. Variable:</th>          <td>Mean</td>       <th>  R-squared:         </th> <td>   0.993</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>GLS</td>       <th>  Adj. R-squared:    </th> <td>   0.993</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   8914.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>             <td>1448</td> <th>  Prob (F-statistic):</th>  <td>  0.00</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>                 <td>23</td>     <th>  Log-Likelihood:    </th> <td> -2202.8</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  1448</td>      <th>  AIC:               </th> <td>   4454.</td>
+</tr>
+<tr>
+  <th></th>          <td>  </td>      <th>  BIC:               </th> <td>   4580.</td>
+</tr>
+
+</table>

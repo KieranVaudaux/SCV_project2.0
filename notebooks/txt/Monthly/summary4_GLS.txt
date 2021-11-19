@@ -4,8 +4,8 @@
 \textbf{Dep. Variable:}    &       Mean       & \textbf{  R-squared:         } &     0.993   \\
 \textbf{Model:}            &       GLS        & \textbf{  Adj. R-squared:    } &     0.993   \\
 \textbf{Method:}           &  Least Squares   & \textbf{  F-statistic:       } &     8914.   \\
-\textbf{Date:}             & Sun, 14 Nov 2021 & \textbf{  Prob (F-statistic):} &     0.00    \\
-\textbf{Time:}             &     09:38:38     & \textbf{  Log-Likelihood:    } &   -2202.8   \\
+\textbf{Date:}             & Fri, 19 Nov 2021 & \textbf{  Prob (F-statistic):} &     0.00    \\
+\textbf{Time:}             &     08:44:31     & \textbf{  Log-Likelihood:    } &   -2202.8   \\
 \textbf{No. Observations:} &        1448      & \textbf{  AIC:               } &     4454.   \\
 \textbf{Df Residuals:}     &        1424      & \textbf{  BIC:               } &     4580.   \\
 \textbf{Df Model:}         &          23      & \textbf{                     } &             \\
