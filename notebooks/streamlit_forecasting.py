@@ -218,9 +218,9 @@ def st_forecasting():
         CI_std[i:,] = sc.stats.bootstrap((mean_simulation[:,i],),np.std, confidence_level=0.95).confidence_interval
         CI_forecast[i,:] = sc.stats.norm.interval(0.95,loc=CI_mean[i,:].mean(),scale=CI_std[i,1])
         
-    st.markdown("*NOTE* | The output of the forecasting model is contains a random part. We give the possibility to try out the model several times and compare the predictions on a single plot. To this end, you can modify the number of experiments to run hereunder (we suggest a number smaller than 6, for clarity purposes).")
+    st.markdown("*NOTE* | The output of the forecasting model is containing a random part. We give the possibility to try out the model several times and compare the predictions on a single plot. To this end, you can modify the number of experiments to run here under (we suggest a number smaller than 6, for clarity purposes).")
 
-    nb_exp = st.text_input('Number of experiments', '3')
+    nb_exp = st.text_input('Number of experiments', '2')
     experiments = []
     
     for n in range(eval(nb_exp)):
@@ -284,4 +284,4 @@ def st_forecasting():
     
     with st.expander("See explanation"):
         
-        st.markdown("With this feature, you can use our forecasting model regulating various parameters. The *starting point of predictions* is the first year you want to predict the average temperature from. We plot the true data up to that point and add the predicted curve, as well as the resulting confindence intervals. The forecasting model is based on a bootstrapping method, and each year's average temperature is predicted based on the past two years.")
+        st.markdown("With this feature, you can use our forecasting model regulating various parameters. The *starting point of predictions* is the first year you want to predict the average temperature from. We plot the true data up to that point and add the predicted curve, as well as the resulting confidence intervals. The forecasting model is based on the model we develop on the previous analysis (*i.e. a $AR(2)$ model), and where we simulated the residuals of our prediction using the residuals of our model to generate new residuals with replacement. The number of simulations is the number of forecasts made on the basis of the model estimated in the previous analysis, in order to create confidence intervals for the predictions. The confidence intervals are calculated for each year in the forecast using a normal confidence interval based on the simulation runs.")

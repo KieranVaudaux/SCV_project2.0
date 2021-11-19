@@ -29,21 +29,21 @@ st.markdown("<h1 style='text-align: center;'> Meteorological data visualization<
 
 
 MODES = ['Descriptive Statistics','Time Series Analysis', 'Time Series Visualization', 'Time Series Analysis']
-MODES_TS = ["Evolution of the Mean Temperature at Geneva Observatory","Analysis of annual Mean Temperature at Geneva Observatory","Analysis of monthly Mean Temperature at Geneva Observatory"]
+MODES_TS = ["Mean Temperature at Geneva Observatory","Annual Mean Temperature at Geneva Observatory","Monthly Mean Temperature at Geneva Observatory"]
 
 st.sidebar.header('Options')
 
-INFO = st.sidebar.radio("Content",('Project description', 'Evolution of the Mean Temperature at Geneva Observatory', 'Data Visualization'))
+INFO = st.sidebar.radio("Content",('Project description', 'Mean Temperature at Geneva Observatory', 'Data Visualization'))
     
 
 # PROJECT DESCRIPTION
 
 if INFO == 'Project description':
     
-    description()
+    introduction()
     
 # Written analysis with time series
-elif INFO == "Evolution of the Mean Temperature at Geneva Observatory":
+elif INFO == "Mean Temperature at Geneva Observatory":
     
     SELECTED_MODE = st.sidebar.selectbox("Part", MODES_TS, index=0)
     if SELECTED_MODE == MODES_TS[0]:
