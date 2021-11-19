@@ -33,6 +33,8 @@ plt.style.use("ggplot")
 
 def st_forecasting():
     
+    st.subheader("Modular Forecasting Model")
+    
     st.markdown("With this feature, you may run a forecasting model on yearly mean temperatures by regulating the parameters in the sidebar.")
     
     
@@ -215,8 +217,16 @@ def st_forecasting():
         CI_mean[i:,] = sc.stats.bootstrap((mean_simulation[:,i],),np.mean, confidence_level=0.95).confidence_interval
         CI_std[i:,] = sc.stats.bootstrap((mean_simulation[:,i],),np.std, confidence_level=0.95).confidence_interval
         CI_forecast[i,:] = sc.stats.norm.interval(0.95,loc=CI_mean[i,:].mean(),scale=CI_std[i,1])
+        
+    st.markdown("*NOTE* | The output of the forecasting model is contains a random part. We give the possibility to try out the model several times and compare the predictions on a single plot. To this end, you can modify the number of experiments to run hereunder (we suggest a number smaller than 6, for clarity purposes).")
 
-    predictions = forecast(data_Y, delta_simulation, param, last_year)
+    nb_exp = st.text_input('Number of experiments', '3')
+    experiments = []
+    
+    for n in range(eval(nb_exp)):
+        
+        experiments.append(forecast(data_Y, delta_simulation, param, last_year))
+    
     delta_years = list(range(last_year+1, last_year+1+delta_simulation))
     
     
@@ -242,17 +252,22 @@ def st_forecasting():
             name = 'data',
             line=dict(width=1, color='rgb(131, 90, 241)')))
 
-    fig.add_trace(go.Scatter(
-            x=[last_year,last_year+1], y=[int(data_Y.Mean[data_Y.Years==last_year]), predictions[0]],
-            mode='lines',
-            name = 'liaison',
-            line=dict(width=1, color='limegreen')))
+    for n in range(eval(nb_exp)):
+        
+        predictions = experiments[n]
+        
+        fig.add_trace(go.Scatter(
+                x=[last_year,last_year+1], y=[float(data_Y.Mean[data_Y.Years==last_year]), predictions[0]],
+                mode='lines',
+                name = 'liaison ' + str(n+1),
+                showlegend=False,
+                line=dict(width=1, color='cornflowerblue')))
 
-    fig.add_trace(go.Scatter(
-            x=delta_years, y=predictions,
-            mode='lines',
-            name = 'prediction',
-            line=dict(width=1, color='cornflowerblue')))
+        fig.add_trace(go.Scatter(
+                x=delta_years, y=predictions,
+                mode='lines',
+                name = 'prediction ' + str(n+1),
+                line=dict(width=1)))
     
     fig['layout'].update({
         'showlegend': True,
@@ -266,3 +281,7 @@ def st_forecasting():
     )
     
     st.plotly_chart(fig)
+    
+    with st.expander("See explanation"):
+        
+        st.markdown("With this feature, you can use our forecasting model regulating various parameters. The *starting point of predictions* is the first year you want to predict the average temperature from. We plot the true data up to that point and add the predicted curve, as well as the resulting confindence intervals. The forecasting model is based on a bootstrapping method, and each year's average temperature is predicted based on the past two years.")
