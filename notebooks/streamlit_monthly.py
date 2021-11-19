@@ -442,11 +442,11 @@ def monthly_analysis():
         x_title = 'Autocorrelation lags'
         )
         
-    fig.add_trace(go.Scatter(x=pval_ind2.index+1, y=pval_ind2.Ljung,
+    fig.add_trace(go.Scatter(x=np.arange(8,50), y=pval_ind2.Ljung[8:],
         mode = 'lines+markers', name = 'Ljung-Box'),row =1, col = 2)
-    fig.add_trace(go.Scatter(x=pval_ind2.index+1, y=pval_ind2.McLeod,
+    fig.add_trace(go.Scatter(x=np.arange(8,50), y=pval_ind2.McLeod[8:],
         mode = 'lines+markers',name = 'McLeod-Li'),row =1, col = 2)
-    #fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
+    fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
     
     fig['layout'].update({
         'title': 'P-values of the Ljung-Box and McLeod-Li tests on the residus of the ARMA(4,3)',
@@ -463,9 +463,9 @@ def monthly_analysis():
     
     st.plotly_chart(fig)
     
-    st.markdown(r"Moreover,as we could expect the residues are of the ARMA(4,3) model are stationary since we obtain a p-value of $p = 0$ for the Augmented Dickey-Fuller test. Thus, we also could check the plots of the acf anf pacf, on the followings figures, to asses the remaining correlation structure in the residus. And we could see that all the autocorrelation lies in the blue 95% confidence interval, which confirms that it is reasonable to assume that the residuals are independent. ")
+    st.markdown(r"Moreover,as we could expect the residus are of the ARMA(4,3) model are stationary since we obtain a p-value of $p = 0$ for the Augmented Dickey-Fuller test. Thus, we also could check the plots of the acf and pacf, on the followings figures, to asses the remaining dependance structure in the residus. And we could see that all the autocorrelation lies in the blue 95% confidence interval, which confirms that it is reasonable to assume that the residuals are independent. ")
     
-    st.image("/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/figure/Monthly/Seasonless1_1_mean_acf_pacf.png")
+    st.image("figure/Monthly/Seasonless1_1_mean_acf_pacf.png")
     
     st.markdown(r'Nevertheless, after performing the Jarque-Bera test, which has the null hypothesis that our data are from a normal distribution, and the Goldfeld-Quandt test, which has the null hypothesis that the data are homoskedastic, we get the p-values : ')
 
@@ -671,7 +671,7 @@ def monthly_analysis():
     
     st.markdown(r"The Augmented Dickey-Fuller test gives us a p-value of $p = 4.394e-05$, thus we can reject the null hypothesis of non-stationnarity. Therefore, we can now look at the dependence structure of our seasonless time series. As we did for the previous modelisation, we use the acf and pacf plot as well as the plot of the p-values of the Ljung-Box and McLeod-Li tests in order to estimate the presence or not of dependence between the residus of the season estimation.")
     
-    st.image("/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/figure/Monthly/Seasonless4_mean_acf_pacf.png")
+    st.image("figure/Monthly/Seasonless4_mean_acf_pacf.png")
         
     with st.expander("Explanation of the test for the acf and pacf plot"):
         st.markdown(r'On the two plot above, the blue zone corresponds to an approximate confidence interval for the acf and pacf under the null hypothesis that the acf and pacf are computedf from a iid sequence. This test is based on the fact that for large n the sample autocorrelations of an iid sequence $Y_1, . . . , Y_n$ with finite variance are approximately iid with distribution $\mathbb{N}(0, \frac{1}{n})$. We can therefore test whether or not the observed residuals are consistent with iid noise by examining the sample autocorrelations and partial autocorrelations of the residuals and rejecting the iid noise hypothesis if more than three or four out of 50 fall outside the bounds $\pm \frac{1.96}{\sqrt{n}}$ or if one falls far outside the bounds.')
@@ -715,7 +715,7 @@ def monthly_analysis():
     
     st.markdown(r"As in the previous model, the plots of the acf and pacf as well as the Ljung-Box test allow us to reject the null hypothesis of independence of the time series $\{\mathbf{\tilde{M}}_{t,m_t}\}$. So we will also have to choose an appropriate time series model, for that we use once again the Akaike Information Criterion to do model selection. We have tried to model the time series as arising from an $ARMA(p,q)$ for $p\in\{0,...,4\}$ and $q\in\{0,...,11\}$, and we could see the result of the model selection on the following figure.")
     
-    aic4 = pd.read_csv("/Users/kieranvaudaux/Documents/SCV/SCV_project2.0/notebooks/DataGenerated/Monthly/Monthly4_modelSelection.csv")
+    aic4 = pd.read_csv("DataGenerated/Monthly/Monthly4_modelSelection.csv")
         
     fig = make_subplots(
         rows=1, cols=3,
@@ -789,8 +789,7 @@ def monthly_analysis():
    
     st.plotly_chart(fig)
     
-    
-    
+    st.markdown(r'To confirm the consistency of our model, we tested one more time the independence and the distribution of the residuals obtained. The following figure show us the result of the Ljung-Box and McLeod-Li test on the residuals of our ARMA(5,4) model, we see that all p-values are far above the significance threshold of $\alpha = 0.05$, except for the first three p-values of the McLeod-Li test, and thus this lead us to not reject the null hypothesis of independence. Therefore, the $ARMA(5,4)$ model seems to capture well the correlation structure between the elements of the time series $\{\mathbf{\tilde{M}}_{t,m_t}\}$.')
     
     pval_ind4_2 = pd.read_csv("DataGenerated/Monthly/Monthly4_pvalue_indep_arma5_4")
     
@@ -802,11 +801,11 @@ def monthly_analysis():
         x_title = 'Autocorrelation lags'
         )
         
-    fig.add_trace(go.Scatter(x=pval_ind4_2.index+1, y=pval_ind4_2.Ljung,
+    fig.add_trace(go.Scatter(x=np.arange(10,50), y=pval_ind4_2.Ljung[10:],
         mode = 'lines+markers', name = 'Ljung-Box'),row =1, col = 2)
-    fig.add_trace(go.Scatter(x=pval_ind4_2.index+1, y=pval_ind4_2.McLeod,
+    fig.add_trace(go.Scatter(x=np.arange(10,50), y=pval_ind4_2.McLeod[10:],
         mode = 'lines+markers',name = 'McLeod-Li'),row =1, col = 2)
-    #fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
+    fig.add_hline(y=0.05,line_dash="dash", line_color="red", name = 'alpha = 0.05')
     
     fig['layout'].update({
         'title': 'P-values of the Ljung-Box and McLeod-Li tests on the residus of the ARMA(5,4)',
@@ -823,6 +822,22 @@ def monthly_analysis():
     
     st.plotly_chart(fig)
     
+    st.markdown(r"As the p-value of the Augmented Dickey-Fuller test is $p = 0$, we can reject the null hypothesis of non-stationarity, and thus compute the acf and pacf that we could see on the plot below. These two plots confirms that the residuals appear to be independent.")
     
-    st.image("/figure/Monthly/resid_arma_4_acf_pacf.png")
-
+    st.image("figure/Monthly/resid_arma_4_acf_pacf.png")
+    
+    st.markdown(r'Nevertheless, after performing the Jarque-Bera test and the Goldfeld-Quandt test, we get the p-values : ')
+    
+    col1,col2,col3 = st.columns([1,1,1])
+    
+    with col2:
+        st.latex(r'''\text{Normality test : }p_{value} = 1.172e-14 \\
+                \text{Heteroskedasticity test : }p_{value} = 0.803
+        ''')
+    
+    with st.expander("Jarque-Bera and Goldfeld_Quandt tests"):
+        st.markdown(r'''$\textbf{The Jarques-Bera test}$ :  is a goodness-of-fit test of whether sample data have the skewness and kurtosis matching a normal distribution. The test statistic is defined as : $JB = \frac{n}{6} \left( S^2 + \frac{1}{4} \left(K-3\right)^2 \right)$, where $S =\frac{ \frac{1}{n} \sum_{i=1}^{n} (x_i-\bar{x})^3 }{ \left( \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2 \right)^{\frac{3}{2}} }$ and $K =\frac{ \frac{1}{n} \sum_{i=1}^{n} (x_i-\bar{x})^4 }{ \left( \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2 \right)^{2} }$.\\
+            If the data comes from a normal distribution, the JB statistic asymptotically has a chi-squared distribution with two degrees of freedom, so the statistic can be used to test the hypothesis that the data are from a normal distribution. The null hypothesis is a joint hypothesis of the skewness being zero and the excess kurtosis being zero.''')
+        st.markdown(r'''$\textbf{The Goldfeld-Quandt tests}$ : is accomplished by undertaking separate least squares analyses on two subsets of the original dataset: these subsets are specified so that the observations for which the pre-identified explanatory variable takes the lowest values are in one subset, with higher values in the other. The subsets needs not be of equal size, nor contain all the observations between them. The test assumes that the errors have a normal distribution. There is an additional assumption here, that the design matrices for the two subsets of data are both of full rank. The test statistic used is the ratio of the mean square residual errors for the regressions on the two subsets. This test statistic corresponds to an F-test of equality of variances.
+            ''')
+    
